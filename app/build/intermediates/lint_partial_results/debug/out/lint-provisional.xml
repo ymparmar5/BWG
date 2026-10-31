@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.2.2" type="conditional_incidents">
+
+    <incident
+        id="QueryAllPackagesPermission"
+        severity="error"
+        message="A `&lt;queries>` declaration should generally be used instead of QUERY_ALL_PACKAGES; \&#xA;see https://g.co/dev/packagevisibility for details">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*manifest*0}"
+            line="12"
+            column="22"
+            startOffset="385"
+            endLine="12"
+            endColumn="74"
+            endOffset="437"/>
+        <map>
+            <condition targetGE="30"/>
+        </map>
+    </incident>
+
+    <incident
+        id="NewApi"
+        severity="error"
+        message="">
+        <fix-data minSdk="ffffffffff800000" requiresApi="fffffffffc000000"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values/styles.xml"
+            line="8"
+            column="15"
+            startOffset="475"
+            endLine="8"
+            endColumn="54"
+            endOffset="514"/>
+        <map>
+            <api-levels id="minSdk"
+                value="ffffffffff800000"/>
+            <api-levels id="requiresApi"
+                value="fffffffffc000000"/>
+            <entry
+                name="message"
+                string="`android:windowLightNavigationBar` requires API level 27 (current min is %1$s)"/>
+        </map>
+    </incident>
+
+    <incident
+        id="ObsoleteSdkInt"
+        severity="warning"
+        message="Unnecessary; SDK_INT is always >= 28">
+        <fix-replace
+            description="Delete tools:targetApi"
+            replacement="">
+            <range
+                file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values/styles.xml"
+                startOffset="735"
+                endOffset="754"/>
+        </fix-replace>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values/styles.xml"
+            line="11"
+            column="62"
+            startOffset="735"
+            endLine="11"
+            endColumn="81"
+            endOffset="754"/>
+        <map>
+            <condition minGE="fffffffff8000000"/>
+        </map>
+    </incident>
+
+    <incident
+        id="MissingPermission"
+        severity="warning"
+        message="">
+        <fix-data missing="android.permission.SCHEDULE_EXACT_ALARM" message="Missing permissions required by AlarmManager.setExactAndAllowWhileIdle: %1$s" lastApi="2147483647"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/automation/AutomationManager.java"
+            line="97"
+            column="13"
+            startOffset="3852"
+            endLine="97"
+            endColumn="85"
+            endOffset="3924"/>
+        <map>
+            <condition targetGE="31"/>
+            <entry
+                name="requirement"
+                string="?android.permission.SCHEDULE_EXACT_ALARM"/>
+            <entry
+                name="message"
+                string="Setting Exact alarms with `setExactAndAllowWhileIdle` requires the `SCHEDULE_EXACT_ALARM` permission or power exemption from user; it is intended for applications where the user knowingly schedules actions to happen at a precise time such as alarms, clocks, calendars, etc. Check out the javadoc on this permission to make sure your use case is valid."/>
+        </map>
+    </incident>
+
+    <incident
+        id="MissingPermission"
+        severity="warning"
+        message="">
+        <fix-data missing="android.permission.SCHEDULE_EXACT_ALARM" message="Missing permissions required by AlarmManager.setExact: %1$s" lastApi="2147483647"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/automation/AutomationManager.java"
+            line="99"
+            column="13"
+            startOffset="3955"
+            endLine="99"
+            endColumn="68"
+            endOffset="4010"/>
+        <map>
+            <condition targetGE="31"/>
+            <entry
+                name="requirement"
+                string="?android.permission.SCHEDULE_EXACT_ALARM"/>
+            <entry
+                name="message"
+                string="Setting Exact alarms with `setExact` requires the `SCHEDULE_EXACT_ALARM` permission or power exemption from user; it is intended for applications where the user knowingly schedules actions to happen at a precise time such as alarms, clocks, calendars, etc. Check out the javadoc on this permission to make sure your use case is valid."/>
+        </map>
+    </incident>
+
+    <incident
+        id="BatteryLife"
+        severity="warning"
+        message="Use of `REQUEST_IGNORE_BATTERY_OPTIMIZATIONS` violates the Play Store Content Policy regarding acceptable use cases, as described in https://developer.android.com/training/monitoring-device-state/doze-standby.html">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/SettingsActivity.java"
+            line="277"
+            column="53"
+            startOffset="12494"
+            endLine="277"
+            endColumn="96"
+            endOffset="12537"/>
+        <map>
+            <condition targetGE="23"/>
+        </map>
+    </incident>
+
+    <incident
+        id="QueryPermissionsNeeded"
+        severity="warning"
+        message="Consider adding a `&lt;queries>` declaration to your manifest when calling this \&#xA;method; see https://g.co/dev/packagevisibility for details">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/util/AppHelper.java"
+            line="57"
+            column="49"
+            startOffset="2509"
+            endLine="57"
+            endColumn="70"
+            endOffset="2530"/>
+        <map>
+            <entry
+                name="queryAll"
+                boolean="false"/>
+        </map>
+    </incident>
+
+</incidents>

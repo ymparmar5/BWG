@@ -1,0 +1,508 @@
+D:\bwg\app\src\main\java\com\example\focus\automation\AutomationManager.java:97: Warning: Setting Exact alarms with setExactAndAllowWhileIdle requires the SCHEDULE_EXACT_ALARM permission or power exemption from user; it is intended for applications where the user knowingly schedules actions to happen at a precise time such as alarms, clocks, calendars, etc. Check out the javadoc on this permission to make sure your use case is valid. [MissingPermission]
+            am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerMillis, pi);
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\java\com\example\focus\automation\AutomationManager.java:99: Warning: Setting Exact alarms with setExact requires the SCHEDULE_EXACT_ALARM permission or power exemption from user; it is intended for applications where the user knowingly schedules actions to happen at a precise time such as alarms, clocks, calendars, etc. Check out the javadoc on this permission to make sure your use case is valid. [MissingPermission]
+            am.setExact(AlarmManager.RTC_WAKEUP, triggerMillis, pi);
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "MissingPermission":
+   This check scans through your code and libraries and looks at the APIs
+   being used, and checks this against the set of permissions required to
+   access those APIs. If the code using those APIs is called at runtime, then
+   the program will crash.
+
+   Furthermore, for permissions that are revocable (with targetSdkVersion 23),
+   client code must also be prepared to handle the calls throwing an exception
+   if the user rejects the request for permission at runtime.
+
+D:\bwg\app\src\main\java\com\example\focus\ui\BlockedInterceptActivity.java:50: Error: Overriding method should call super.onBackPressed [MissingSuperCall]
+    public void onBackPressed() {
+                ~~~~~~~~~~~~~
+D:\bwg\app\src\main\java\com\example\focus\MainActivity.java:297: Error: Overriding method should call super.onBackPressed [MissingSuperCall]
+    public void onBackPressed() {
+                ~~~~~~~~~~~~~
+
+   Explanation for issues of type "MissingSuperCall":
+   Some methods, such as View#onDetachedFromWindow, require that you also call
+   the super implementation as part of your method.
+
+D:\bwg\app\src\main\java\com\example\focus\ui\AppDrawerAdapter.java:47: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+            String q = query.trim().toLowerCase();
+                                    ~~~~~~~~~~~
+D:\bwg\app\src\main\java\com\example\focus\ui\AppDrawerAdapter.java:49: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                String display = item.getDisplayLabel().toLowerCase();
+                                                        ~~~~~~~~~~~
+D:\bwg\app\src\main\java\com\example\focus\ui\AppDrawerAdapter.java:50: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                String original = item.getOriginalLabel().toLowerCase();
+                                                          ~~~~~~~~~~~
+D:\bwg\app\src\main\java\com\example\focus\engine\RuleMatcherEngine.java:90: Warning: Implicitly using the default locale is a common source of bugs: Use String.format(Locale, ...) instead [DefaultLocale]
+            inspector.onNodeInspected(String.format(
+                                      ^
+D:\bwg\app\src\main\java\com\example\focus\engine\RuleMatcherEngine.java:115: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                if (!combined.isEmpty() && combined.toLowerCase().contains(kw.toLowerCase())) {
+                                                    ~~~~~~~~~~~
+D:\bwg\app\src\main\java\com\example\focus\engine\RuleMatcherEngine.java:115: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                if (!combined.isEmpty() && combined.toLowerCase().contains(kw.toLowerCase())) {
+                                                                              ~~~~~~~~~~~
+D:\bwg\app\src\main\java\com\example\focus\engine\RuleMatcherEngine.java:178: Warning: Implicitly using the default locale is a common source of bugs: Use String.format(Locale, ...) instead [DefaultLocale]
+            inspector.onNodeInspected(String.format(
+                                      ^
+D:\bwg\app\src\main\java\com\example\focus\engine\RuleMatcherEngine.java:199: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                if (!combined.isEmpty() && combined.toLowerCase().contains(kw.toLowerCase())) {
+                                                    ~~~~~~~~~~~
+D:\bwg\app\src\main\java\com\example\focus\engine\RuleMatcherEngine.java:199: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                if (!combined.isEmpty() && combined.toLowerCase().contains(kw.toLowerCase())) {
+                                                                              ~~~~~~~~~~~
+
+   Explanation for issues of type "DefaultLocale":
+   Calling String#toLowerCase() or #toUpperCase() without specifying an
+   explicit locale is a common source of bugs. The reason for that is that
+   those methods will use the current locale on the user's device, and even
+   though the code appears to work correctly when you are developing the app,
+   it will fail in some locales. For example, in the Turkish locale, the
+   uppercase replacement for i is not I.
+
+   If you want the methods to just perform ASCII replacement, for example to
+   convert an enum name, call String#toUpperCase(Locale.US) instead. If you
+   really want to use the current locale, call
+   String#toUpperCase(Locale.getDefault()) instead.
+
+   https://developer.android.com/reference/java/util/Locale.html#default_locale
+
+D:\bwg\app\src\main\res\values\styles.xml:8: Error: android:windowLightNavigationBar requires API level 27 (current min is 24) [NewApi]
+        <item name="android:windowLightNavigationBar">false</item>
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "NewApi":
+   This check scans through all the Android API calls in the application and
+   warns about any calls that are not available on all versions targeted by
+   this application (according to its minimum SDK attribute in the manifest).
+
+   If you really want to use this API and don't need to support older devices
+   just set the minSdkVersion in your build.gradle or AndroidManifest.xml
+   files.
+
+   If your code is deliberately accessing newer APIs, and you have ensured
+   (e.g. with conditional execution) that this code will only ever be called
+   on a supported platform, then you can annotate your class or method with
+   the @TargetApi annotation specifying the local minimum SDK to apply, such
+   as @TargetApi(11), such that this check considers 11 rather than your
+   manifest file's minimum SDK as the required API level.
+
+   If you are deliberately setting android: attributes in style definitions,
+   make sure you place this in a values-vNN folder in order to avoid running
+   into runtime conflicts on certain devices where manufacturers have added
+   custom attributes whose ids conflict with the new ones on later platforms.
+
+   Similarly, you can use tools:targetApi="11" in an XML file to indicate that
+   the element will only be inflated in an adequate context.
+
+D:\bwg\app\build.gradle:12: Warning: Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details. [OldTargetApi]
+        targetSdk 34
+        ~~~~~~~~~~~~
+
+   Explanation for issues of type "OldTargetApi":
+   When your application runs on a version of Android that is more recent than
+   your targetSdkVersion specifies that it has been tested with, various
+   compatibility modes kick in. This ensures that your application continues
+   to work, but it may look out of place. For example, if the targetSdkVersion
+   is less than 14, your app may get an option button in the UI.
+
+   To fix this issue, set the targetSdkVersion to the highest available value.
+   Then test your app to make sure everything works correctly. You may want to
+   consult the compatibility notes to see what changes apply to each version
+   you are adding support for:
+   https://developer.android.com/reference/android/os/Build.VERSION_CODES.html
+   as well as follow this guide:
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.
+   html
+
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.html
+
+D:\bwg\app\src\main\java\com\example\focus\MainActivity.java:363: Error: Must be one of: Context.POWER_SERVICE, Context.WINDOW_SERVICE, Context.LAYOUT_INFLATER_SERVICE, Context.ACCOUNT_SERVICE, Context.ACTIVITY_SERVICE, Context.ALARM_SERVICE, Context.NOTIFICATION_SERVICE, Context.ACCESSIBILITY_SERVICE, Context.CAPTIONING_SERVICE, Context.KEYGUARD_SERVICE, Context.LOCATION_SERVICE, Context.HEALTHCONNECT_SERVICE, Context.SEARCH_SERVICE, Context.SENSOR_SERVICE, Context.STORAGE_SERVICE, Context.STORAGE_STATS_SERVICE, Context.WALLPAPER_SERVICE, Context.VIBRATOR_MANAGER_SERVICE, Context.VIBRATOR_SERVICE, Context.CONNECTIVITY_SERVICE, Context.IPSEC_SERVICE, Context.VPN_MANAGEMENT_SERVICE, Context.NETWORK_STATS_SERVICE, Context.WIFI_SERVICE, Context.WIFI_AWARE_SERVICE, Context.WIFI_P2P_SERVICE, Context.WIFI_RTT_RANGING_SERVICE, Context.NSD_SERVICE, Context.AUDIO_SERVICE, Context.FINGERPRINT_SERVICE, Context.BIOMETRIC_SERVICE, Context.MEDIA_ROUTER_SERVICE, Context.TELEPHONY_SERVICE, Context.TELEPHONY_SUBSCRIPTION_SERVICE, Context.CARRIER_CONFIG_SERVICE, Context.EUICC_SERVICE, Context.TELECOM_SERVICE, Context.CLIPBOARD_SERVICE, Context.INPUT_METHOD_SERVICE, Context.TEXT_SERVICES_MANAGER_SERVICE, Context.TEXT_CLASSIFICATION_SERVICE, Context.APPWIDGET_SERVICE, Context.DROPBOX_SERVICE, Context.DEVICE_POLICY_SERVICE, Context.UI_MODE_SERVICE, Context.DOWNLOAD_SERVICE, Context.NFC_SERVICE, Context.BLUETOOTH_SERVICE, Context.USB_SERVICE, Context.LAUNCHER_APPS_SERVICE, Context.INPUT_SERVICE, Context.DISPLAY_SERVICE, Context.USER_SERVICE, Context.RESTRICTIONS_SERVICE, Context.APP_OPS_SERVICE, Context.ROLE_SERVICE, Context.CAMERA_SERVICE, Context.PRINT_SERVICE, Context.CONSUMER_IR_SERVICE, Context.TV_INTERACTIVE_APP_SERVICE, Context.TV_INPUT_SERVICE, Context.USAGE_STATS_SERVICE, Context.MEDIA_SESSION_SERVICE, Context.MEDIA_COMMUNICATION_SERVICE, Context.BATTERY_SERVICE, Context.JOB_SCHEDULER_SERVICE, Context.MEDIA_PROJECTION_SERVICE, Context.MIDI_SERVICE, Context.HARDWARE_PROPERTIES_SERVICE, Context.SHORTCUT_SERVICE, Context.SYSTEM_HEALTH_SERVICE, Context.COMPANION_DEVICE_SERVICE, Context.VIRTUAL_DEVICE_SERVICE, Context.CROSS_PROFILE_APPS_SERVICE, Context.LOCALE_SERVICE, Context.MEDIA_METRICS_SERVICE, Context.DISPLAY_HASH_SERVICE, Context.CREDENTIAL_SERVICE, Context.DEVICE_LOCK_SERVICE, Context.GRAMMATICAL_INFLECTION_SERVICE [WrongConstant]
+            Object sbservice = getSystemService("statusbar");
+                                                ~~~~~~~~~~~
+
+   Explanation for issues of type "WrongConstant":
+   Ensures that when parameter in a method only allows a specific set of
+   constants, calls obey those rules.
+
+D:\bwg\app\src\main\java\com\example\focus\SettingsActivity.java:277: Warning: Use of REQUEST_IGNORE_BATTERY_OPTIMIZATIONS violates the Play Store Content Policy regarding acceptable use cases, as described in https://developer.android.com/training/monitoring-device-state/doze-standby.html [BatteryLife]
+                Intent intent = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+                                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "BatteryLife":
+   This issue flags code that either
+   * negatively affects battery life, or
+   * uses APIs that have recently changed behavior to prevent background tasks
+   from consuming memory and battery excessively.
+
+   Generally, you should be using WorkManager instead.
+
+   For more details on how to update your code, please see
+   https://developer.android.com/topic/performance/background-optimization
+
+
+D:\bwg\app\build.gradle:46: Warning: A newer version of androidx.appcompat:appcompat than 1.6.1 is available: 1.8.0 [GradleDependency]
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\build.gradle:47: Warning: A newer version of com.google.android.material:material than 1.11.0 is available: 1.14.0 [GradleDependency]
+    implementation 'com.google.android.material:material:1.11.0'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\build.gradle:48: Warning: A newer version of androidx.recyclerview:recyclerview than 1.3.2 is available: 1.4.0 [GradleDependency]
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\build.gradle:51: Warning: A newer version of org.mockito:mockito-core than 5.11.0 is available: 5.20.0 [GradleDependency]
+    testImplementation 'org.mockito:mockito-core:5.11.0'
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\build.gradle:52: Warning: A newer version of org.json:json than 20231013 is available: 20250517 [GradleDependency]
+    testImplementation 'org.json:json:20231013'
+                       ~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "GradleDependency":
+   This detector looks for usages of libraries where the version you are using
+   is not the current stable release. Using older versions is fine, and there
+   are cases where you deliberately want to stick with an older version.
+   However, you may simply not be aware that a more recent version is
+   available, and that is what this lint check helps find.
+
+D:\bwg\app\src\main\AndroidManifest.xml:12: Error: A <queries> declaration should generally be used instead of QUERY_ALL_PACKAGES; see https://g.co/dev/packagevisibility for details [QueryAllPackagesPermission]
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "QueryAllPackagesPermission":
+   If you need to query or interact with other installed apps, you should be
+   using a <queries> declaration in your manifest. Using the
+   QUERY_ALL_PACKAGES permission in order to see all installed apps is rarely
+   necessary, and most apps on Google Play are not allowed to have this
+   permission.
+
+   https://g.co/dev/packagevisibility
+
+D:\bwg\app\src\main\java\com\example\focus\ui\AppDrawerAdapter.java:39: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        notifyDataSetChanged();
+        ~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\java\com\example\focus\ui\AppDrawerAdapter.java:56: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        notifyDataSetChanged();
+        ~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\java\com\example\focus\ui\FavoritesAdapter.java:36: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        notifyDataSetChanged();
+        ~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "NotifyDataSetChanged":
+   The RecyclerView adapter's onNotifyDataSetChanged method does not specify
+   what about the data set has changed, forcing any observers to assume that
+   all existing items and structure may no longer be valid. `LayoutManager`s
+   will be forced to fully rebind and relayout all visible views.
+
+D:\bwg\app\src\main\java\com\example\focus\automation\AutomationManager.java:96: Warning: Unnecessary; SDK_INT is always >= 24 [ObsoleteSdkInt]
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\java\com\example\focus\service\FocusNotificationListenerService.java:41: Warning: Unnecessary; SDK_INT is always >= 24 [ObsoleteSdkInt]
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\java\com\example\focus\MainActivity.java:89: Warning: Unnecessary; SDK_INT is always >= 24 [ObsoleteSdkInt]
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\java\com\example\focus\SettingsActivity.java:267: Warning: Unnecessary; SDK_INT is always >= 24 [ObsoleteSdkInt]
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\java\com\example\focus\SettingsActivity.java:275: Warning: Unnecessary; SDK_INT is always >= 24 [ObsoleteSdkInt]
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "ObsoleteSdkInt":
+   This check flags version checks that are not necessary, because the
+   minSdkVersion (or surrounding known API level) is already at least as high
+   as the version checked for.
+
+   Similarly, it also looks for resources in -vNN folders, such as values-v14
+   where the version qualifier is less than or equal to the minSdkVersion,
+   where the contents should be merged into the best folder.
+
+D:\bwg\app\src\main\res\layout\activity_blocked_intercept.xml:5: Warning: Possible overdraw: Root element paints background @color/black with a theme that also paints a background (inferred theme is @style/Theme_FocusLauncher) [Overdraw]
+    android:background="@color/black"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_main.xml:6: Warning: Possible overdraw: Root element paints background @color/black with a theme that also paints a background (inferred theme is @style/Theme.FocusLauncher) [Overdraw]
+    android:background="@color/black">
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_mindful_delay.xml:5: Warning: Possible overdraw: Root element paints background @color/black with a theme that also paints a background (inferred theme is @style/Theme_FocusLauncher) [Overdraw]
+    android:background="@color/black"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:5: Warning: Possible overdraw: Root element paints background @color/black with a theme that also paints a background (inferred theme is @style/Theme_FocusLauncher) [Overdraw]
+    android:background="@color/black"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\item_app_drawer.xml:15: Warning: Possible overdraw: Root element paints background ?android:attr/selectableItemBackground with a theme that also paints a background (inferred theme is @style/Theme.FocusLauncher) [Overdraw]
+    android:background="?android:attr/selectableItemBackground" />
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\item_favorite.xml:15: Warning: Possible overdraw: Root element paints background ?android:attr/selectableItemBackground with a theme that also paints a background (inferred theme is @style/Theme.FocusLauncher) [Overdraw]
+    android:background="?android:attr/selectableItemBackground" />
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "Overdraw":
+   If you set a background drawable on a root view, then you should use a
+   custom theme where the theme background is null. Otherwise, the theme
+   background will be painted first, only to have your custom background
+   completely cover it; this is called "overdraw".
+
+   NOTE: This detector relies on figuring out which layouts are associated
+   with which activities based on scanning the Java code, and it's currently
+   doing that using an inexact pattern matching algorithm. Therefore, it can
+   incorrectly conclude which activity the layout is associated with and then
+   wrongly complain that a background-theme is hidden.
+
+   If you want your custom background on multiple pages, then you should
+   consider making a custom theme with your custom background and just using
+   that theme instead of a root element background.
+
+   Of course it's possible that your custom drawable is translucent and you
+   want it to be mixed with the background. However, you will get better
+   performance if you pre-mix the background with your drawable and use that
+   resulting image or color as a custom theme background instead.
+
+D:\bwg\app\src\main\res\values\strings.xml:4: Warning: The resource R.string.app_options appears to be unused [UnusedResources]
+    <string name="app_options">App Options</string>
+            ~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\values\strings.xml:9: Warning: The resource R.string.unhide_app appears to be unused [UnusedResources]
+    <string name="unhide_app">Unhide app</string>
+            ~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UnusedResources":
+   Unused resources make applications larger and slow down builds.
+
+
+   The unused resource check can ignore tests. If you want to include
+   resources that are only referenced from tests, consider packaging them in a
+   test source set instead.
+
+   You can include test sources in the unused resource check by setting the
+   system property lint.unused-resources.include-tests =true, and to exclude
+   them (usually for performance reasons), use
+   lint.unused-resources.exclude-tests =true.
+   ,
+
+D:\bwg\app\src\main\res\layout\activity_main.xml:103: Warning: Missing autofillHints attribute [Autofill]
+        <EditText
+         ~~~~~~~~
+
+   Explanation for issues of type "Autofill":
+   Specify an autofillHints attribute when targeting SDK version 26 or higher
+   or explicitly specify that the view is not important for autofill. Your app
+   can help an autofill service classify the data correctly by providing the
+   meaning of each view that could be autofillable, such as views representing
+   usernames, passwords, credit card fields, email addresses, etc.
+
+   The hints can have any value, but it is recommended to use predefined
+   values like 'username' for a username or 'creditCardNumber' for a credit
+   card number. For a list of all predefined autofill hint constants, see the
+   AUTOFILL_HINT_ constants in the View reference at
+   https://developer.android.com/reference/android/view/View.html.
+
+   You can mark a view unimportant for autofill by specifying an
+   importantForAutofill attribute on that view or a parent view. See
+   https://developer.android.com/reference/android/view/View.html#setImportant
+   ForAutofill(int).
+
+   https://developer.android.com/guide/topics/text/autofill.html
+
+D:\bwg\app\src\main\java\com\example\focus\SettingsActivity.java:202: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        textSwipeLeft.setText("Swipe Left App: " + (left != null ? getAppLabel(left) : "Default (Camera)"));
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\java\com\example\focus\SettingsActivity.java:202: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        textSwipeLeft.setText("Swipe Left App: " + (left != null ? getAppLabel(left) : "Default (Camera)"));
+                              ~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\java\com\example\focus\SettingsActivity.java:205: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        textSwipeRight.setText("Swipe Right App: " + (right != null ? getAppLabel(right) : "Default (Phone)"));
+                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\java\com\example\focus\SettingsActivity.java:205: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        textSwipeRight.setText("Swipe Right App: " + (right != null ? getAppLabel(right) : "Default (Phone)"));
+                               ~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\java\com\example\focus\SettingsActivity.java:210: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        textNotifMode.setText("Filter Mode: " + (mode == FocusPreferences.NOTIF_MODE_BLOCKLIST ? "Blocklist (Noisy Apps)" : "Strict Allowlist (Calls/SMS only)"));
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\java\com\example\focus\SettingsActivity.java:210: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        textNotifMode.setText("Filter Mode: " + (mode == FocusPreferences.NOTIF_MODE_BLOCKLIST ? "Blocklist (Noisy Apps)" : "Strict Allowlist (Calls/SMS only)"));
+                              ~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "SetTextI18n":
+   When calling TextView#setText
+   * Never call Number#toString() to format numbers; it will not handle
+   fraction separators and locale-specific digits properly. Consider using
+   String#format with proper format specifications (%d or %f) instead.
+   * Do not pass a string literal (e.g. "Hello") to display text. Hardcoded
+   text can not be properly translated to other languages. Consider using
+   Android resource strings instead.
+   * Do not build messages by concatenating text chunks. Such messages can not
+   be properly translated.
+
+   https://developer.android.com/guide/topics/resources/localization.html
+
+D:\bwg\app\src\main\res\layout\activity_blocked_intercept.xml:20: Warning: Hardcoded string "App", should use @string resource [HardcodedText]
+            android:text="App"
+            ~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_blocked_intercept.xml:30: Warning: Hardcoded string "Limit Reached", should use @string resource [HardcodedText]
+            android:text="Limit Reached"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_blocked_intercept.xml:42: Warning: Hardcoded string "Detail info", should use @string resource [HardcodedText]
+            android:text="Detail info"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_blocked_intercept.xml:52: Warning: Hardcoded string "Unlocks at 14:00", should use @string resource [HardcodedText]
+            android:text="Unlocks at 14:00"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_blocked_intercept.xml:63: Warning: Hardcoded string "Return Home", should use @string resource [HardcodedText]
+        android:text="Return Home"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_main.xml:72: Warning: Hardcoded string "Phone", should use @string resource [HardcodedText]
+                android:contentDescription="Phone"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_main.xml:86: Warning: Hardcoded string "Messages", should use @string resource [HardcodedText]
+                android:contentDescription="Messages"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_mindful_delay.xml:20: Warning: Hardcoded string "App", should use @string resource [HardcodedText]
+            android:text="App"
+            ~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_mindful_delay.xml:30: Warning: Hardcoded string "10", should use @string resource [HardcodedText]
+            android:text="10"
+            ~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_mindful_delay.xml:39: Warning: Hardcoded string "Take a breath.nDo you really want to open this right now?", should use @string resource [HardcodedText]
+            android:text="Take a breath.\nDo you really want to open this right now?"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_mindful_delay.xml:57: Warning: Hardcoded string "Cancel & Stay Focused", should use @string resource [HardcodedText]
+            android:text="Cancel &amp; Stay Focused"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_mindful_delay.xml:68: Warning: Hardcoded string "Proceed Anyway", should use @string resource [HardcodedText]
+            android:text="Proceed Anyway"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:20: Warning: Hardcoded string "Focus Settings", should use @string resource [HardcodedText]
+            android:text="Focus Settings"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:30: Warning: Hardcoded string "PERMISSIONS HEALTH DASHBOARD", should use @string resource [HardcodedText]
+            android:text="PERMISSIONS HEALTH DASHBOARD"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:48: Warning: Hardcoded string "Default Launcher", should use @string resource [HardcodedText]
+                android:text="Default Launcher"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:55: Warning: Hardcoded string "Checking...", should use @string resource [HardcodedText]
+                android:text="Checking..."
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:71: Warning: Hardcoded string "Accessibility Service (Content Blocker)", should use @string resource [HardcodedText]
+                android:text="Accessibility Service (Content Blocker)"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:78: Warning: Hardcoded string "Checking...", should use @string resource [HardcodedText]
+                android:text="Checking..."
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:94: Warning: Hardcoded string "Usage Access (App Usage Limits)", should use @string resource [HardcodedText]
+                android:text="Usage Access (App Usage Limits)"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:101: Warning: Hardcoded string "Checking...", should use @string resource [HardcodedText]
+                android:text="Checking..."
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:117: Warning: Hardcoded string "Notification Access (Filter)", should use @string resource [HardcodedText]
+                android:text="Notification Access (Filter)"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:124: Warning: Hardcoded string "Checking...", should use @string resource [HardcodedText]
+                android:text="Checking..."
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:140: Warning: Hardcoded string "Do Not Disturb Access (Night Automation)", should use @string resource [HardcodedText]
+                android:text="Do Not Disturb Access (Night Automation)"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:147: Warning: Hardcoded string "Checking...", should use @string resource [HardcodedText]
+                android:text="Checking..."
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:163: Warning: Hardcoded string "Ignore Battery Optimization (OEM Survival)", should use @string resource [HardcodedText]
+                android:text="Ignore Battery Optimization (OEM Survival)"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:170: Warning: Hardcoded string "Checking...", should use @string resource [HardcodedText]
+                android:text="Checking..."
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:186: Warning: Hardcoded string "HOME SCREEN & DRAWER", should use @string resource [HardcodedText]
+            android:text="HOME SCREEN &amp; DRAWER"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:197: Warning: Hardcoded string "Auto-Launch Exact Search Match", should use @string resource [HardcodedText]
+            android:text="Auto-Launch Exact Search Match"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:207: Warning: Hardcoded string "Swipe Left App: Default (Camera)", should use @string resource [HardcodedText]
+            android:text="Swipe Left App: Default (Camera)"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:218: Warning: Hardcoded string "Swipe Right App: Default (Phone)", should use @string resource [HardcodedText]
+            android:text="Swipe Right App: Default (Phone)"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:229: Warning: Hardcoded string "Manage Favorites (Max 7)", should use @string resource [HardcodedText]
+            android:text="Manage Favorites (Max 7)"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:240: Warning: Hardcoded string "Manage Hidden Apps", should use @string resource [HardcodedText]
+            android:text="Manage Hidden Apps"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:251: Warning: Hardcoded string "Manage Renamed App Aliases", should use @string resource [HardcodedText]
+            android:text="Manage Renamed App Aliases"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:269: Warning: Hardcoded string "CONTENT BLOCKER (SHORTS / REELS / STATUS)", should use @string resource [HardcodedText]
+            android:text="CONTENT BLOCKER (SHORTS / REELS / STATUS)"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:280: Warning: Hardcoded string "Enable Content Blocker", should use @string resource [HardcodedText]
+            android:text="Enable Content Blocker"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:290: Warning: Hardcoded string "Live Debug Inspector Mode", should use @string resource [HardcodedText]
+            android:text="Live Debug Inspector Mode"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:300: Warning: Hardcoded string "Rule Inspector (View Last 30 Node IDs)", should use @string resource [HardcodedText]
+            android:text="Rule Inspector (View Last 30 Node IDs)"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:311: Warning: Hardcoded string "JSON Rule Store Editor", should use @string resource [HardcodedText]
+            android:text="JSON Rule Store Editor"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:329: Warning: Hardcoded string "USAGE LIMITS & MINDFUL DELAYS", should use @string resource [HardcodedText]
+            android:text="USAGE LIMITS &amp; MINDFUL DELAYS"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:340: Warning: Hardcoded string "Manage App Limits & Schedules", should use @string resource [HardcodedText]
+            android:text="Manage App Limits &amp; Schedules"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:358: Warning: Hardcoded string "NOTIFICATION FILTER", should use @string resource [HardcodedText]
+            android:text="NOTIFICATION FILTER"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:369: Warning: Hardcoded string "Enable Notification Filter", should use @string resource [HardcodedText]
+            android:text="Enable Notification Filter"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:379: Warning: Hardcoded string "Filter Mode: Blocklist", should use @string resource [HardcodedText]
+            android:text="Filter Mode: Blocklist"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:390: Warning: Hardcoded string "Manage Blocked / Allowed Apps", should use @string resource [HardcodedText]
+            android:text="Manage Blocked / Allowed Apps"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:401: Warning: Hardcoded string "Safety Digest (Last 50 Dismissed)", should use @string resource [HardcodedText]
+            android:text="Safety Digest (Last 50 Dismissed)"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:419: Warning: Hardcoded string "AUTOMATION (NIGHT SILENT / DND)", should use @string resource [HardcodedText]
+            android:text="AUTOMATION (NIGHT SILENT / DND)"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:430: Warning: Hardcoded string "Silent / DND Schedule", should use @string resource [HardcodedText]
+            android:text="Silent / DND Schedule"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:448: Warning: Hardcoded string "Start Time", should use @string resource [HardcodedText]
+                android:text="Start Time"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:455: Warning: Hardcoded string "22:00", should use @string resource [HardcodedText]
+                android:text="22:00"
+                ~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:472: Warning: Hardcoded string "End Time", should use @string resource [HardcodedText]
+                android:text="End Time"
+                ~~~~~~~~~~~~~~~~~~~~~~~
+D:\bwg\app\src\main\res\layout\activity_settings.xml:479: Warning: Hardcoded string "07:00", should use @string resource [HardcodedText]
+                android:text="07:00"
+                ~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "HardcodedText":
+   Hardcoding text attributes directly in layout files is bad for several
+   reasons:
+
+   * When creating configuration variations (for example for landscape or
+   portrait) you have to repeat the actual text (and keep it up to date when
+   making changes)
+
+   * The application cannot be translated to other languages by just adding
+   new translations for existing string resources.
+
+   There are quickfixes to automatically extract this hardcoded string into a
+   resource lookup.
+
+5 errors, 92 warnings

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.focus.RuleMatcherEngineTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-10-31T17:25:54" hostname="Y" time="0.006">
+  <properties/>
+  <testcase name="testYouTubeShorts_BlockedByViewId" classname="com.example.focus.RuleMatcherEngineTest" time="0.003"/>
+  <testcase name="testYouTubeNormalWatchScreen_NotBlockedDueToWhitelist" classname="com.example.focus.RuleMatcherEngineTest" time="0.001"/>
+  <testcase name="testYouTubeShorts_BlockedBySelectedTab" classname="com.example.focus.RuleMatcherEngineTest" time="0.0"/>
+  <testcase name="testInstagramReels_Blocked" classname="com.example.focus.RuleMatcherEngineTest" time="0.001"/>
+  <testcase name="testInstagramFeed_NotBlocked" classname="com.example.focus.RuleMatcherEngineTest" time="0.0"/>
+  <testcase name="testWhatsAppStatus_Blocked" classname="com.example.focus.RuleMatcherEngineTest" time="0.0"/>
+  <testcase name="testWhatsAppNormalChat_NotBlocked" classname="com.example.focus.RuleMatcherEngineTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

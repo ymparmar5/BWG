@@ -1,0 +1,1314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.2.2" type="incidents">
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;App&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_blocked_intercept.xml"
+            line="20"
+            column="13"
+            startOffset="700"
+            endLine="20"
+            endColumn="31"
+            endOffset="718"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Limit Reached&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_blocked_intercept.xml"
+            line="30"
+            column="13"
+            startOffset="1085"
+            endLine="30"
+            endColumn="41"
+            endOffset="1113"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Detail info&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_blocked_intercept.xml"
+            line="42"
+            column="13"
+            startOffset="1536"
+            endLine="42"
+            endColumn="39"
+            endOffset="1562"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Unlocks at 14:00&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_blocked_intercept.xml"
+            line="52"
+            column="13"
+            startOffset="1921"
+            endLine="52"
+            endColumn="44"
+            endOffset="1952"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Return Home&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_blocked_intercept.xml"
+            line="63"
+            column="9"
+            startOffset="2304"
+            endLine="63"
+            endColumn="35"
+            endOffset="2330"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Phone&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="72"
+            column="17"
+            startOffset="2821"
+            endLine="72"
+            endColumn="51"
+            endOffset="2855"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Messages&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="86"
+            column="17"
+            startOffset="3362"
+            endLine="86"
+            endColumn="54"
+            endOffset="3399"/>
+    </incident>
+
+    <incident
+        id="Autofill"
+        severity="warning"
+        message="Missing `autofillHints` attribute">
+        <fix-alternatives>
+            <fix-attribute
+                description="Set autofillHints"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="autofillHints"
+                value=""
+                dot="0"
+                mark="0"/>
+            <fix-attribute
+                description="Set importantForAutofill=&quot;no&quot;"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="importantForAutofill"
+                value="no"/>
+        </fix-alternatives>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="103"
+            column="10"
+            startOffset="3905"
+            endLine="103"
+            endColumn="18"
+            endOffset="3913"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;App&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_mindful_delay.xml"
+            line="20"
+            column="13"
+            startOffset="701"
+            endLine="20"
+            endColumn="31"
+            endOffset="719"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;10&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_mindful_delay.xml"
+            line="30"
+            column="13"
+            startOffset="1090"
+            endLine="30"
+            endColumn="30"
+            endOffset="1107"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Take a breath.\nDo you really want to open this right now?&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_mindful_delay.xml"
+            line="39"
+            column="13"
+            startOffset="1417"
+            endLine="39"
+            endColumn="86"
+            endOffset="1490"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Cancel &amp; Stay Focused&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_mindful_delay.xml"
+            line="57"
+            column="13"
+            startOffset="2098"
+            endLine="57"
+            endColumn="53"
+            endOffset="2138"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Proceed Anyway&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_mindful_delay.xml"
+            line="68"
+            column="13"
+            startOffset="2535"
+            endLine="68"
+            endColumn="42"
+            endOffset="2564"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Focus Settings&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="20"
+            column="13"
+            startOffset="684"
+            endLine="20"
+            endColumn="42"
+            endOffset="713"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;PERMISSIONS HEALTH DASHBOARD&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="30"
+            column="13"
+            startOffset="1066"
+            endLine="30"
+            endColumn="56"
+            endOffset="1109"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Default Launcher&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="48"
+            column="17"
+            startOffset="1843"
+            endLine="48"
+            endColumn="48"
+            endOffset="1874"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Checking...&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="55"
+            column="17"
+            startOffset="2165"
+            endLine="55"
+            endColumn="43"
+            endOffset="2191"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Accessibility Service (Content Blocker)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="71"
+            column="17"
+            startOffset="2824"
+            endLine="71"
+            endColumn="71"
+            endOffset="2878"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Checking...&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="78"
+            column="17"
+            startOffset="3174"
+            endLine="78"
+            endColumn="43"
+            endOffset="3200"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Usage Access (App Usage Limits)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="94"
+            column="17"
+            startOffset="3825"
+            endLine="94"
+            endColumn="63"
+            endOffset="3871"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Checking...&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="101"
+            column="17"
+            startOffset="4159"
+            endLine="101"
+            endColumn="43"
+            endOffset="4185"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Notification Access (Filter)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="117"
+            column="17"
+            startOffset="4810"
+            endLine="117"
+            endColumn="60"
+            endOffset="4853"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Checking...&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="124"
+            column="17"
+            startOffset="5141"
+            endLine="124"
+            endColumn="43"
+            endOffset="5167"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Do Not Disturb Access (Night Automation)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="140"
+            column="17"
+            startOffset="5790"
+            endLine="140"
+            endColumn="72"
+            endOffset="5845"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Checking...&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="147"
+            column="17"
+            startOffset="6131"
+            endLine="147"
+            endColumn="43"
+            endOffset="6157"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Ignore Battery Optimization (OEM Survival)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="163"
+            column="17"
+            startOffset="6784"
+            endLine="163"
+            endColumn="74"
+            endOffset="6841"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Checking...&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="170"
+            column="17"
+            startOffset="7131"
+            endLine="170"
+            endColumn="43"
+            endOffset="7157"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;HOME SCREEN &amp; DRAWER&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="186"
+            column="13"
+            startOffset="7695"
+            endLine="186"
+            endColumn="52"
+            endOffset="7734"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Auto-Launch Exact Search Match&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="197"
+            column="13"
+            startOffset="8169"
+            endLine="197"
+            endColumn="58"
+            endOffset="8214"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Swipe Left App: Default (Camera)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="207"
+            column="13"
+            startOffset="8558"
+            endLine="207"
+            endColumn="60"
+            endOffset="8605"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Swipe Right App: Default (Phone)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="218"
+            column="13"
+            startOffset="9022"
+            endLine="218"
+            endColumn="60"
+            endOffset="9069"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Manage Favorites (Max 7)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="229"
+            column="13"
+            startOffset="9484"
+            endLine="229"
+            endColumn="52"
+            endOffset="9523"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Manage Hidden Apps&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="240"
+            column="13"
+            startOffset="9935"
+            endLine="240"
+            endColumn="46"
+            endOffset="9968"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Manage Renamed App Aliases&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="251"
+            column="13"
+            startOffset="10381"
+            endLine="251"
+            endColumn="54"
+            endOffset="10422"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;CONTENT BLOCKER (SHORTS / REELS / STATUS)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="269"
+            column="13"
+            startOffset="11082"
+            endLine="269"
+            endColumn="69"
+            endOffset="11138"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Enable Content Blocker&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="280"
+            column="13"
+            startOffset="11569"
+            endLine="280"
+            endColumn="50"
+            endOffset="11606"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Live Debug Inspector Mode&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="290"
+            column="13"
+            startOffset="11979"
+            endLine="290"
+            endColumn="53"
+            endOffset="12019"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rule Inspector (View Last 30 Node IDs)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="300"
+            column="13"
+            startOffset="12365"
+            endLine="300"
+            endColumn="66"
+            endOffset="12418"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;JSON Rule Store Editor&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="311"
+            column="13"
+            startOffset="12832"
+            endLine="311"
+            endColumn="50"
+            endOffset="12869"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;USAGE LIMITS &amp; MINDFUL DELAYS&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="329"
+            column="13"
+            startOffset="13527"
+            endLine="329"
+            endColumn="61"
+            endOffset="13575"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Manage App Limits &amp; Schedules&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="340"
+            column="13"
+            startOffset="13979"
+            endLine="340"
+            endColumn="61"
+            endOffset="14027"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;NOTIFICATION FILTER&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="358"
+            column="13"
+            startOffset="14694"
+            endLine="358"
+            endColumn="47"
+            endOffset="14728"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Enable Notification Filter&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="369"
+            column="13"
+            startOffset="15164"
+            endLine="369"
+            endColumn="54"
+            endOffset="15205"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Filter Mode: Blocklist&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="379"
+            column="13"
+            startOffset="15549"
+            endLine="379"
+            endColumn="50"
+            endOffset="15586"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Manage Blocked / Allowed Apps&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="390"
+            column="13"
+            startOffset="15998"
+            endLine="390"
+            endColumn="57"
+            endOffset="16042"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Safety Digest (Last 50 Dismissed)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="401"
+            column="13"
+            startOffset="16459"
+            endLine="401"
+            endColumn="61"
+            endOffset="16507"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;AUTOMATION (NIGHT SILENT / DND)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="419"
+            column="13"
+            startOffset="17149"
+            endLine="419"
+            endColumn="59"
+            endOffset="17195"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Silent / DND Schedule&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="430"
+            column="13"
+            startOffset="17622"
+            endLine="430"
+            endColumn="49"
+            endOffset="17658"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Start Time&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="448"
+            column="17"
+            startOffset="18364"
+            endLine="448"
+            endColumn="42"
+            endOffset="18389"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;22:00&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="455"
+            column="17"
+            startOffset="18679"
+            endLine="455"
+            endColumn="37"
+            endOffset="18699"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;End Time&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="472"
+            column="17"
+            startOffset="19368"
+            endLine="472"
+            endColumn="40"
+            endOffset="19391"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;07:00&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="479"
+            column="17"
+            startOffset="19679"
+            endLine="479"
+            endColumn="37"
+            endOffset="19699"/>
+    </incident>
+
+    <incident
+        id="ObsoleteSdkInt"
+        severity="warning"
+        message="Unnecessary; SDK_INT is always >= 24">
+        <fix-data conditional="true"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/automation/AutomationManager.java"
+            line="96"
+            column="13"
+            startOffset="3790"
+            endLine="96"
+            endColumn="59"
+            endOffset="3836"/>
+    </incident>
+
+    <incident
+        id="DefaultLocale"
+        severity="warning"
+        message="Implicitly using the default locale is a common source of bugs: Use `String.format(Locale, ...)` instead">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/engine/RuleMatcherEngine.java"
+            line="90"
+            column="39"
+            startOffset="2962"
+            endLine="93"
+            endColumn="14"
+            endOffset="3146"/>
+    </incident>
+
+    <incident
+        id="DefaultLocale"
+        severity="warning"
+        message="Implicitly using the default locale is a common source of bugs: Use `toLowerCase(Locale)` instead. For strings meant to be internal use `Locale.ROOT`, otherwise `Locale.getDefault()`.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/engine/RuleMatcherEngine.java"
+            line="115"
+            column="53"
+            startOffset="4163"
+            endLine="115"
+            endColumn="64"
+            endOffset="4174"/>
+    </incident>
+
+    <incident
+        id="DefaultLocale"
+        severity="warning"
+        message="Implicitly using the default locale is a common source of bugs: Use `toLowerCase(Locale)` instead. For strings meant to be internal use `Locale.ROOT`, otherwise `Locale.getDefault()`.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/engine/RuleMatcherEngine.java"
+            line="115"
+            column="79"
+            startOffset="4189"
+            endLine="115"
+            endColumn="90"
+            endOffset="4200"/>
+    </incident>
+
+    <incident
+        id="DefaultLocale"
+        severity="warning"
+        message="Implicitly using the default locale is a common source of bugs: Use `String.format(Locale, ...)` instead">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/engine/RuleMatcherEngine.java"
+            line="178"
+            column="39"
+            startOffset="6503"
+            endLine="181"
+            endColumn="14"
+            endOffset="6653"/>
+    </incident>
+
+    <incident
+        id="DefaultLocale"
+        severity="warning"
+        message="Implicitly using the default locale is a common source of bugs: Use `toLowerCase(Locale)` instead. For strings meant to be internal use `Locale.ROOT`, otherwise `Locale.getDefault()`.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/engine/RuleMatcherEngine.java"
+            line="199"
+            column="53"
+            startOffset="7327"
+            endLine="199"
+            endColumn="64"
+            endOffset="7338"/>
+    </incident>
+
+    <incident
+        id="DefaultLocale"
+        severity="warning"
+        message="Implicitly using the default locale is a common source of bugs: Use `toLowerCase(Locale)` instead. For strings meant to be internal use `Locale.ROOT`, otherwise `Locale.getDefault()`.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/engine/RuleMatcherEngine.java"
+            line="199"
+            column="79"
+            startOffset="7353"
+            endLine="199"
+            endColumn="90"
+            endOffset="7364"/>
+    </incident>
+
+    <incident
+        id="ObsoleteSdkInt"
+        severity="warning"
+        message="Unnecessary; SDK_INT is always >= 24">
+        <fix-data conditional="true"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/MainActivity.java"
+            line="89"
+            column="13"
+            startOffset="2819"
+            endLine="89"
+            endColumn="66"
+            endOffset="2872"/>
+    </incident>
+
+    <incident
+        id="MissingSuperCall"
+        severity="error"
+        message="Overriding method should call `super.onBackPressed`">
+        <fix-data/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/MainActivity.java"
+            line="297"
+            column="17"
+            startOffset="10982"
+            endLine="297"
+            endColumn="30"
+            endOffset="10995"/>
+    </incident>
+
+    <incident
+        id="WrongConstant"
+        severity="error"
+        message="Must be one of: Context.POWER_SERVICE, Context.WINDOW_SERVICE, Context.LAYOUT_INFLATER_SERVICE, Context.ACCOUNT_SERVICE, Context.ACTIVITY_SERVICE, Context.ALARM_SERVICE, Context.NOTIFICATION_SERVICE, Context.ACCESSIBILITY_SERVICE, Context.CAPTIONING_SERVICE, Context.KEYGUARD_SERVICE, Context.LOCATION_SERVICE, Context.HEALTHCONNECT_SERVICE, Context.SEARCH_SERVICE, Context.SENSOR_SERVICE, Context.STORAGE_SERVICE, Context.STORAGE_STATS_SERVICE, Context.WALLPAPER_SERVICE, Context.VIBRATOR_MANAGER_SERVICE, Context.VIBRATOR_SERVICE, Context.CONNECTIVITY_SERVICE, Context.IPSEC_SERVICE, Context.VPN_MANAGEMENT_SERVICE, Context.NETWORK_STATS_SERVICE, Context.WIFI_SERVICE, Context.WIFI_AWARE_SERVICE, Context.WIFI_P2P_SERVICE, Context.WIFI_RTT_RANGING_SERVICE, Context.NSD_SERVICE, Context.AUDIO_SERVICE, Context.FINGERPRINT_SERVICE, Context.BIOMETRIC_SERVICE, Context.MEDIA_ROUTER_SERVICE, Context.TELEPHONY_SERVICE, Context.TELEPHONY_SUBSCRIPTION_SERVICE, Context.CARRIER_CONFIG_SERVICE, Context.EUICC_SERVICE, Context.TELECOM_SERVICE, Context.CLIPBOARD_SERVICE, Context.INPUT_METHOD_SERVICE, Context.TEXT_SERVICES_MANAGER_SERVICE, Context.TEXT_CLASSIFICATION_SERVICE, Context.APPWIDGET_SERVICE, Context.DROPBOX_SERVICE, Context.DEVICE_POLICY_SERVICE, Context.UI_MODE_SERVICE, Context.DOWNLOAD_SERVICE, Context.NFC_SERVICE, Context.BLUETOOTH_SERVICE, Context.USB_SERVICE, Context.LAUNCHER_APPS_SERVICE, Context.INPUT_SERVICE, Context.DISPLAY_SERVICE, Context.USER_SERVICE, Context.RESTRICTIONS_SERVICE, Context.APP_OPS_SERVICE, Context.ROLE_SERVICE, Context.CAMERA_SERVICE, Context.PRINT_SERVICE, Context.CONSUMER_IR_SERVICE, Context.TV_INTERACTIVE_APP_SERVICE, Context.TV_INPUT_SERVICE, Context.USAGE_STATS_SERVICE, Context.MEDIA_SESSION_SERVICE, Context.MEDIA_COMMUNICATION_SERVICE, Context.BATTERY_SERVICE, Context.JOB_SCHEDULER_SERVICE, Context.MEDIA_PROJECTION_SERVICE, Context.MIDI_SERVICE, Context.HARDWARE_PROPERTIES_SERVICE, Context.SHORTCUT_SERVICE, Context.SYSTEM_HEALTH_SERVICE, Context.COMPANION_DEVICE_SERVICE, Context.VIRTUAL_DEVICE_SERVICE, Context.CROSS_PROFILE_APPS_SERVICE, Context.LOCALE_SERVICE, Context.MEDIA_METRICS_SERVICE, Context.DISPLAY_HASH_SERVICE, Context.CREDENTIAL_SERVICE, Context.DEVICE_LOCK_SERVICE, Context.GRAMMATICAL_INFLECTION_SERVICE">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/MainActivity.java"
+            line="363"
+            column="49"
+            startOffset="13284"
+            endLine="363"
+            endColumn="60"
+            endOffset="13295"/>
+    </incident>
+
+    <incident
+        id="ObsoleteSdkInt"
+        severity="warning"
+        message="Unnecessary; SDK_INT is always >= 24">
+        <fix-data conditional="true"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/service/FocusNotificationListenerService.java"
+            line="41"
+            column="13"
+            startOffset="1286"
+            endLine="41"
+            endColumn="59"
+            endOffset="1332"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/SettingsActivity.java"
+            line="202"
+            column="31"
+            startOffset="8428"
+            endLine="202"
+            endColumn="107"
+            endOffset="8504"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/SettingsActivity.java"
+            line="202"
+            column="31"
+            startOffset="8428"
+            endLine="202"
+            endColumn="49"
+            endOffset="8446"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/SettingsActivity.java"
+            line="205"
+            column="32"
+            startOffset="8592"
+            endLine="205"
+            endColumn="110"
+            endOffset="8670"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/SettingsActivity.java"
+            line="205"
+            column="32"
+            startOffset="8592"
+            endLine="205"
+            endColumn="51"
+            endOffset="8611"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/SettingsActivity.java"
+            line="210"
+            column="31"
+            startOffset="8806"
+            endLine="210"
+            endColumn="161"
+            endOffset="8936"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/SettingsActivity.java"
+            line="210"
+            column="31"
+            startOffset="8806"
+            endLine="210"
+            endColumn="46"
+            endOffset="8821"/>
+    </incident>
+
+    <incident
+        id="ObsoleteSdkInt"
+        severity="warning"
+        message="Unnecessary; SDK_INT is always >= 24">
+        <fix-data conditional="true"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/SettingsActivity.java"
+            line="267"
+            column="13"
+            startOffset="12048"
+            endLine="267"
+            endColumn="59"
+            endOffset="12094"/>
+    </incident>
+
+    <incident
+        id="ObsoleteSdkInt"
+        severity="warning"
+        message="Unnecessary; SDK_INT is always >= 24">
+        <fix-data conditional="true"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/SettingsActivity.java"
+            line="275"
+            column="13"
+            startOffset="12374"
+            endLine="275"
+            endColumn="59"
+            endOffset="12420"/>
+    </incident>
+
+    <incident
+        id="NotifyDataSetChanged"
+        severity="warning"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/ui/AppDrawerAdapter.java"
+            line="39"
+            column="9"
+            startOffset="1083"
+            endLine="39"
+            endColumn="31"
+            endOffset="1105"/>
+    </incident>
+
+    <incident
+        id="DefaultLocale"
+        severity="warning"
+        message="Implicitly using the default locale is a common source of bugs: Use `toLowerCase(Locale)` instead. For strings meant to be internal use `Locale.ROOT`, otherwise `Locale.getDefault()`.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/ui/AppDrawerAdapter.java"
+            line="47"
+            column="37"
+            startOffset="1333"
+            endLine="47"
+            endColumn="48"
+            endOffset="1344"/>
+    </incident>
+
+    <incident
+        id="DefaultLocale"
+        severity="warning"
+        message="Implicitly using the default locale is a common source of bugs: Use `toLowerCase(Locale)` instead. For strings meant to be internal use `Locale.ROOT`, otherwise `Locale.getDefault()`.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/ui/AppDrawerAdapter.java"
+            line="49"
+            column="57"
+            startOffset="1448"
+            endLine="49"
+            endColumn="68"
+            endOffset="1459"/>
+    </incident>
+
+    <incident
+        id="DefaultLocale"
+        severity="warning"
+        message="Implicitly using the default locale is a common source of bugs: Use `toLowerCase(Locale)` instead. For strings meant to be internal use `Locale.ROOT`, otherwise `Locale.getDefault()`.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/ui/AppDrawerAdapter.java"
+            line="50"
+            column="59"
+            startOffset="1521"
+            endLine="50"
+            endColumn="70"
+            endOffset="1532"/>
+    </incident>
+
+    <incident
+        id="NotifyDataSetChanged"
+        severity="warning"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/ui/AppDrawerAdapter.java"
+            line="56"
+            column="9"
+            startOffset="1697"
+            endLine="56"
+            endColumn="31"
+            endOffset="1719"/>
+    </incident>
+
+    <incident
+        id="MissingSuperCall"
+        severity="error"
+        message="Overriding method should call `super.onBackPressed`">
+        <fix-data/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/ui/BlockedInterceptActivity.java"
+            line="50"
+            column="17"
+            startOffset="1964"
+            endLine="50"
+            endColumn="30"
+            endOffset="1977"/>
+    </incident>
+
+    <incident
+        id="NotifyDataSetChanged"
+        severity="warning"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/focus/ui/FavoritesAdapter.java"
+            line="36"
+            column="9"
+            startOffset="981"
+            endLine="36"
+            endColumn="31"
+            endOffset="1003"/>
+    </incident>
+
+    <incident
+        id="OldTargetApi"
+        severity="warning"
+        message="Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details.">
+        <fix-replace
+            description="Update targetSdkVersion to 36"
+            oldString="34"
+            replacement="36"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="12"
+            column="9"
+            startOffset="197"
+            endLine="12"
+            endColumn="21"
+            endOffset="209"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.appcompat:appcompat than 1.6.1 is available: 1.8.0">
+        <fix-replace
+            description="Change to 1.8.0"
+            family="Update versions"
+            oldString="1.6.1"
+            replacement="1.8.0"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="46"
+            column="20"
+            startOffset="937"
+            endLine="46"
+            endColumn="56"
+            endOffset="973"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of com.google.android.material:material than 1.11.0 is available: 1.14.0">
+        <fix-replace
+            description="Change to 1.14.0"
+            family="Update versions"
+            oldString="1.11.0"
+            replacement="1.14.0"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="47"
+            column="20"
+            startOffset="993"
+            endLine="47"
+            endColumn="65"
+            endOffset="1038"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.recyclerview:recyclerview than 1.3.2 is available: 1.4.0">
+        <fix-replace
+            description="Change to 1.4.0"
+            family="Update versions"
+            oldString="1.3.2"
+            replacement="1.4.0"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="48"
+            column="20"
+            startOffset="1058"
+            endLine="48"
+            endColumn="62"
+            endOffset="1100"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of org.mockito:mockito-core than 5.11.0 is available: 5.20.0">
+        <fix-replace
+            description="Change to 5.20.0"
+            family="Update versions"
+            oldString="5.11.0"
+            replacement="5.20.0"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="51"
+            column="24"
+            startOffset="1169"
+            endLine="51"
+            endColumn="57"
+            endOffset="1202"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of org.json:json than 20231013 is available: 20250517">
+        <fix-replace
+            description="Change to 20250517"
+            family="Update versions"
+            oldString="20231013"
+            replacement="20250517"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="52"
+            column="24"
+            startOffset="1226"
+            endLine="52"
+            endColumn="48"
+            endOffset="1250"/>
+    </incident>
+
+    <incident
+        id="Overdraw"
+        severity="warning"
+        message="Possible overdraw: Root element paints background `@color/black` with a theme that also paints a background (inferred theme is `@style/Theme_FocusLauncher`)">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_blocked_intercept.xml"
+            line="5"
+            column="5"
+            startOffset="199"
+            endLine="5"
+            endColumn="38"
+            endOffset="232"/>
+    </incident>
+
+    <incident
+        id="Overdraw"
+        severity="warning"
+        message="Possible overdraw: Root element paints background `@color/black` with a theme that also paints a background (inferred theme is `@style/Theme.FocusLauncher`)">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="6"
+            column="5"
+            startOffset="230"
+            endLine="6"
+            endColumn="38"
+            endOffset="263"/>
+    </incident>
+
+    <incident
+        id="Overdraw"
+        severity="warning"
+        message="Possible overdraw: Root element paints background `@color/black` with a theme that also paints a background (inferred theme is `@style/Theme_FocusLauncher`)">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_mindful_delay.xml"
+            line="5"
+            column="5"
+            startOffset="199"
+            endLine="5"
+            endColumn="38"
+            endOffset="232"/>
+    </incident>
+
+    <incident
+        id="Overdraw"
+        severity="warning"
+        message="Possible overdraw: Root element paints background `@color/black` with a theme that also paints a background (inferred theme is `@style/Theme_FocusLauncher`)">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_settings.xml"
+            line="5"
+            column="5"
+            startOffset="195"
+            endLine="5"
+            endColumn="38"
+            endOffset="228"/>
+    </incident>
+
+    <incident
+        id="Overdraw"
+        severity="warning"
+        message="Possible overdraw: Root element paints background `?android:attr/selectableItemBackground` with a theme that also paints a background (inferred theme is `@style/Theme.FocusLauncher`)">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_app_drawer.xml"
+            line="15"
+            column="5"
+            startOffset="509"
+            endLine="15"
+            endColumn="64"
+            endOffset="568"/>
+    </incident>
+
+    <incident
+        id="Overdraw"
+        severity="warning"
+        message="Possible overdraw: Root element paints background `?android:attr/selectableItemBackground` with a theme that also paints a background (inferred theme is `@style/Theme.FocusLauncher`)">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_favorite.xml"
+            line="15"
+            column="5"
+            startOffset="520"
+            endLine="15"
+            endColumn="64"
+            endOffset="579"/>
+    </incident>
+
+</incidents>
