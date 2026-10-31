@@ -7,22 +7,31 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.AlarmClock;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowInsets;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextClock;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.window.OnBackInvokedCallback;
 
@@ -38,6 +47,7 @@ import com.example.focus.data.FocusPreferences;
 import com.example.focus.engine.ScheduleBlock;
 import com.example.focus.engine.UsageTrackerEngine;
 import com.example.focus.model.AppItem;
+import com.example.focus.model.TodoItem;
 import com.example.focus.service.FocusAccessibilityService;
 import com.example.focus.ui.AppDrawerAdapter;
 import com.example.focus.ui.BlockedInterceptActivity;
@@ -45,6 +55,7 @@ import com.example.focus.ui.FavoritesAdapter;
 import com.example.focus.ui.MindfulDelayActivity;
 import com.example.focus.util.AppHelper;
 import com.example.focus.util.NotificationHelper;
+import com.example.focus.util.ThemeHelper;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -62,6 +73,11 @@ public class MainActivity extends AppCompatActivity {
     private View homeLayout;
     private View drawerLayout;
     private EditText searchInput;
+    private TextClock textClock;
+    private TextClock textDate;
+    private ImageView btnSettings;
+    private ImageView btnTodo;
+    private ImageView btnPhone;
     private AppDrawerAdapter drawerAdapter;
     private FavoritesAdapter favoritesAdapter;
     private GestureDetector gestureDetector;
@@ -73,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_main);
 
         prefs = new FocusPreferences(this);
@@ -86,11 +103,40 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        applyCurrentTheme();
         loadApps();
         if (!hasPromptedDefaultLauncher) {
             hasPromptedDefaultLauncher = true;
             checkDefaultLauncherPrompt();
         }
+    }
+
+    private void applyCurrentTheme() {
+        boolean isDark = prefs.isDarkMode();
+        ThemeHelper.applyTheme(this, isDark);
+
+        int bgColor = isDark ? Color.BLACK : Color.WHITE;
+        int textPrimary = isDark ? Color.WHITE : 0xFF111111;
+        int textSecondary = isDark ? 0xB3FFFFFF : 0xFF777777;
+
+        rootLayout.setBackgroundColor(bgColor);
+        homeLayout.setBackgroundColor(bgColor);
+        drawerLayout.setBackgroundColor(bgColor);
+
+        if (textClock != null) textClock.setTextColor(textPrimary);
+        if (textDate != null) textDate.setTextColor(textSecondary);
+
+        if (btnSettings != null) btnSettings.setColorFilter(textPrimary);
+        if (btnTodo != null) btnTodo.setColorFilter(textPrimary);
+        if (btnPhone != null) btnPhone.setColorFilter(textPrimary);
+
+        if (searchInput != null) {
+            searchInput.setTextColor(textPrimary);
+            searchInput.setHintTextColor(getResources().getColor(R.color.gray_muted));
+        }
+
+        if (drawerAdapter != null) drawerAdapter.setDarkMode(isDark);
+        if (favoritesAdapter != null) favoritesAdapter.setDarkMode(isDark);
     }
 
     private boolean isDefaultLauncher() {
@@ -162,19 +208,25 @@ public class MainActivity extends AppCompatActivity {
         homeLayout = findViewById(R.id.home_layout);
         drawerLayout = findViewById(R.id.drawer_layout);
         searchInput = findViewById(R.id.search_input);
+        textClock = findViewById(R.id.text_clock);
+        textDate = findViewById(R.id.text_date);
+        btnSettings = findViewById(R.id.btn_settings);
+        btnTodo = findViewById(R.id.btn_todo);
+        btnPhone = findViewById(R.id.btn_phone);
 
         // Clock & Date click handlers
-        findViewById(R.id.text_clock).setOnClickListener(v -> openClock());
-        findViewById(R.id.text_date).setOnClickListener(v -> openCalendar());
+        textClock.setOnClickListener(v -> openClock());
+        textDate.setOnClickListener(v -> openCalendar());
         findViewById(R.id.clock_container).setOnLongClickListener(v -> {
             startActivity(new Intent(MainActivity.this, SettingsActivity.class));
             return true;
         });
 
-        // Settings on left, Phone on right
-        findViewById(R.id.btn_settings).setOnClickListener(v ->
+        // Settings on left, Todo in center, Phone on right
+        btnSettings.setOnClickListener(v ->
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class)));
-        findViewById(R.id.btn_phone).setOnClickListener(v -> AppHelper.openDialer(this));
+        btnTodo.setOnClickListener(v -> showTodoDialog());
+        btnPhone.setOnClickListener(v -> AppHelper.openDialer(this));
 
         // Tapping search input explicitly opens keyboard
         searchInput.setOnClickListener(v -> {
@@ -217,6 +269,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         drawerRecycler.setAdapter(drawerAdapter);
+
+        // Search bar click explicitly opens soft keyboard
+        searchInput.setOnClickListener(v -> {
+            searchInput.requestFocus();
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.showSoftInput(searchInput, InputMethodManager.SHOW_IMPLICIT);
+            }
+        });
 
         // Live Search Filter with Auto-Launch
         searchInput.addTextChangedListener(new TextWatcher() {
@@ -288,7 +349,8 @@ public class MainActivity extends AppCompatActivity {
                         if (diffX > 0) {
                             onSwipeRight();
                         } else {
-                            onSwipeLeft();
+                            // Right to left swipe: open the apps drawer (user request)
+                            openDrawer();
                         }
                         return true;
                     }
@@ -365,10 +427,12 @@ public class MainActivity extends AppCompatActivity {
         if (drawerLayout.getVisibility() == View.VISIBLE) return;
         drawerLayout.setVisibility(View.VISIBLE);
         searchInput.setText("");
+        drawerLayout.requestFocus();
         searchInput.clearFocus();
-        // Do NOT open keyboard automatically on swipe up
+        // Do NOT open keyboard automatically on swipe up or swipe left
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null) {
+            imm.hideSoftInputFromWindow(drawerLayout.getWindowToken(), 0);
             imm.hideSoftInputFromWindow(searchInput.getWindowToken(), 0);
         }
     }
@@ -707,6 +771,100 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(this, "Limits saved", Toast.LENGTH_SHORT).show();
                 })
                 .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void showTodoDialog() {
+        int dialogTheme = prefs.isDarkMode()
+                ? android.R.style.Theme_DeviceDefault_Dialog_Alert
+                : android.R.style.Theme_DeviceDefault_Light_Dialog_Alert;
+
+        List<TodoItem> list = prefs.getTodoList();
+
+        LinearLayout container = new LinearLayout(this);
+        container.setOrientation(LinearLayout.VERTICAL);
+        container.setPadding(36, 16, 36, 16);
+
+        EditText input = new EditText(this);
+        input.setHint("Add new focus task...");
+        int textColor = prefs.isDarkMode() ? Color.WHITE : 0xFF111111;
+        input.setTextColor(textColor);
+        input.setHintTextColor(getResources().getColor(R.color.gray_muted));
+        container.addView(input);
+
+        ListView listView = new ListView(this);
+        container.addView(listView);
+
+        BaseAdapter adapter = new BaseAdapter() {
+            @Override
+            public int getCount() {
+                return list.size();
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return list.get(position);
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return position;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                TextView tv = (TextView) convertView;
+                if (tv == null) {
+                    tv = new TextView(MainActivity.this);
+                    tv.setTextSize(16);
+                    tv.setPadding(12, 20, 12, 20);
+                }
+                TodoItem item = list.get(position);
+                tv.setText((item.isCompleted() ? "[✓] " : "[ ] ") + item.getText());
+                tv.setTextColor(item.isCompleted() ? getResources().getColor(R.color.gray_muted) : textColor);
+                if (item.isCompleted()) {
+                    tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                } else {
+                    tv.setPaintFlags(tv.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+                }
+                return tv;
+            }
+        };
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            TodoItem item = list.get(position);
+            prefs.toggleTodo(item.getId());
+            item.setCompleted(!item.isCompleted());
+            adapter.notifyDataSetChanged();
+        });
+
+        listView.setOnItemLongClickListener((parent, view, position, id) -> {
+            TodoItem item = list.get(position);
+            new AlertDialog.Builder(MainActivity.this, dialogTheme)
+                    .setTitle("Delete Task")
+                    .setMessage("Delete \"" + item.getText() + "\"?")
+                    .setPositiveButton("Delete", (d, w) -> {
+                        prefs.deleteTodo(item.getId());
+                        list.remove(position);
+                        adapter.notifyDataSetChanged();
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
+            return true;
+        });
+
+        new AlertDialog.Builder(this, dialogTheme)
+                .setTitle("Focus Tasks & To-Do List")
+                .setView(container)
+                .setPositiveButton("Add Task", (d, w) -> {
+                    String text = input.getText().toString().trim();
+                    if (!TextUtils.isEmpty(text)) {
+                        prefs.addTodo(text);
+                        Toast.makeText(this, "Task added", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Close", null)
                 .show();
     }
 }

@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.focus.UsageTrackerEngineTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-10-31T18:47:24" hostname="Y" time="0.009">
+<testsuite name="com.example.focus.UsageTrackerEngineTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-10-31T19:24:50" hostname="Y" time="0.024">
   <properties/>
-  <testcase name="testClockHourCalculation" classname="com.example.focus.UsageTrackerEngineTest" time="0.001"/>
-  <testcase name="testForegroundCalculation_UnfinishedSessionAtEnd" classname="com.example.focus.UsageTrackerEngineTest" time="0.003"/>
-  <testcase name="testForegroundCalculation_SessionAcrossStartTimeBoundary" classname="com.example.focus.UsageTrackerEngineTest" time="0.0"/>
+  <testcase name="testClockHourCalculation" classname="com.example.focus.UsageTrackerEngineTest" time="0.003"/>
+  <testcase name="testForegroundCalculation_UnfinishedSessionAtEnd" classname="com.example.focus.UsageTrackerEngineTest" time="0.011"/>
+  <testcase name="testStartOfToday" classname="com.example.focus.UsageTrackerEngineTest" time="0.0"/>
+  <testcase name="testForegroundCalculation_SessionAcrossStartTimeBoundary" classname="com.example.focus.UsageTrackerEngineTest" time="0.001"/>
   <testcase name="testScheduleBlock_Overnight" classname="com.example.focus.UsageTrackerEngineTest" time="0.001"/>
   <testcase name="testScheduleBlock_SameDay" classname="com.example.focus.UsageTrackerEngineTest" time="0.001"/>
   <testcase name="testForegroundCalculation_SingleCleanSession" classname="com.example.focus.UsageTrackerEngineTest" time="0.001"/>
   <testcase name="testForegroundCalculation_MultipleSessionsWithOtherApp" classname="com.example.focus.UsageTrackerEngineTest" time="0.0"/>
+  <testcase name="testFormatDuration" classname="com.example.focus.UsageTrackerEngineTest" time="0.001"/>
   <testcase name="testStartOfWeekCalculation" classname="com.example.focus.UsageTrackerEngineTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

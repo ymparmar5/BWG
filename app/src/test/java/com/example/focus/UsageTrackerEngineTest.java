@@ -148,5 +148,31 @@ public class UsageTrackerEngineTest {
         daytime.set(Calendar.MINUTE, 0);
         Assert.assertFalse(overnight.isActiveNow(daytime));
     }
+
+    @Test
+    public void testFormatDuration() {
+        Assert.assertEquals("0m", UsageTrackerEngine.formatDuration(0));
+        Assert.assertEquals("< 1m", UsageTrackerEngine.formatDuration(35));
+        Assert.assertEquals("5m", UsageTrackerEngine.formatDuration(300));
+        Assert.assertEquals("45m", UsageTrackerEngine.formatDuration(2700));
+        Assert.assertEquals("1h 15m", UsageTrackerEngine.formatDuration(4500));
+        Assert.assertEquals("3h 0m", UsageTrackerEngine.formatDuration(10800));
+    }
+
+    @Test
+    public void testStartOfToday() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(2026, Calendar.OCTOBER, 31, 16, 45, 12);
+
+        long start = UsageTrackerEngine.getStartOfToday(cal.getTimeInMillis());
+
+        Calendar res = Calendar.getInstance();
+        res.setTimeInMillis(start);
+
+        Assert.assertEquals(0, res.get(Calendar.HOUR_OF_DAY));
+        Assert.assertEquals(0, res.get(Calendar.MINUTE));
+        Assert.assertEquals(0, res.get(Calendar.SECOND));
+        Assert.assertEquals(0, res.get(Calendar.MILLISECOND));
+    }
 }
 

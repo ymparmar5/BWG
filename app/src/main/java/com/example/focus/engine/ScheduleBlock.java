@@ -16,6 +16,10 @@ public class ScheduleBlock {
     private final int endMinute;
     private final Set<Integer> daysOfWeek; // Calendar.SUNDAY (1) to Calendar.SATURDAY (7)
 
+    public ScheduleBlock(String packageName, int startHour, int startMinute, int endHour, int endMinute) {
+        this(packageName, startHour, startMinute, endHour, endMinute, getAllDaysOfWeek());
+    }
+
     public ScheduleBlock(String packageName, int startHour, int startMinute, int endHour, int endMinute, Set<Integer> daysOfWeek) {
         this.packageName = packageName;
         this.startHour = startHour;
@@ -23,6 +27,12 @@ public class ScheduleBlock {
         this.endHour = endHour;
         this.endMinute = endMinute;
         this.daysOfWeek = daysOfWeek != null ? daysOfWeek : new HashSet<>();
+    }
+
+    public static Set<Integer> getAllDaysOfWeek() {
+        Set<Integer> set = new HashSet<>();
+        for (int i = 1; i <= 7; i++) set.add(i);
+        return set;
     }
 
     public String getPackageName() {
@@ -49,24 +59,21 @@ public class ScheduleBlock {
         return daysOfWeek;
     }
 
-    public boolean isActiveNow(Calendar cal) {
-        if (daysOfWeek != null && !daysOfWeek.isEmpty()) {
-            int currentDay = cal.get(Calendar.DAY_OF_WEEK);
-            if (!daysOfWeek.contains(currentDay)) {
-                return false;
-            }
+    public boolean isActiveNow(Calendar now) {
+        int dayOfWeek = now.get(Calendar.DAY_OF_WEEK);
+        if (!daysOfWeek.contains(dayOfWeek)) {
+            return false;
         }
 
-        int currentMinutes = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE);
-        int startMinutes = startHour * 60 + startMinute;
-        int endMinutes = endHour * 60 + endMinute;
+        int currentMinutes = now.get(Calendar.HOUR_OF_DAY) * 60 + now.get(Calendar.MINUTE);
+        int startTotal = startHour * 60 + startMinute;
+        int endTotal = endHour * 60 + endMinute;
 
-        if (startMinutes <= endMinutes) {
-            // Same day block, e.g. 09:00 to 17:00
-            return currentMinutes >= startMinutes && currentMinutes < endMinutes;
+        if (startTotal <= endTotal) {
+            return currentMinutes >= startTotal && currentMinutes < endTotal;
         } else {
-            // Overnight block, e.g. 22:00 to 07:00
-            return currentMinutes >= startMinutes || currentMinutes < endMinutes;
+            // Over midnight (e.g. 22:00 to 07:00)
+            return currentMinutes >= startTotal || currentMinutes < endTotal;
         }
     }
 
@@ -81,28 +88,25 @@ public class ScheduleBlock {
         obj.put("startMinute", startMinute);
         obj.put("endHour", endHour);
         obj.put("endMinute", endMinute);
-        JSONArray daysArr = new JSONArray();
-        for (int d : daysOfWeek) {
-            daysArr.put(d);
-        }
-        obj.put("daysOfWeek", daysArr);
+        JSONArray arr = new JSONArray();
+        for (int d : daysOfWeek) arr.put(d);
+        obj.put("daysOfWeek", arr);
         return obj;
     }
 
-    public static ScheduleBlock fromJsonObject(JSONObject obj) throws JSONException {
-        String pkg = obj.getString("packageName");
-        int sh = obj.getInt("startHour");
-        int sm = obj.getInt("startMinute");
-        int eh = obj.getInt("endHour");
-        int em = obj.getInt("endMinute");
+    public static ScheduleBlock fromJsonObject(JSONObject obj) {
+        String pkg = obj.optString("packageName");
+        int sh = obj.optInt("startHour");
+        int sm = obj.optInt("startMinute");
+        int eh = obj.optInt("endHour");
+        int em = obj.optInt("endMinute");
         Set<Integer> days = new HashSet<>();
         JSONArray arr = obj.optJSONArray("daysOfWeek");
         if (arr != null) {
             for (int i = 0; i < arr.length(); i++) {
-                days.add(arr.getInt(i));
+                days.add(arr.optInt(i));
             }
         }
         return new ScheduleBlock(pkg, sh, sm, eh, em, days);
     }
 }
-

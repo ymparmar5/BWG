@@ -23,9 +23,15 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
     private final List<AppItem> favorites = new ArrayList<>();
     private final OnFavoriteClickListener listener;
+    private boolean isDarkMode = true;
 
     public FavoritesAdapter(OnFavoriteClickListener listener) {
         this.listener = listener;
+    }
+
+    public void setDarkMode(boolean darkMode) {
+        this.isDarkMode = darkMode;
+        notifyDataSetChanged();
     }
 
     public void setFavorites(List<AppItem> list) {
@@ -47,6 +53,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         AppItem app = favorites.get(position);
         holder.favoriteLabel.setText(app.getDisplayLabel());
+        holder.favoriteLabel.setTextColor(isDarkMode ? 0xFFFFFFFF : 0xFF111111);
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) listener.onFavoriteClick(app);
         });

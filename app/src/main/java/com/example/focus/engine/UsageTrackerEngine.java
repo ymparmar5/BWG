@@ -2,18 +2,23 @@ package com.example.focus.engine;
 
 import android.app.AppOpsManager;
 import android.app.usage.UsageEvents;
+import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Process;
 
 import com.example.focus.data.FocusPreferences;
+import com.example.focus.model.AppUsageStat;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class UsageTrackerEngine {
 
@@ -59,6 +64,16 @@ public class UsageTrackerEngine {
     public static long getStartOfClockHour(long currentTime) {
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(currentTime);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTimeInMillis();
+    }
+
+    public static long getStartOfToday(long currentTime) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(currentTime);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
@@ -145,7 +160,152 @@ public class UsageTrackerEngine {
         }
 
         long totalMs = calculateForegroundTimeMillis(rawList, packageName, startTime, endTime);
+        long seconds = totalMs / 1000;
+
+        // Fallback to queryUsageStats if queryEvents had empty results on certain OEM implementations
+        if (seconds == 0) {
+            Map<String, UsageStats> statsMap = usm.queryAndAggregateUsageStats(startTime, endTime);
+            if (statsMap != null && statsMap.containsKey(packageName)) {
+                UsageStats stats = statsMap.get(packageName);
+                if (stats != null) {
+                    seconds = stats.getTotalTimeInForeground() / 1000;
+                }
+            }
+        }
+
+        return seconds;
+    }
+
+    /**
+     * Returns total seconds an app has been used today (since midnight).
+     */
+    public static long getTodayAppUsageSeconds(Context context, String packageName) {
+        long now = System.currentTimeMillis();
+        long startOfToday = getStartOfToday(now);
+        return getForegroundTimeSeconds(context, packageName, startOfToday, now);
+    }
+
+    /**
+     * Returns total screen time across all apps today.
+     */
+    public static long getTodayTotalDeviceUsageSeconds(Context context) {
+        if (!hasUsageAccessPermission(context)) return 0;
+        UsageStatsManager usm = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
+        if (usm == null) return 0;
+
+        long now = System.currentTimeMillis();
+        long startOfToday = getStartOfToday(now);
+
+        Map<String, UsageStats> statsMap = usm.queryAndAggregateUsageStats(startOfToday, now);
+        if (statsMap == null) return 0;
+
+        long totalMs = 0;
+        for (UsageStats stats : statsMap.values()) {
+            totalMs += stats.getTotalTimeInForeground();
+        }
         return totalMs / 1000;
+    }
+
+    /**
+     * Calculates device unlock count today.
+     * Uses UsageEvents (KEYGUARD_HIDDEN = 18, SCREEN_INTERACTIVE = 15) and FocusPreferences counter.
+     */
+    public static int getTodayUnlockCount(Context context) {
+        FocusPreferences prefs = new FocusPreferences(context);
+        int localCount = prefs.getTodayUnlockCount();
+
+        if (!hasUsageAccessPermission(context)) {
+            return Math.max(1, localCount);
+        }
+
+        UsageStatsManager usm = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
+        if (usm == null) return Math.max(1, localCount);
+
+        long now = System.currentTimeMillis();
+        long startOfToday = getStartOfToday(now);
+
+        UsageEvents events = usm.queryEvents(startOfToday, now);
+        if (events == null) return Math.max(1, localCount);
+
+        int eventUnlocks = 0;
+        UsageEvents.Event ev = new UsageEvents.Event();
+        while (events.hasNextEvent()) {
+            events.getNextEvent(ev);
+            int type = ev.getEventType();
+            // 18 = KEYGUARD_HIDDEN (Unlock on API 28+)
+            // 15 = SCREEN_INTERACTIVE
+            if (type == 18) {
+                eventUnlocks++;
+            }
+        }
+
+        return Math.max(localCount, eventUnlocks);
+    }
+
+    /**
+     * Returns list of AppUsageStat for today, sorted either low-to-high or high-to-low.
+     */
+    public static List<AppUsageStat> getTodayAppUsageStats(Context context, boolean lowToHigh) {
+        List<AppUsageStat> list = new ArrayList<>();
+        if (!hasUsageAccessPermission(context)) {
+            return list;
+        }
+
+        UsageStatsManager usm = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
+        if (usm == null) return list;
+
+        long now = System.currentTimeMillis();
+        long startOfToday = getStartOfToday(now);
+
+        Map<String, UsageStats> statsMap = usm.queryAndAggregateUsageStats(startOfToday, now);
+        if (statsMap == null || statsMap.isEmpty()) return list;
+
+        long totalUsageSecs = getTodayTotalDeviceUsageSeconds(context);
+        PackageManager pm = context.getPackageManager();
+
+        for (Map.Entry<String, UsageStats> entry : statsMap.entrySet()) {
+            String pkg = entry.getKey();
+            UsageStats stats = entry.getValue();
+            long sec = stats.getTotalTimeInForeground() / 1000;
+            if (sec <= 0) continue;
+
+            // Skip own package or system background services
+            if (context.getPackageName().equals(pkg)) continue;
+
+            String label = pkg;
+            try {
+                label = pm.getApplicationLabel(pm.getApplicationInfo(pkg, 0)).toString();
+            } catch (Exception ignored) {}
+
+            int pct = totalUsageSecs > 0 ? (int) ((sec * 100) / totalUsageSecs) : 0;
+            list.add(new AppUsageStat(pkg, label, sec, pct));
+        }
+
+        // Sort by usage seconds
+        if (lowToHigh) {
+            list.sort(Comparator.comparingLong(AppUsageStat::getUsageSeconds));
+        } else {
+            list.sort((a, b) -> Long.compare(b.getUsageSeconds(), a.getUsageSeconds()));
+        }
+
+        return list;
+    }
+
+    /**
+     * Formats seconds into human-readable duration like "45m", "1h 20m", or "< 1m".
+     */
+    public static String formatDuration(long seconds) {
+        if (seconds < 60) {
+            return seconds > 0 ? "< 1m" : "0m";
+        }
+        long minutes = seconds / 60;
+        long hours = minutes / 60;
+        long remMinutes = minutes % 60;
+        if (hours > 0) {
+            return hours + "h " + remMinutes + "m";
+        } else {
+            return minutes + "m";
+        }
     }
 
     /**
@@ -207,4 +367,3 @@ public class UsageTrackerEngine {
         return null;
     }
 }
-

@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="?android:attr/colorBackground"
     android:fitsSystemWindows="true">
 
     <LinearLayout
@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Focus Settings"
-            android:textColor="@color/white"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="26sp"
             android:fontFamily="sans-serif-medium"
             android:layout_marginBottom="24dp" />
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="PERMISSIONS HEALTH DASHBOARD"
-            android:textColor="@color/gray_muted"
+            android:textColor="?attr/focusSectionHeaderColor"
             android:textSize="12sp"
             android:fontFamily="sans-serif-medium"
             android:letterSpacing="0.1"
@@ -46,14 +46,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Default Launcher"
-                android:textColor="@color/white"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="16sp" />
             <TextView
                 android:id="@+id/status_perm_launcher"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Checking..."
-                android:textColor="@color/gray_muted"
+                android:textColor="?android:attr/textColorSecondary"
                 android:textSize="13sp" />
         </LinearLayout>
 
@@ -69,14 +69,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Accessibility Service (Content Blocker)"
-                android:textColor="@color/white"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="16sp" />
             <TextView
                 android:id="@+id/status_perm_accessibility"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Checking..."
-                android:textColor="@color/gray_muted"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_perm_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="?android:attr/selectableItemBackground">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Display Over Other Apps (Instant Takeover Screen)"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/status_perm_overlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Checking..."
+                android:textColor="?android:attr/textColorSecondary"
                 android:textSize="13sp" />
         </LinearLayout>
 
@@ -92,14 +115,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Usage Access (App Usage Limits)"
-                android:textColor="@color/white"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="16sp" />
             <TextView
                 android:id="@+id/status_perm_usage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Checking..."
-                android:textColor="@color/gray_muted"
+                android:textColor="?android:attr/textColorSecondary"
                 android:textSize="13sp" />
         </LinearLayout>
 
@@ -115,14 +138,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Notification Access (Filter)"
-                android:textColor="@color/white"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="16sp" />
             <TextView
                 android:id="@+id/status_perm_notif"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Checking..."
-                android:textColor="@color/gray_muted"
+                android:textColor="?android:attr/textColorSecondary"
                 android:textSize="13sp" />
         </LinearLayout>
 
@@ -138,14 +161,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Do Not Disturb Access (Night Automation)"
-                android:textColor="@color/white"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="16sp" />
             <TextView
                 android:id="@+id/status_perm_dnd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Checking..."
-                android:textColor="@color/gray_muted"
+                android:textColor="?android:attr/textColorSecondary"
                 android:textSize="13sp" />
         </LinearLayout>
 
@@ -161,73 +184,61 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ignore Battery Optimization (OEM Survival)"
-                android:textColor="@color/white"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="16sp" />
             <TextView
                 android:id="@+id/status_perm_battery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Checking..."
-                android:textColor="@color/gray_muted"
+                android:textColor="?android:attr/textColorSecondary"
                 android:textSize="13sp" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray_dark"
+            android:background="?attr/focusDividerColor"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="20dp" />
 
-        <!-- 2. HOME SCREEN & DRAWER -->
+        <!-- 2. HOME SCREEN & THEME -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="HOME SCREEN &amp; DRAWER"
-            android:textColor="@color/gray_muted"
+            android:text="HOME SCREEN &amp; APPEARANCE"
+            android:textColor="?attr/focusSectionHeaderColor"
             android:textSize="12sp"
             android:fontFamily="sans-serif-medium"
             android:letterSpacing="0.1"
             android:layout_marginBottom="12dp" />
 
         <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switch_auto_launch"
+            android:id="@+id/switch_dark_mode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Auto-Launch Exact Search Match"
-            android:textColor="@color/white"
+            android:text="Dark Mode (AMOLED Black vs Clean Light)"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp" />
 
-        <TextView
-            android:id="@+id/btn_assign_swipe_left"
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_auto_launch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Swipe Left App: Default (Camera)"
-            android:textColor="@color/white"
+            android:text="Auto-Launch Exact Search Match"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:background="?android:attr/selectableItemBackground" />
-
-        <TextView
-            android:id="@+id/btn_assign_swipe_right"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Swipe Right App: Default (Phone)"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:background="?android:attr/selectableItemBackground" />
+            android:paddingBottom="10dp" />
 
         <TextView
             android:id="@+id/btn_manage_favorites"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Manage Favorites (Max 7)"
-            android:textColor="@color/white"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -238,7 +249,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Manage Hidden Apps"
-            android:textColor="@color/white"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -249,7 +260,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Manage Renamed App Aliases"
-            android:textColor="@color/white"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="?android:attr/selectableItemBackground" />
+
+        <TextView
+            android:id="@+id/btn_manage_todo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Focus Tasks &amp; To-Do List"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="?android:attr/selectableItemBackground" />
+
+        <TextView
+            android:id="@+id/btn_view_screentime_report"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Screen Time &amp; Unlock Report"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -258,16 +291,16 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray_dark"
+            android:background="?attr/focusDividerColor"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="20dp" />
 
-        <!-- 3. CONTENT BLOCKER & JSON RULES -->
+        <!-- 3. BLOCKING UI & DISTRACTION CONTROLS -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CONTENT BLOCKER (SHORTS / REELS / STATUS)"
-            android:textColor="@color/gray_muted"
+            android:text="BLOCKING UI &amp; DISTRACTION CONTROLS"
+            android:textColor="?attr/focusSectionHeaderColor"
             android:textSize="12sp"
             android:fontFamily="sans-serif-medium"
             android:letterSpacing="0.1"
@@ -277,18 +310,70 @@
             android:id="@+id/switch_blocker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enable Content Blocker"
-            android:textColor="@color/white"
+            android:text="Master Content Blocker"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_block_yt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Block YouTube Shorts"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_block_ig"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Block Instagram Reels"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_block_wa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Block WhatsApp Status / Updates"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+
+        <TextView
+            android:id="@+id/btn_preview_blocking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Test &amp; Preview Takeover Screen"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="?android:attr/selectableItemBackground" />
+
+        <TextView
+            android:id="@+id/btn_manage_blocked_apps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Manage Blocked Apps (Full App Blocker)"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="?android:attr/selectableItemBackground" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch_blocker_debug"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Live Debug Inspector Mode"
-            android:textColor="@color/white"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp" />
@@ -297,8 +382,8 @@
             android:id="@+id/btn_view_inspector_logs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rule Inspector (View Last 30 Node IDs)"
-            android:textColor="@color/white"
+            android:text="Rule Inspector (View Node IDs)"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -309,7 +394,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="JSON Rule Store Editor"
-            android:textColor="@color/white"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -318,16 +403,144 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray_dark"
+            android:background="?attr/focusDividerColor"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="20dp" />
 
-        <!-- 4. APP LIMITS & MINDFUL DELAY -->
+        <!-- 4. BEDTIME ("BAD TIME") DOWNTIME SCHEDULE -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="USAGE LIMITS &amp; MINDFUL DELAYS"
-            android:textColor="@color/gray_muted"
+            android:text="BEDTIME DOWNTIME (NIGHT BLOCKER)"
+            android:textColor="?attr/focusSectionHeaderColor"
+            android:textSize="12sp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.1"
+            android:layout_marginBottom="12dp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_bedtime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enable Bedtime App Blocker"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+
+        <LinearLayout
+            android:id="@+id/btn_bedtime_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="?android:attr/selectableItemBackground">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Bedtime Start (e.g. 22:00)"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/text_bedtime_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="22:00"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_bedtime_end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="?android:attr/selectableItemBackground">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Bedtime End (e.g. 07:00)"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/text_bedtime_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="07:00"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/focusDividerColor"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="20dp" />
+
+        <!-- 5. MINDFULNESS CONTINUOUS SCREEN TIMER (30 MIN) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MINDFULNESS CONTINUOUS SCREEN TIMER"
+            android:textColor="?attr/focusSectionHeaderColor"
+            android:textSize="12sp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.1"
+            android:layout_marginBottom="12dp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_mindfulness_reminder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Continuous Screen Time Reminder"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+
+        <LinearLayout
+            android:id="@+id/btn_mindfulness_duration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="?android:attr/selectableItemBackground">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Reminder Interval"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/text_mindfulness_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Every 30 Minutes"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/focusDividerColor"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="20dp" />
+
+        <!-- 6. APP LIMITS & SCHEDULES -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="USAGE LIMITS &amp; SCHEDULES"
+            android:textColor="?attr/focusSectionHeaderColor"
             android:textSize="12sp"
             android:fontFamily="sans-serif-medium"
             android:letterSpacing="0.1"
@@ -338,7 +551,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Manage App Limits &amp; Schedules"
-            android:textColor="@color/white"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -347,16 +560,16 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray_dark"
+            android:background="?attr/focusDividerColor"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="20dp" />
 
-        <!-- 5. NOTIFICATION FILTER & SAFETY DIGEST -->
+        <!-- 7. NOTIFICATION FILTER & SAFETY DIGEST -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NOTIFICATION FILTER"
-            android:textColor="@color/gray_muted"
+            android:textColor="?attr/focusSectionHeaderColor"
             android:textSize="12sp"
             android:fontFamily="sans-serif-medium"
             android:letterSpacing="0.1"
@@ -367,7 +580,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Enable Notification Filter"
-            android:textColor="@color/white"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp" />
@@ -377,7 +590,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Filter Mode: Blocklist"
-            android:textColor="@color/white"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -388,7 +601,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Manage Blocked / Allowed Apps"
-            android:textColor="@color/white"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -399,7 +612,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Safety Digest (Last 50 Dismissed)"
-            android:textColor="@color/white"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -408,16 +621,16 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray_dark"
+            android:background="?attr/focusDividerColor"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="20dp" />
 
-        <!-- 6. AUTOMATION -->
+        <!-- 8. AUTOMATION (DND) -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="AUTOMATION (NIGHT SILENT / DND)"
-            android:textColor="@color/gray_muted"
+            android:text="AUTOMATION (DND SCHEDULE)"
+            android:textColor="?attr/focusSectionHeaderColor"
             android:textSize="12sp"
             android:fontFamily="sans-serif-medium"
             android:letterSpacing="0.1"
@@ -428,7 +641,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Silent / DND Schedule"
-            android:textColor="@color/white"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp" />
@@ -445,15 +658,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Start Time"
-                android:textColor="@color/white"
+                android:text="DND Start Time"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="16sp" />
             <TextView
                 android:id="@+id/text_dnd_start_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="22:00"
-                android:textColor="@color/white_translucent"
+                android:textColor="?android:attr/textColorSecondary"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -469,15 +682,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="End Time"
-                android:textColor="@color/white"
+                android:text="DND End Time"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="16sp" />
             <TextView
                 android:id="@+id/text_dnd_end_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="07:00"
-                android:textColor="@color/white_translucent"
+                android:textColor="?android:attr/textColorSecondary"
                 android:textSize="16sp" />
         </LinearLayout>
 

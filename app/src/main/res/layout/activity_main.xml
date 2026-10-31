@@ -78,6 +78,20 @@
                 android:layout_weight="1" />
 
             <ImageView
+                android:id="@+id/btn_todo"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="12dp"
+                android:src="@drawable/ic_todo"
+                android:contentDescription="Focus Tasks"
+                android:background="?android:attr/selectableItemBackgroundBorderless" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <ImageView
                 android:id="@+id/btn_phone"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -98,7 +112,8 @@
         android:orientation="vertical"
         android:visibility="gone"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
         <EditText
             android:id="@+id/search_input"

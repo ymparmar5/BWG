@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import com.example.focus.engine.RuleModel;
 import com.example.focus.engine.ScheduleBlock;
 import com.example.focus.model.NotificationDigestItem;
+import com.example.focus.model.TodoItem;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,6 +15,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -50,6 +52,7 @@ public class FocusPreferences {
     private static final String KEY_BLOCK_WA_STATUS = "block_whatsapp_status";
     private static final String KEY_RULES_JSON = "blocker_rules_json";
     private static final String KEY_INSPECTOR_BUFFER = "inspector_node_buffer";
+    private static final String KEY_DARK_MODE = "pref_dark_mode";
 
     private static final String KEY_AUTO_LAUNCH_SINGLE = "auto_launch_single_result";
     private static final String KEY_SWIPE_LEFT = "swipe_left_pkg";
@@ -60,6 +63,20 @@ public class FocusPreferences {
     private static final String KEY_DND_START_M = "dnd_start_minute";
     private static final String KEY_DND_END_H = "dnd_end_hour";
     private static final String KEY_DND_END_M = "dnd_end_minute";
+
+    private static final String KEY_BEDTIME_ENABLED = "bedtime_mode_enabled";
+    private static final String KEY_BEDTIME_START_H = "bedtime_start_hour";
+    private static final String KEY_BEDTIME_START_M = "bedtime_start_minute";
+    private static final String KEY_BEDTIME_END_H = "bedtime_end_hour";
+    private static final String KEY_BEDTIME_END_M = "bedtime_end_minute";
+
+    private static final String KEY_MINDFULNESS_REMINDER_ENABLED = "mindfulness_reminder_enabled";
+    private static final String KEY_MINDFULNESS_REMINDER_MINUTES = "mindfulness_reminder_minutes";
+
+    private static final String KEY_TODO_LIST = "todo_items_json";
+    private static final String KEY_BLOCKED_APPS = "blocked_apps_set";
+    private static final String KEY_UNLOCK_COUNT_DATE = "unlock_count_date";
+    private static final String KEY_UNLOCK_COUNT = "unlock_count_today";
 
     private final SharedPreferences prefs;
 
@@ -106,6 +123,19 @@ public class FocusPreferences {
     }
 
     // --- APP ALIASES / RENAMES ---
+    public Map<String, String> getAppAliases() {
+        Map<String, String> map = new HashMap<>();
+        try {
+            JSONObject obj = new JSONObject(prefs.getString(KEY_ALIASES, "{}"));
+            Iterator<String> keys = obj.keys();
+            while (keys.hasNext()) {
+                String k = keys.next();
+                map.put(k, obj.getString(k));
+            }
+        } catch (JSONException ignored) {}
+        return map;
+    }
+
     public String getAppAlias(String packageName) {
         try {
             JSONObject obj = new JSONObject(prefs.getString(KEY_ALIASES, "{}"));
@@ -127,9 +157,17 @@ public class FocusPreferences {
         } catch (JSONException ignored) {}
     }
 
+    public void removeAlias(String packageName) {
+        setAppAlias(packageName, null);
+    }
+
     // --- HIDDEN APPS ---
     public Set<String> getHiddenApps() {
         return new HashSet<>(prefs.getStringSet(KEY_HIDDEN, new HashSet<>()));
+    }
+
+    public void setHiddenApps(Set<String> set) {
+        prefs.edit().putStringSet(KEY_HIDDEN, set != null ? set : new HashSet<>()).apply();
     }
 
     public void hideApp(String packageName) {
@@ -192,6 +230,10 @@ public class FocusPreferences {
         } catch (JSONException ignored) {}
     }
 
+    public void removeHourlyLimit(String packageName) {
+        setHourlyLimitMinutes(packageName, 0);
+    }
+
     // --- WEEKLY LIMITS (Minutes) ---
     public int getWeeklyLimitMinutes(String packageName) {
         try {
@@ -212,6 +254,10 @@ public class FocusPreferences {
             }
             prefs.edit().putString(KEY_WEEKLY_LIMITS, obj.toString()).apply();
         } catch (JSONException ignored) {}
+    }
+
+    public void removeWeeklyLimit(String packageName) {
+        setWeeklyLimitMinutes(packageName, 0);
     }
 
     // --- SCHEDULE BLOCKS ---
@@ -235,6 +281,10 @@ public class FocusPreferences {
             }
             prefs.edit().putString(KEY_SCHEDULE_BLOCKS, obj.toString()).apply();
         } catch (JSONException ignored) {}
+    }
+
+    public void removeScheduleBlock(String packageName) {
+        setScheduleBlock(packageName, null);
     }
 
     public Set<String> getAllMonitoredPackages() {
@@ -489,6 +539,14 @@ public class FocusPreferences {
         prefs.edit().putString(KEY_INSPECTOR_BUFFER, "[]").apply();
     }
 
+    public List<String> getInspectorLogs() {
+        return getInspectorBuffer();
+    }
+
+    public void clearInspectorLogs() {
+        clearInspectorBuffer();
+    }
+
     // --- LAUNCHER UI PREFERENCES ---
     public boolean isAutoLaunchSingle() {
         return prefs.getBoolean(KEY_AUTO_LAUNCH_SINGLE, false);
@@ -496,6 +554,14 @@ public class FocusPreferences {
 
     public void setAutoLaunchSingle(boolean autoLaunch) {
         prefs.edit().putBoolean(KEY_AUTO_LAUNCH_SINGLE, autoLaunch).apply();
+    }
+
+    public boolean isDarkMode() {
+        return prefs.getBoolean(KEY_DARK_MODE, true);
+    }
+
+    public void setDarkMode(boolean darkMode) {
+        prefs.edit().putBoolean(KEY_DARK_MODE, darkMode).apply();
     }
 
     public String getSwipeLeftPackage() {
@@ -545,6 +611,175 @@ public class FocusPreferences {
 
     public void setDndEndTime(int h, int m) {
         prefs.edit().putInt(KEY_DND_END_H, h).putInt(KEY_DND_END_M, m).apply();
+    }
+
+    // --- BEDTIME ("BAD TIME" DOWNTIME) ---
+    public boolean isBedtimeModeEnabled() {
+        return prefs.getBoolean(KEY_BEDTIME_ENABLED, true);
+    }
+
+    public void setBedtimeModeEnabled(boolean enabled) {
+        prefs.edit().putBoolean(KEY_BEDTIME_ENABLED, enabled).apply();
+    }
+
+    public int getBedtimeStartHour() {
+        return prefs.getInt(KEY_BEDTIME_START_H, 22);
+    }
+
+    public int getBedtimeStartMinute() {
+        return prefs.getInt(KEY_BEDTIME_START_M, 0);
+    }
+
+    public void setBedtimeStartTime(int h, int m) {
+        prefs.edit().putInt(KEY_BEDTIME_START_H, h).putInt(KEY_BEDTIME_START_M, m).apply();
+    }
+
+    public int getBedtimeEndHour() {
+        return prefs.getInt(KEY_BEDTIME_END_H, 7);
+    }
+
+    public int getBedtimeEndMinute() {
+        return prefs.getInt(KEY_BEDTIME_END_M, 0);
+    }
+
+    public void setBedtimeEndTime(int h, int m) {
+        prefs.edit().putInt(KEY_BEDTIME_END_H, h).putInt(KEY_BEDTIME_END_M, m).apply();
+    }
+
+    public boolean isBedtimeActiveNow() {
+        if (!isBedtimeModeEnabled()) return false;
+        Calendar cal = Calendar.getInstance();
+        int nowH = cal.get(Calendar.HOUR_OF_DAY);
+        int nowM = cal.get(Calendar.MINUTE);
+        int nowTotal = nowH * 60 + nowM;
+
+        int startTotal = getBedtimeStartHour() * 60 + getBedtimeStartMinute();
+        int endTotal = getBedtimeEndHour() * 60 + getBedtimeEndMinute();
+
+        if (startTotal == endTotal) return false;
+        if (startTotal < endTotal) {
+            return nowTotal >= startTotal && nowTotal < endTotal;
+        } else {
+            // Over midnight (e.g. 22:00 to 07:00)
+            return nowTotal >= startTotal || nowTotal < endTotal;
+        }
+    }
+
+    // --- MINDFULNESS CONTINUOUS SCREEN TIMER (e.g. 30 MIN) ---
+    public boolean isMindfulnessReminderEnabled() {
+        return prefs.getBoolean(KEY_MINDFULNESS_REMINDER_ENABLED, true);
+    }
+
+    public void setMindfulnessReminderEnabled(boolean enabled) {
+        prefs.edit().putBoolean(KEY_MINDFULNESS_REMINDER_ENABLED, enabled).apply();
+    }
+
+    public int getMindfulnessReminderMinutes() {
+        return prefs.getInt(KEY_MINDFULNESS_REMINDER_MINUTES, 30);
+    }
+
+    public void setMindfulnessReminderMinutes(int minutes) {
+        prefs.edit().putInt(KEY_MINDFULNESS_REMINDER_MINUTES, minutes).apply();
+    }
+
+    // --- BLOCKED APPS (STRICT APP BLOCKER) ---
+    public Set<String> getBlockedApps() {
+        return new HashSet<>(prefs.getStringSet(KEY_BLOCKED_APPS, new HashSet<>()));
+    }
+
+    public void setBlockedApps(Set<String> set) {
+        prefs.edit().putStringSet(KEY_BLOCKED_APPS, set).apply();
+    }
+
+    public boolean isAppBlocked(String packageName) {
+        return getBlockedApps().contains(packageName);
+    }
+
+    public void addBlockedApp(String packageName) {
+        Set<String> set = getBlockedApps();
+        set.add(packageName);
+        setBlockedApps(set);
+    }
+
+    public void removeBlockedApp(String packageName) {
+        Set<String> set = getBlockedApps();
+        set.remove(packageName);
+        setBlockedApps(set);
+    }
+
+    // --- UNLOCK COUNT TRACKER ---
+    public synchronized int getTodayUnlockCount() {
+        long now = System.currentTimeMillis();
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(now);
+        String todayKey = cal.get(Calendar.YEAR) + "-" + cal.get(Calendar.DAY_OF_YEAR);
+
+        String savedDate = prefs.getString(KEY_UNLOCK_COUNT_DATE, "");
+        if (!todayKey.equals(savedDate)) {
+            prefs.edit().putString(KEY_UNLOCK_COUNT_DATE, todayKey).putInt(KEY_UNLOCK_COUNT, 0).apply();
+            return 0;
+        }
+        return prefs.getInt(KEY_UNLOCK_COUNT, 0);
+    }
+
+    public synchronized void incrementTodayUnlockCount() {
+        int current = getTodayUnlockCount();
+        prefs.edit().putInt(KEY_UNLOCK_COUNT, current + 1).apply();
+    }
+
+    // --- MINIMALIST TO-DO LIST ---
+    public synchronized List<TodoItem> getTodoList() {
+        List<TodoItem> list = new ArrayList<>();
+        String raw = prefs.getString(KEY_TODO_LIST, "[]");
+        try {
+            JSONArray arr = new JSONArray(raw);
+            for (int i = 0; i < arr.length(); i++) {
+                list.add(TodoItem.fromJsonObject(arr.getJSONObject(i)));
+            }
+        } catch (JSONException ignored) {}
+        return list;
+    }
+
+    public synchronized void saveTodoList(List<TodoItem> list) {
+        JSONArray arr = new JSONArray();
+        if (list != null) {
+            for (TodoItem item : list) {
+                try {
+                    arr.put(item.toJsonObject());
+                } catch (JSONException ignored) {}
+            }
+        }
+        prefs.edit().putString(KEY_TODO_LIST, arr.toString()).apply();
+    }
+
+    public synchronized void addTodo(String text) {
+        if (TextUtils.isEmpty(text)) return;
+        List<TodoItem> list = getTodoList();
+        list.add(0, new TodoItem(text.trim()));
+        saveTodoList(list);
+    }
+
+    public synchronized void toggleTodo(String id) {
+        List<TodoItem> list = getTodoList();
+        for (TodoItem item : list) {
+            if (item.getId().equals(id)) {
+                item.setCompleted(!item.isCompleted());
+                break;
+            }
+        }
+        saveTodoList(list);
+    }
+
+    public synchronized void deleteTodo(String id) {
+        List<TodoItem> list = getTodoList();
+        Iterator<TodoItem> it = list.iterator();
+        while (it.hasNext()) {
+            if (it.next().getId().equals(id)) {
+                it.remove();
+                break;
+            }
+        }
+        saveTodoList(list);
     }
 }
 

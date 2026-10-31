@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.focus.NotificationFilterEngineTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-10-31T18:47:24" hostname="Y" time="0.005">
+<testsuite name="com.example.focus.NotificationFilterEngineTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-10-31T19:24:50" hostname="Y" time="0.007">
   <properties/>
-  <testcase name="testStrictAllowlistMode_UnlistedPackageDismissed" classname="com.example.focus.NotificationFilterEngineTest" time="0.001"/>
+  <testcase name="testStrictAllowlistMode_UnlistedPackageDismissed" classname="com.example.focus.NotificationFilterEngineTest" time="0.004"/>
   <testcase name="testIncomingCall_NeverDismissed" classname="com.example.focus.NotificationFilterEngineTest" time="0.001"/>
-  <testcase name="testBlocklistMode_UnblockedPackageAllowed" classname="com.example.focus.NotificationFilterEngineTest" time="0.001"/>
+  <testcase name="testBlocklistMode_UnblockedPackageAllowed" classname="com.example.focus.NotificationFilterEngineTest" time="0.0"/>
   <testcase name="testStrictAllowlistMode_AllowedPackageAllowed" classname="com.example.focus.NotificationFilterEngineTest" time="0.0"/>
   <testcase name="testAlarmNotification_NeverDismissed" classname="com.example.focus.NotificationFilterEngineTest" time="0.0"/>
   <testcase name="testOngoingForegroundEvent_NeverDismissed" classname="com.example.focus.NotificationFilterEngineTest" time="0.001"/>

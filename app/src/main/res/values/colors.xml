@@ -5,4 +5,15 @@
     <color name="gray_muted">#777777</color>
     <color name="gray_dark">#1A1A1A</color>
     <color name="gray_border">#2E2E2E</color>
+
+    <!-- Theme Colors -->
+    <color name="theme_bg_dark">#000000</color>
+    <color name="theme_text_dark">#FFFFFF</color>
+    <color name="theme_subtext_dark">#B3FFFFFF</color>
+    <color name="theme_divider_dark">#1E1E1E</color>
+
+    <color name="theme_bg_light">#FFFFFF</color>
+    <color name="theme_text_light">#111111</color>
+    <color name="theme_subtext_light">#777777</color>
+    <color name="theme_divider_light">#E0E0E0</color>
 </resources>

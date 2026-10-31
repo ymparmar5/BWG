@@ -24,9 +24,15 @@ public class AppDrawerAdapter extends RecyclerView.Adapter<AppDrawerAdapter.View
     private final List<AppItem> fullList = new ArrayList<>();
     private final List<AppItem> filteredList = new ArrayList<>();
     private final OnAppClickListener listener;
+    private boolean isDarkMode = true;
 
     public AppDrawerAdapter(OnAppClickListener listener) {
         this.listener = listener;
+    }
+
+    public void setDarkMode(boolean darkMode) {
+        this.isDarkMode = darkMode;
+        notifyDataSetChanged();
     }
 
     public void setApps(List<AppItem> apps) {
@@ -76,6 +82,7 @@ public class AppDrawerAdapter extends RecyclerView.Adapter<AppDrawerAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         AppItem app = filteredList.get(position);
         holder.appLabel.setText(app.getDisplayLabel());
+        holder.appLabel.setTextColor(isDarkMode ? 0xFFFFFFFF : 0xFF111111);
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) listener.onAppClick(app);
         });
