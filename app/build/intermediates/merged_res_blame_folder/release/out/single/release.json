@@ -1,0 +1,42 @@
+[
+    {
+        "merged": "com.example.focus.app-merged_res-32:/layout_activity_mindful_delay.xml.flat",
+        "source": "com.example.focus.app-main-33:/layout/activity_mindful_delay.xml"
+    },
+    {
+        "merged": "com.example.focus.app-merged_res-32:/drawable_ic_launcher.xml.flat",
+        "source": "com.example.focus.app-main-33:/drawable/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.focus.app-merged_res-32:/layout_activity_blocked_intercept.xml.flat",
+        "source": "com.example.focus.app-main-33:/layout/activity_blocked_intercept.xml"
+    },
+    {
+        "merged": "com.example.focus.app-merged_res-32:/drawable_ic_call.xml.flat",
+        "source": "com.example.focus.app-main-33:/drawable/ic_call.xml"
+    },
+    {
+        "merged": "com.example.focus.app-merged_res-32:/drawable_ic_message.xml.flat",
+        "source": "com.example.focus.app-main-33:/drawable/ic_message.xml"
+    },
+    {
+        "merged": "com.example.focus.app-merged_res-32:/layout_activity_main.xml.flat",
+        "source": "com.example.focus.app-main-33:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.focus.app-merged_res-32:/xml_accessibility_service_config.xml.flat",
+        "source": "com.example.focus.app-main-33:/xml/accessibility_service_config.xml"
+    },
+    {
+        "merged": "com.example.focus.app-merged_res-32:/layout_item_favorite.xml.flat",
+        "source": "com.example.focus.app-main-33:/layout/item_favorite.xml"
+    },
+    {
+        "merged": "com.example.focus.app-merged_res-32:/layout_item_app_drawer.xml.flat",
+        "source": "com.example.focus.app-main-33:/layout/item_app_drawer.xml"
+    },
+    {
+        "merged": "com.example.focus.app-merged_res-32:/layout_activity_settings.xml.flat",
+        "source": "com.example.focus.app-main-33:/layout/activity_settings.xml"
+    }
+]

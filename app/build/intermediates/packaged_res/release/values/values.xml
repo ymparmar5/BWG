@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <color name="black">#000000</color>
+    <color name="gray_border">#2E2E2E</color>
+    <color name="gray_dark">#1A1A1A</color>
+    <color name="gray_muted">#777777</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_translucent">#B3FFFFFF</color>
+    <string name="accessibility_service_description">Monitors and blocks addictive short-form content (YouTube Shorts, Instagram Reels, WhatsApp Status) and enforces app limits.</string>
+    <string name="app_info">App info</string>
+    <string name="app_name">Focus</string>
+    <string name="app_options">App Options</string>
+    <string name="block_notifications">Block notifications</string>
+    <string name="hide_app">Hide app</string>
+    <string name="pin_to_favorites">Add to favorites</string>
+    <string name="remove_from_favorites">Remove from favorites</string>
+    <string name="rename_app">Rename app</string>
+    <string name="search_hint">Search apps</string>
+    <string name="set_limits">Set usage limits</string>
+    <string name="set_mindful_delay">Mindful launch delay</string>
+    <string name="unblock_notifications">Allow notifications</string>
+    <string name="unhide_app">Unhide app</string>
+    <string name="uninstall">Uninstall</string>
+    <style name="Theme.FocusLauncher" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@color/black</item>
+        <item name="android:colorBackground">@color/black</item>
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white_translucent</item>
+        <item name="android:windowLayoutInDisplayCutoutMode" ns1:targetApi="p">shortEdges</item>
+        <item name="colorAccent">@color/white</item>
+    </style>
+</resources>

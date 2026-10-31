@@ -298,6 +298,18 @@ public class MainActivity extends AppCompatActivity {
         if (drawerLayout.getVisibility() == View.VISIBLE) {
             closeDrawer();
         }
+        // Never call super.onBackPressed() on home screen
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (drawerLayout.getVisibility() == View.VISIBLE) {
+                closeDrawer();
+            }
+            return true; // Completely consume KEYCODE_BACK so launcher NEVER exits
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     public void openDrawer() {
