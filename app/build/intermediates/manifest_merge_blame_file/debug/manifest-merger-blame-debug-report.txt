@@ -50,7 +50,7 @@
 29-->[androidx.core:core:1.9.0] C:\Users\ympar\.gradle\caches\transforms-4\8b9fa7ab399feb78cf8011afa90058d3\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
 30
 31    <application
-31-->D:\bwg\app\src\main\AndroidManifest.xml:20:5-105:19
+31-->D:\bwg\app\src\main\AndroidManifest.xml:20:5-108:19
 32        android:allowBackup="true"
 32-->D:\bwg\app\src\main\AndroidManifest.xml:21:9-35
 33        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -68,215 +68,221 @@
 40        android:theme="@style/Theme.FocusLauncher" >
 40-->D:\bwg\app\src\main\AndroidManifest.xml:26:9-51
 41        <activity
-41-->D:\bwg\app\src\main\AndroidManifest.xml:28:9-41:20
+41-->D:\bwg\app\src\main\AndroidManifest.xml:28:9-44:20
 42            android:name="com.example.focus.MainActivity"
 42-->D:\bwg\app\src\main\AndroidManifest.xml:29:13-41
 43            android:clearTaskOnLaunch="true"
 43-->D:\bwg\app\src\main\AndroidManifest.xml:32:13-45
-44            android:exported="true"
-44-->D:\bwg\app\src\main\AndroidManifest.xml:30:13-36
-45            android:launchMode="singleTask"
-45-->D:\bwg\app\src\main\AndroidManifest.xml:31:13-44
-46            android:stateNotNeeded="true"
-46-->D:\bwg\app\src\main\AndroidManifest.xml:33:13-42
-47            android:windowSoftInputMode="adjustResize" >
-47-->D:\bwg\app\src\main\AndroidManifest.xml:34:13-55
-48            <intent-filter>
-48-->D:\bwg\app\src\main\AndroidManifest.xml:35:13-40:29
-49                <action android:name="android.intent.action.MAIN" />
-49-->D:\bwg\app\src\main\AndroidManifest.xml:7:13-65
-49-->D:\bwg\app\src\main\AndroidManifest.xml:7:21-62
-50
-51                <category android:name="android.intent.category.HOME" />
-51-->D:\bwg\app\src\main\AndroidManifest.xml:37:17-73
-51-->D:\bwg\app\src\main\AndroidManifest.xml:37:27-70
-52                <category android:name="android.intent.category.DEFAULT" />
-52-->D:\bwg\app\src\main\AndroidManifest.xml:38:17-76
-52-->D:\bwg\app\src\main\AndroidManifest.xml:38:27-73
-53                <category android:name="android.intent.category.LAUNCHER" />
-53-->D:\bwg\app\src\main\AndroidManifest.xml:8:13-73
-53-->D:\bwg\app\src\main\AndroidManifest.xml:8:23-70
-54            </intent-filter>
-55        </activity>
-56        <activity
-56-->D:\bwg\app\src\main\AndroidManifest.xml:43:9-47:58
-57            android:name="com.example.focus.SettingsActivity"
-57-->D:\bwg\app\src\main\AndroidManifest.xml:44:13-45
-58            android:exported="false"
-58-->D:\bwg\app\src\main\AndroidManifest.xml:45:13-37
-59            android:label="Settings"
-59-->D:\bwg\app\src\main\AndroidManifest.xml:46:13-37
-60            android:theme="@style/Theme.FocusLauncher" />
-60-->D:\bwg\app\src\main\AndroidManifest.xml:47:13-55
-61        <activity
-61-->D:\bwg\app\src\main\AndroidManifest.xml:49:9-54:46
-62            android:name="com.example.focus.ui.MindfulDelayActivity"
-62-->D:\bwg\app\src\main\AndroidManifest.xml:50:13-52
-63            android:exported="false"
-63-->D:\bwg\app\src\main\AndroidManifest.xml:51:13-37
-64            android:label="Mindful Pause"
-64-->D:\bwg\app\src\main\AndroidManifest.xml:52:13-42
-65            android:launchMode="singleTop"
-65-->D:\bwg\app\src\main\AndroidManifest.xml:54:13-43
-66            android:theme="@style/Theme.FocusLauncher" />
-66-->D:\bwg\app\src\main\AndroidManifest.xml:53:13-55
-67        <activity
-67-->D:\bwg\app\src\main\AndroidManifest.xml:56:9-61:46
-68            android:name="com.example.focus.ui.BlockedInterceptActivity"
-68-->D:\bwg\app\src\main\AndroidManifest.xml:57:13-56
-69            android:exported="false"
-69-->D:\bwg\app\src\main\AndroidManifest.xml:58:13-37
-70            android:label="App Blocked"
-70-->D:\bwg\app\src\main\AndroidManifest.xml:59:13-40
-71            android:launchMode="singleTop"
-71-->D:\bwg\app\src\main\AndroidManifest.xml:61:13-43
-72            android:theme="@style/Theme.FocusLauncher" />
-72-->D:\bwg\app\src\main\AndroidManifest.xml:60:13-55
-73
-74        <service
-74-->D:\bwg\app\src\main\AndroidManifest.xml:63:9-73:19
-75            android:name="com.example.focus.service.FocusAccessibilityService"
-75-->D:\bwg\app\src\main\AndroidManifest.xml:64:13-62
-76            android:exported="true"
-76-->D:\bwg\app\src\main\AndroidManifest.xml:65:13-36
-77            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" >
-77-->D:\bwg\app\src\main\AndroidManifest.xml:66:13-79
-78            <intent-filter>
-78-->D:\bwg\app\src\main\AndroidManifest.xml:67:13-69:29
-79                <action android:name="android.accessibilityservice.AccessibilityService" />
-79-->D:\bwg\app\src\main\AndroidManifest.xml:68:17-92
-79-->D:\bwg\app\src\main\AndroidManifest.xml:68:25-89
-80            </intent-filter>
-81
-82            <meta-data
-82-->D:\bwg\app\src\main\AndroidManifest.xml:70:13-72:72
-83                android:name="android.accessibilityservice"
-83-->D:\bwg\app\src\main\AndroidManifest.xml:71:17-60
-84                android:resource="@xml/accessibility_service_config" />
-84-->D:\bwg\app\src\main\AndroidManifest.xml:72:17-69
-85        </service>
-86        <service
-86-->D:\bwg\app\src\main\AndroidManifest.xml:75:9-83:19
-87            android:name="com.example.focus.service.FocusNotificationListenerService"
-87-->D:\bwg\app\src\main\AndroidManifest.xml:76:13-69
-88            android:exported="true"
-88-->D:\bwg\app\src\main\AndroidManifest.xml:77:13-36
-89            android:label="@string/app_name"
-89-->D:\bwg\app\src\main\AndroidManifest.xml:78:13-45
-90            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" >
-90-->D:\bwg\app\src\main\AndroidManifest.xml:79:13-87
-91            <intent-filter>
-91-->D:\bwg\app\src\main\AndroidManifest.xml:80:13-82:29
-92                <action android:name="android.service.notification.NotificationListenerService" />
-92-->D:\bwg\app\src\main\AndroidManifest.xml:81:17-99
-92-->D:\bwg\app\src\main\AndroidManifest.xml:81:25-96
-93            </intent-filter>
-94        </service>
-95
-96        <receiver
-96-->D:\bwg\app\src\main\AndroidManifest.xml:85:9-92:20
-97            android:name="com.example.focus.receiver.AutomationReceiver"
-97-->D:\bwg\app\src\main\AndroidManifest.xml:86:13-56
-98            android:exported="false" >
-98-->D:\bwg\app\src\main\AndroidManifest.xml:87:13-37
-99            <intent-filter>
-99-->D:\bwg\app\src\main\AndroidManifest.xml:88:13-91:29
-100                <action android:name="com.example.focus.ACTION_ENABLE_DND" />
-100-->D:\bwg\app\src\main\AndroidManifest.xml:89:17-78
-100-->D:\bwg\app\src\main\AndroidManifest.xml:89:25-75
-101                <action android:name="com.example.focus.ACTION_DISABLE_DND" />
-101-->D:\bwg\app\src\main\AndroidManifest.xml:90:17-79
-101-->D:\bwg\app\src\main\AndroidManifest.xml:90:25-76
-102            </intent-filter>
-103        </receiver>
-104        <receiver
-104-->D:\bwg\app\src\main\AndroidManifest.xml:94:9-103:20
-105            android:name="com.example.focus.receiver.BootReceiver"
-105-->D:\bwg\app\src\main\AndroidManifest.xml:95:13-50
-106            android:exported="true" >
-106-->D:\bwg\app\src\main\AndroidManifest.xml:96:13-36
-107            <intent-filter>
-107-->D:\bwg\app\src\main\AndroidManifest.xml:97:13-102:29
-108                <action android:name="android.intent.action.BOOT_COMPLETED" />
-108-->D:\bwg\app\src\main\AndroidManifest.xml:98:17-79
-108-->D:\bwg\app\src\main\AndroidManifest.xml:98:25-76
-109                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-109-->D:\bwg\app\src\main\AndroidManifest.xml:99:17-82
-109-->D:\bwg\app\src\main\AndroidManifest.xml:99:25-79
-110                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
-110-->D:\bwg\app\src\main\AndroidManifest.xml:100:17-84
-110-->D:\bwg\app\src\main\AndroidManifest.xml:100:25-81
-111                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
-111-->D:\bwg\app\src\main\AndroidManifest.xml:101:17-82
-111-->D:\bwg\app\src\main\AndroidManifest.xml:101:25-79
-112            </intent-filter>
-113        </receiver>
-114
-115        <provider
-115-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ympar\.gradle\caches\transforms-4\3096be1dbc00866d160560a9e46569ee\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
-116            android:name="androidx.startup.InitializationProvider"
-116-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ympar\.gradle\caches\transforms-4\3096be1dbc00866d160560a9e46569ee\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
-117            android:authorities="com.example.focus.androidx-startup"
-117-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ympar\.gradle\caches\transforms-4\3096be1dbc00866d160560a9e46569ee\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
-118            android:exported="false" >
-118-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ympar\.gradle\caches\transforms-4\3096be1dbc00866d160560a9e46569ee\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
-119            <meta-data
-119-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ympar\.gradle\caches\transforms-4\3096be1dbc00866d160560a9e46569ee\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
-120                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-120-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ympar\.gradle\caches\transforms-4\3096be1dbc00866d160560a9e46569ee\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
-121                android:value="androidx.startup" />
-121-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ympar\.gradle\caches\transforms-4\3096be1dbc00866d160560a9e46569ee\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+44            android:excludeFromRecents="true"
+44-->D:\bwg\app\src\main\AndroidManifest.xml:34:13-46
+45            android:exported="true"
+45-->D:\bwg\app\src\main\AndroidManifest.xml:30:13-36
+46            android:launchMode="singleTask"
+46-->D:\bwg\app\src\main\AndroidManifest.xml:31:13-44
+47            android:resumeWhilePausing="true"
+47-->D:\bwg\app\src\main\AndroidManifest.xml:36:13-46
+48            android:stateNotNeeded="true"
+48-->D:\bwg\app\src\main\AndroidManifest.xml:33:13-42
+49            android:taskAffinity=""
+49-->D:\bwg\app\src\main\AndroidManifest.xml:35:13-36
+50            android:windowSoftInputMode="adjustResize" >
+50-->D:\bwg\app\src\main\AndroidManifest.xml:37:13-55
+51            <intent-filter>
+51-->D:\bwg\app\src\main\AndroidManifest.xml:38:13-43:29
+52                <action android:name="android.intent.action.MAIN" />
+52-->D:\bwg\app\src\main\AndroidManifest.xml:7:13-65
+52-->D:\bwg\app\src\main\AndroidManifest.xml:7:21-62
+53
+54                <category android:name="android.intent.category.HOME" />
+54-->D:\bwg\app\src\main\AndroidManifest.xml:40:17-73
+54-->D:\bwg\app\src\main\AndroidManifest.xml:40:27-70
+55                <category android:name="android.intent.category.DEFAULT" />
+55-->D:\bwg\app\src\main\AndroidManifest.xml:41:17-76
+55-->D:\bwg\app\src\main\AndroidManifest.xml:41:27-73
+56                <category android:name="android.intent.category.LAUNCHER" />
+56-->D:\bwg\app\src\main\AndroidManifest.xml:8:13-73
+56-->D:\bwg\app\src\main\AndroidManifest.xml:8:23-70
+57            </intent-filter>
+58        </activity>
+59        <activity
+59-->D:\bwg\app\src\main\AndroidManifest.xml:46:9-50:58
+60            android:name="com.example.focus.SettingsActivity"
+60-->D:\bwg\app\src\main\AndroidManifest.xml:47:13-45
+61            android:exported="false"
+61-->D:\bwg\app\src\main\AndroidManifest.xml:48:13-37
+62            android:label="Settings"
+62-->D:\bwg\app\src\main\AndroidManifest.xml:49:13-37
+63            android:theme="@style/Theme.FocusLauncher" />
+63-->D:\bwg\app\src\main\AndroidManifest.xml:50:13-55
+64        <activity
+64-->D:\bwg\app\src\main\AndroidManifest.xml:52:9-57:46
+65            android:name="com.example.focus.ui.MindfulDelayActivity"
+65-->D:\bwg\app\src\main\AndroidManifest.xml:53:13-52
+66            android:exported="false"
+66-->D:\bwg\app\src\main\AndroidManifest.xml:54:13-37
+67            android:label="Mindful Pause"
+67-->D:\bwg\app\src\main\AndroidManifest.xml:55:13-42
+68            android:launchMode="singleTop"
+68-->D:\bwg\app\src\main\AndroidManifest.xml:57:13-43
+69            android:theme="@style/Theme.FocusLauncher" />
+69-->D:\bwg\app\src\main\AndroidManifest.xml:56:13-55
+70        <activity
+70-->D:\bwg\app\src\main\AndroidManifest.xml:59:9-64:46
+71            android:name="com.example.focus.ui.BlockedInterceptActivity"
+71-->D:\bwg\app\src\main\AndroidManifest.xml:60:13-56
+72            android:exported="false"
+72-->D:\bwg\app\src\main\AndroidManifest.xml:61:13-37
+73            android:label="App Blocked"
+73-->D:\bwg\app\src\main\AndroidManifest.xml:62:13-40
+74            android:launchMode="singleTop"
+74-->D:\bwg\app\src\main\AndroidManifest.xml:64:13-43
+75            android:theme="@style/Theme.FocusLauncher" />
+75-->D:\bwg\app\src\main\AndroidManifest.xml:63:13-55
+76
+77        <service
+77-->D:\bwg\app\src\main\AndroidManifest.xml:66:9-76:19
+78            android:name="com.example.focus.service.FocusAccessibilityService"
+78-->D:\bwg\app\src\main\AndroidManifest.xml:67:13-62
+79            android:exported="true"
+79-->D:\bwg\app\src\main\AndroidManifest.xml:68:13-36
+80            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" >
+80-->D:\bwg\app\src\main\AndroidManifest.xml:69:13-79
+81            <intent-filter>
+81-->D:\bwg\app\src\main\AndroidManifest.xml:70:13-72:29
+82                <action android:name="android.accessibilityservice.AccessibilityService" />
+82-->D:\bwg\app\src\main\AndroidManifest.xml:71:17-92
+82-->D:\bwg\app\src\main\AndroidManifest.xml:71:25-89
+83            </intent-filter>
+84
+85            <meta-data
+85-->D:\bwg\app\src\main\AndroidManifest.xml:73:13-75:72
+86                android:name="android.accessibilityservice"
+86-->D:\bwg\app\src\main\AndroidManifest.xml:74:17-60
+87                android:resource="@xml/accessibility_service_config" />
+87-->D:\bwg\app\src\main\AndroidManifest.xml:75:17-69
+88        </service>
+89        <service
+89-->D:\bwg\app\src\main\AndroidManifest.xml:78:9-86:19
+90            android:name="com.example.focus.service.FocusNotificationListenerService"
+90-->D:\bwg\app\src\main\AndroidManifest.xml:79:13-69
+91            android:exported="true"
+91-->D:\bwg\app\src\main\AndroidManifest.xml:80:13-36
+92            android:label="@string/app_name"
+92-->D:\bwg\app\src\main\AndroidManifest.xml:81:13-45
+93            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" >
+93-->D:\bwg\app\src\main\AndroidManifest.xml:82:13-87
+94            <intent-filter>
+94-->D:\bwg\app\src\main\AndroidManifest.xml:83:13-85:29
+95                <action android:name="android.service.notification.NotificationListenerService" />
+95-->D:\bwg\app\src\main\AndroidManifest.xml:84:17-99
+95-->D:\bwg\app\src\main\AndroidManifest.xml:84:25-96
+96            </intent-filter>
+97        </service>
+98
+99        <receiver
+99-->D:\bwg\app\src\main\AndroidManifest.xml:88:9-95:20
+100            android:name="com.example.focus.receiver.AutomationReceiver"
+100-->D:\bwg\app\src\main\AndroidManifest.xml:89:13-56
+101            android:exported="false" >
+101-->D:\bwg\app\src\main\AndroidManifest.xml:90:13-37
+102            <intent-filter>
+102-->D:\bwg\app\src\main\AndroidManifest.xml:91:13-94:29
+103                <action android:name="com.example.focus.ACTION_ENABLE_DND" />
+103-->D:\bwg\app\src\main\AndroidManifest.xml:92:17-78
+103-->D:\bwg\app\src\main\AndroidManifest.xml:92:25-75
+104                <action android:name="com.example.focus.ACTION_DISABLE_DND" />
+104-->D:\bwg\app\src\main\AndroidManifest.xml:93:17-79
+104-->D:\bwg\app\src\main\AndroidManifest.xml:93:25-76
+105            </intent-filter>
+106        </receiver>
+107        <receiver
+107-->D:\bwg\app\src\main\AndroidManifest.xml:97:9-106:20
+108            android:name="com.example.focus.receiver.BootReceiver"
+108-->D:\bwg\app\src\main\AndroidManifest.xml:98:13-50
+109            android:exported="true" >
+109-->D:\bwg\app\src\main\AndroidManifest.xml:99:13-36
+110            <intent-filter>
+110-->D:\bwg\app\src\main\AndroidManifest.xml:100:13-105:29
+111                <action android:name="android.intent.action.BOOT_COMPLETED" />
+111-->D:\bwg\app\src\main\AndroidManifest.xml:101:17-79
+111-->D:\bwg\app\src\main\AndroidManifest.xml:101:25-76
+112                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+112-->D:\bwg\app\src\main\AndroidManifest.xml:102:17-82
+112-->D:\bwg\app\src\main\AndroidManifest.xml:102:25-79
+113                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+113-->D:\bwg\app\src\main\AndroidManifest.xml:103:17-84
+113-->D:\bwg\app\src\main\AndroidManifest.xml:103:25-81
+114                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+114-->D:\bwg\app\src\main\AndroidManifest.xml:104:17-82
+114-->D:\bwg\app\src\main\AndroidManifest.xml:104:25-79
+115            </intent-filter>
+116        </receiver>
+117
+118        <provider
+118-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ympar\.gradle\caches\transforms-4\3096be1dbc00866d160560a9e46569ee\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+119            android:name="androidx.startup.InitializationProvider"
+119-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ympar\.gradle\caches\transforms-4\3096be1dbc00866d160560a9e46569ee\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+120            android:authorities="com.example.focus.androidx-startup"
+120-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ympar\.gradle\caches\transforms-4\3096be1dbc00866d160560a9e46569ee\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+121            android:exported="false" >
+121-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ympar\.gradle\caches\transforms-4\3096be1dbc00866d160560a9e46569ee\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
 122            <meta-data
-122-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\ympar\.gradle\caches\transforms-4\91045097ae9afb1475ca7fbcaeaff9cb\transformed\lifecycle-process-2.6.1\AndroidManifest.xml:29:13-31:52
-123                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-123-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\ympar\.gradle\caches\transforms-4\91045097ae9afb1475ca7fbcaeaff9cb\transformed\lifecycle-process-2.6.1\AndroidManifest.xml:30:17-78
+122-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ympar\.gradle\caches\transforms-4\3096be1dbc00866d160560a9e46569ee\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+123                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+123-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ympar\.gradle\caches\transforms-4\3096be1dbc00866d160560a9e46569ee\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
 124                android:value="androidx.startup" />
-124-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\ympar\.gradle\caches\transforms-4\91045097ae9afb1475ca7fbcaeaff9cb\transformed\lifecycle-process-2.6.1\AndroidManifest.xml:31:17-49
+124-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ympar\.gradle\caches\transforms-4\3096be1dbc00866d160560a9e46569ee\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
 125            <meta-data
-125-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
-126                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-126-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
+125-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\ympar\.gradle\caches\transforms-4\91045097ae9afb1475ca7fbcaeaff9cb\transformed\lifecycle-process-2.6.1\AndroidManifest.xml:29:13-31:52
+126                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+126-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\ympar\.gradle\caches\transforms-4\91045097ae9afb1475ca7fbcaeaff9cb\transformed\lifecycle-process-2.6.1\AndroidManifest.xml:30:17-78
 127                android:value="androidx.startup" />
-127-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
-128        </provider>
-129
-130        <receiver
-130-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
-131            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-131-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
-132            android:directBootAware="false"
-132-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
-133            android:enabled="true"
-133-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
-134            android:exported="true"
-134-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
-135            android:permission="android.permission.DUMP" >
-135-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
-136            <intent-filter>
-136-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
-137                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-137-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
-137-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
-138            </intent-filter>
+127-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\ympar\.gradle\caches\transforms-4\91045097ae9afb1475ca7fbcaeaff9cb\transformed\lifecycle-process-2.6.1\AndroidManifest.xml:31:17-49
+128            <meta-data
+128-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
+129                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+129-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
+130                android:value="androidx.startup" />
+130-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
+131        </provider>
+132
+133        <receiver
+133-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
+134            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+134-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
+135            android:directBootAware="false"
+135-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
+136            android:enabled="true"
+136-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
+137            android:exported="true"
+137-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
+138            android:permission="android.permission.DUMP" >
+138-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
 139            <intent-filter>
-139-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
-140                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-140-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
-140-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
+139-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
+140                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+140-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
+140-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
 141            </intent-filter>
 142            <intent-filter>
-142-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
-143                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-143-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
-143-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
+142-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
+143                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+143-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
+143-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
 144            </intent-filter>
 145            <intent-filter>
-145-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
-146                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-146-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
-146-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
+145-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
+146                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+146-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
+146-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
 147            </intent-filter>
-148        </receiver>
-149    </application>
-150
-151</manifest>
+148            <intent-filter>
+148-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
+149                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+149-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
+149-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\ympar\.gradle\caches\transforms-4\ee500109eea714ca2ca5e57357691176\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
+150            </intent-filter>
+151        </receiver>
+152    </application>
+153
+154</manifest>

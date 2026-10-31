@@ -1,8 +1,11 @@
 package com.example.focus;
 
 import android.app.AlertDialog;
+import android.app.role.RoleManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -65,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
     private List<AppItem> allInstalledApps = new ArrayList<>();
     private final Map<String, AppItem> appMap = new HashMap<>();
+    private boolean hasPromptedDefaultLauncher = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +87,41 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         loadApps();
+        if (!hasPromptedDefaultLauncher) {
+            hasPromptedDefaultLauncher = true;
+            checkDefaultLauncherPrompt();
+        }
+    }
+
+    private boolean isDefaultLauncher() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        ResolveInfo resolve = getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        return resolve != null && getPackageName().equals(resolve.activityInfo.packageName);
+    }
+
+    private void checkDefaultLauncherPrompt() {
+        if (!isDefaultLauncher()) {
+            new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert)
+                    .setTitle("Set Focus as Home Screen")
+                    .setMessage("To stop returning to your old launcher and make your Home button stay in Focus, set Focus as your default launcher.")
+                    .setPositiveButton("Set Default", (d, w) -> requestDefaultLauncher())
+                    .setNegativeButton("Later", null)
+                    .show();
+        }
+    }
+
+    public void requestDefaultLauncher() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            RoleManager roleManager = getSystemService(RoleManager.class);
+            if (roleManager != null && roleManager.isRoleAvailable(RoleManager.ROLE_HOME)) {
+                startActivity(roleManager.createRequestRoleIntent(RoleManager.ROLE_HOME));
+                return;
+            }
+        }
+        Intent intent = new Intent(Settings.ACTION_HOME_SETTINGS);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     private void setupEdgeToEdgeInsets() {
@@ -132,9 +171,19 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        // Phone & Messages bottom shortcuts
+        // Settings on left, Phone on right
+        findViewById(R.id.btn_settings).setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class)));
         findViewById(R.id.btn_phone).setOnClickListener(v -> AppHelper.openDialer(this));
-        findViewById(R.id.btn_messages).setOnClickListener(v -> AppHelper.openMessages(this));
+
+        // Tapping search input explicitly opens keyboard
+        searchInput.setOnClickListener(v -> {
+            searchInput.requestFocus();
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.showSoftInput(searchInput, InputMethodManager.SHOW_IMPLICIT);
+            }
+        });
 
         // Favorites RecyclerView
         RecyclerView favoritesRecycler = findViewById(R.id.favorites_recycler);
@@ -316,10 +365,11 @@ public class MainActivity extends AppCompatActivity {
         if (drawerLayout.getVisibility() == View.VISIBLE) return;
         drawerLayout.setVisibility(View.VISIBLE);
         searchInput.setText("");
-        searchInput.requestFocus();
+        searchInput.clearFocus();
+        // Do NOT open keyboard automatically on swipe up
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null) {
-            imm.showSoftInput(searchInput, InputMethodManager.SHOW_IMPLICIT);
+            imm.hideSoftInputFromWindow(searchInput.getWindowToken(), 0);
         }
     }
 

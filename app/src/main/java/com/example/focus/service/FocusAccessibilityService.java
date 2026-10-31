@@ -117,6 +117,16 @@ public class FocusAccessibilityService extends AccessibilityService {
             return;
         }
 
+        if ("com.google.android.youtube".equals(packageName) && !prefs.isBlockYouTubeShortsEnabled()) {
+            return;
+        }
+        if ("com.instagram.android".equals(packageName) && !prefs.isBlockInstagramReelsEnabled()) {
+            return;
+        }
+        if ("com.whatsapp".equals(packageName) && !prefs.isBlockWhatsAppStatusEnabled()) {
+            return;
+        }
+
         Map<String, RuleModel> rulesMap = prefs.getRulesMap();
         RuleModel rule = rulesMap.get(packageName);
         if (rule == null) {

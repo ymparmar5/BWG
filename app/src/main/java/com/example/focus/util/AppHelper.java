@@ -100,7 +100,7 @@ public class AppHelper {
         PackageManager pm = context.getPackageManager();
         Intent launchIntent = pm.getLaunchIntentForPackage(packageName);
         if (launchIntent != null) {
-            launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
             try {
                 context.startActivity(launchIntent);
             } catch (Exception e) {

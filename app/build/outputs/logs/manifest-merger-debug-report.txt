@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:2:1-107:12
-INJECTED from D:\bwg\app\src\main\AndroidManifest.xml:2:1-107:12
-INJECTED from D:\bwg\app\src\main\AndroidManifest.xml:2:1-107:12
-INJECTED from D:\bwg\app\src\main\AndroidManifest.xml:2:1-107:12
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:2:1-110:12
+INJECTED from D:\bwg\app\src\main\AndroidManifest.xml:2:1-110:12
+INJECTED from D:\bwg\app\src\main\AndroidManifest.xml:2:1-110:12
+INJECTED from D:\bwg\app\src\main\AndroidManifest.xml:2:1-110:12
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\ympar\.gradle\caches\transforms-4\e10574d536c501787d77eafb3c2a3ca2\transformed\material-1.11.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\ympar\.gradle\caches\transforms-4\b91686136cef2f805a360573be738b70\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\ympar\.gradle\caches\transforms-4\6b7d2a528b38a1ba6f88b4862e445027\transformed\constraintlayout-2.0.1\AndroidManifest.xml:2:1-11:12
@@ -91,8 +91,8 @@ ADDED from D:\bwg\app\src\main\AndroidManifest.xml:18:5-95
 	android:name
 		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:18:22-92
 application
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:20:5-105:19
-INJECTED from D:\bwg\app\src\main\AndroidManifest.xml:20:5-105:19
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:20:5-108:19
+INJECTED from D:\bwg\app\src\main\AndroidManifest.xml:20:5-108:19
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\ympar\.gradle\caches\transforms-4\e10574d536c501787d77eafb3c2a3ca2\transformed\material-1.11.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\ympar\.gradle\caches\transforms-4\e10574d536c501787d77eafb3c2a3ca2\transformed\material-1.11.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\ympar\.gradle\caches\transforms-4\6b7d2a528b38a1ba6f88b4862e445027\transformed\constraintlayout-2.0.1\AndroidManifest.xml:9:5-20
@@ -126,139 +126,145 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\ympar\.gradle\cach
 	android:theme
 		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:26:9-51
 activity#com.example.focus.MainActivity
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:28:9-41:20
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:28:9-44:20
 	android:clearTaskOnLaunch
 		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:32:13-45
 	android:stateNotNeeded
 		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:33:13-42
+	android:excludeFromRecents
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:34:13-46
 	android:launchMode
 		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:31:13-44
 	android:windowSoftInputMode
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:34:13-55
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:37:13-55
 	android:exported
 		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:30:13-36
+	android:resumeWhilePausing
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:36:13-46
+	android:taskAffinity
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:35:13-36
 	android:name
 		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:29:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.DEFAULT+category:name:android.intent.category.HOME+category:name:android.intent.category.LAUNCHER
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:35:13-40:29
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:38:13-43:29
 category#android.intent.category.HOME
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:37:17-73
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:40:17-73
 	android:name
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:37:27-70
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:40:27-70
 category#android.intent.category.DEFAULT
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:38:17-76
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:41:17-76
 	android:name
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:38:27-73
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:41:27-73
 activity#com.example.focus.SettingsActivity
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:43:9-47:58
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:46:9-50:58
 	android:label
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:46:13-37
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:49:13-37
 	android:exported
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:45:13-37
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:48:13-37
 	android:theme
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:47:13-55
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:50:13-55
 	android:name
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:44:13-45
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:47:13-45
 activity#com.example.focus.ui.MindfulDelayActivity
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:49:9-54:46
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:52:9-57:46
 	android:label
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:52:13-42
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:55:13-42
 	android:launchMode
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:54:13-43
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:57:13-43
 	android:exported
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:51:13-37
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:54:13-37
 	android:theme
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:53:13-55
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:56:13-55
 	android:name
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:50:13-52
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:53:13-52
 activity#com.example.focus.ui.BlockedInterceptActivity
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:56:9-61:46
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:59:9-64:46
 	android:label
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:59:13-40
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:62:13-40
 	android:launchMode
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:61:13-43
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:64:13-43
 	android:exported
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:58:13-37
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:61:13-37
 	android:theme
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:60:13-55
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:63:13-55
 	android:name
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:57:13-56
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:60:13-56
 service#com.example.focus.service.FocusAccessibilityService
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:63:9-73:19
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:66:9-76:19
 	android:exported
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:65:13-36
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:68:13-36
 	android:permission
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:66:13-79
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:69:13-79
 	android:name
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:64:13-62
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:67:13-62
 intent-filter#action:name:android.accessibilityservice.AccessibilityService
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:67:13-69:29
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:70:13-72:29
 action#android.accessibilityservice.AccessibilityService
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:68:17-92
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:71:17-92
 	android:name
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:68:25-89
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:71:25-89
 meta-data#android.accessibilityservice
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:70:13-72:72
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:73:13-75:72
 	android:resource
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:72:17-69
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:75:17-69
 	android:name
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:71:17-60
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:74:17-60
 service#com.example.focus.service.FocusNotificationListenerService
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:75:9-83:19
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:78:9-86:19
 	android:label
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:78:13-45
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:81:13-45
 	android:exported
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:77:13-36
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:80:13-36
 	android:permission
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:79:13-87
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:82:13-87
 	android:name
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:76:13-69
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:79:13-69
 intent-filter#action:name:android.service.notification.NotificationListenerService
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:80:13-82:29
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:83:13-85:29
 action#android.service.notification.NotificationListenerService
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:81:17-99
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:84:17-99
 	android:name
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:81:25-96
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:84:25-96
 receiver#com.example.focus.receiver.AutomationReceiver
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:85:9-92:20
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:88:9-95:20
 	android:exported
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:87:13-37
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:90:13-37
 	android:name
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:86:13-56
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:89:13-56
 intent-filter#action:name:com.example.focus.ACTION_DISABLE_DND+action:name:com.example.focus.ACTION_ENABLE_DND
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:88:13-91:29
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:91:13-94:29
 action#com.example.focus.ACTION_ENABLE_DND
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:89:17-78
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:92:17-78
 	android:name
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:89:25-75
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:92:25-75
 action#com.example.focus.ACTION_DISABLE_DND
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:90:17-79
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:93:17-79
 	android:name
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:90:25-76
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:93:25-76
 receiver#com.example.focus.receiver.BootReceiver
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:94:9-103:20
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:97:9-106:20
 	android:exported
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:96:13-36
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:99:13-36
 	android:name
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:95:13-50
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:98:13-50
 intent-filter#action:name:android.intent.action.BOOT_COMPLETED+action:name:android.intent.action.MY_PACKAGE_REPLACED+action:name:android.intent.action.QUICKBOOT_POWERON+action:name:com.htc.intent.action.QUICKBOOT_POWERON
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:97:13-102:29
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:100:13-105:29
 action#android.intent.action.BOOT_COMPLETED
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:98:17-79
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:101:17-79
 	android:name
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:98:25-76
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:101:25-76
 action#android.intent.action.QUICKBOOT_POWERON
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:99:17-82
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:102:17-82
 	android:name
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:99:25-79
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:102:25-79
 action#android.intent.action.MY_PACKAGE_REPLACED
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:100:17-84
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:103:17-84
 	android:name
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:100:25-81
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:103:25-81
 action#com.htc.intent.action.QUICKBOOT_POWERON
-ADDED from D:\bwg\app\src\main\AndroidManifest.xml:101:17-82
+ADDED from D:\bwg\app\src\main\AndroidManifest.xml:104:17-82
 	android:name
-		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:101:25-79
+		ADDED from D:\bwg\app\src\main\AndroidManifest.xml:104:25-79
 uses-sdk
 INJECTED from D:\bwg\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\bwg\app\src\main\AndroidManifest.xml

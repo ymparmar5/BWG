@@ -45,6 +45,9 @@ public class FocusPreferences {
 
     private static final String KEY_BLOCKER_ENABLED = "content_blocker_enabled";
     private static final String KEY_BLOCKER_DEBUG = "content_blocker_debug";
+    private static final String KEY_BLOCK_YT_SHORTS = "block_youtube_shorts";
+    private static final String KEY_BLOCK_IG_REELS = "block_instagram_reels";
+    private static final String KEY_BLOCK_WA_STATUS = "block_whatsapp_status";
     private static final String KEY_RULES_JSON = "blocker_rules_json";
     private static final String KEY_INSPECTOR_BUFFER = "inspector_node_buffer";
 
@@ -336,6 +339,30 @@ public class FocusPreferences {
 
     public void setBlockerEnabled(boolean enabled) {
         prefs.edit().putBoolean(KEY_BLOCKER_ENABLED, enabled).apply();
+    }
+
+    public boolean isBlockYouTubeShortsEnabled() {
+        return prefs.getBoolean(KEY_BLOCK_YT_SHORTS, true);
+    }
+
+    public void setBlockYouTubeShortsEnabled(boolean enabled) {
+        prefs.edit().putBoolean(KEY_BLOCK_YT_SHORTS, enabled).apply();
+    }
+
+    public boolean isBlockInstagramReelsEnabled() {
+        return prefs.getBoolean(KEY_BLOCK_IG_REELS, true);
+    }
+
+    public void setBlockInstagramReelsEnabled(boolean enabled) {
+        prefs.edit().putBoolean(KEY_BLOCK_IG_REELS, enabled).apply();
+    }
+
+    public boolean isBlockWhatsAppStatusEnabled() {
+        return prefs.getBoolean(KEY_BLOCK_WA_STATUS, true);
+    }
+
+    public void setBlockWhatsAppStatusEnabled(boolean enabled) {
+        prefs.edit().putBoolean(KEY_BLOCK_WA_STATUS, enabled).apply();
     }
 
     public boolean isBlockerDebugMode() {
