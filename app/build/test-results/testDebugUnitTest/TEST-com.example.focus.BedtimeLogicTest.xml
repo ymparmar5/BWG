@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.focus.BedtimeLogicTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-10-31T19:24:50" hostname="Y" time="0.001">
-  <properties/>
-  <testcase name="testBedtimeOverMidnight" classname="com.example.focus.BedtimeLogicTest" time="0.001"/>
-  <testcase name="testBedtimeSameDay" classname="com.example.focus.BedtimeLogicTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

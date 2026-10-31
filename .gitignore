@@ -1,0 +1,45 @@
+# Built application files
+*.aar
+*.ap_
+*.aab
+
+# Keep standalone sideloadable APK
+*.apk
+!FocusLauncher.apk
+
+# Files for the ART/Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+out/
+build/
+app/build/
+**/build/
+
+# Gradle cache and intermediate files
+.gradle/
+buildOutputCleanup/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Log Files
+*.log
+
+# Android Studio / IntelliJ IDEA
+*.iml
+.idea/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/caches/
+.idea/assetWizardSettings.xml
+
+# OS generated files
+.DS_Store
+Thumbs.db
