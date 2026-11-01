@@ -39,7 +39,10 @@ import com.example.focus.model.AppUsageStat;
 import com.example.focus.model.NotificationDigestItem;
 import com.example.focus.model.TodoItem;
 import com.example.focus.service.FocusAccessibilityService;
+import com.example.focus.ui.BlockProfileActivity;
 import com.example.focus.ui.BlockedInterceptActivity;
+import com.example.focus.ui.FocusTasksActivity;
+import com.example.focus.ui.WeeklyReportActivity;
 import com.example.focus.util.AppHelper;
 import com.example.focus.util.NotificationHelper;
 import com.example.focus.util.ThemeHelper;
@@ -78,6 +81,7 @@ public class SettingsActivity extends AppCompatActivity {
     private SwitchCompat switchBlockIg;
     private SwitchCompat switchBlockWa;
     private SwitchCompat switchBlockerDebug;
+    private SwitchCompat switchBlockAdultSites;
 
     // Bedtime
     private SwitchCompat switchBedtime;
@@ -176,8 +180,10 @@ public class SettingsActivity extends AppCompatActivity {
         findViewById(R.id.btn_manage_favorites).setOnClickListener(v -> showManageFavoritesDialog());
         findViewById(R.id.btn_manage_hidden).setOnClickListener(v -> showManageHiddenAppsDialog());
         findViewById(R.id.btn_manage_renamed).setOnClickListener(v -> showManageRenamedAppsDialog());
-        findViewById(R.id.btn_manage_todo).setOnClickListener(v -> showTodoDialog());
-        findViewById(R.id.btn_view_screentime_report).setOnClickListener(v -> showScreenTimeReportDialog());
+        findViewById(R.id.btn_manage_todo).setOnClickListener(v ->
+                startActivity(new Intent(SettingsActivity.this, FocusTasksActivity.class)));
+        findViewById(R.id.btn_view_screentime_report).setOnClickListener(v ->
+                startActivity(new Intent(SettingsActivity.this, WeeklyReportActivity.class)));
 
         // 3. Blocking UI & Distraction Controls
         switchBlocker = findViewById(R.id.switch_blocker);
@@ -197,7 +203,13 @@ public class SettingsActivity extends AppCompatActivity {
         switchBlockWa.setOnCheckedChangeListener((btn, isChecked) -> prefs.setBlockWhatsAppStatusEnabled(isChecked));
 
         findViewById(R.id.btn_preview_blocking).setOnClickListener(v -> previewBlockingScreen());
+        findViewById(R.id.btn_open_block_profile).setOnClickListener(v ->
+                startActivity(new Intent(SettingsActivity.this, BlockProfileActivity.class)));
         findViewById(R.id.btn_manage_blocked_apps).setOnClickListener(v -> showManageBlockedAppsDialog());
+
+        switchBlockAdultSites = findViewById(R.id.switch_block_adult_sites);
+        switchBlockAdultSites.setChecked(prefs.isAdultBlockerEnabled());
+        switchBlockAdultSites.setOnCheckedChangeListener((btn, isChecked) -> prefs.setAdultBlockerEnabled(isChecked));
 
         switchBlockerDebug = findViewById(R.id.switch_blocker_debug);
         switchBlockerDebug.setChecked(prefs.isBlockerDebugMode());
@@ -240,7 +252,8 @@ public class SettingsActivity extends AppCompatActivity {
         findViewById(R.id.btn_mindfulness_duration).setOnClickListener(v -> showMindfulnessIntervalDialog());
 
         // 6. Usage Limits & Schedules
-        findViewById(R.id.btn_manage_limits).setOnClickListener(v -> showManageLimitsDialog());
+        findViewById(R.id.btn_manage_limits).setOnClickListener(v ->
+                startActivity(new Intent(SettingsActivity.this, BlockProfileActivity.class)));
 
         // 7. Notification Filter
         switchNotifFilter = findViewById(R.id.switch_notif_filter);

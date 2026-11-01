@@ -1,0 +1,929 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#101412"
+    android:orientation="vertical"
+    android:paddingStart="16dp"
+    android:paddingTop="20dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="16dp">
+
+    <!-- Top Header Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/btn_close"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Close"
+            android:padding="8dp"
+            android:src="@drawable/ic_close" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_card_dark"
+            android:orientation="vertical"
+            android:paddingStart="12dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set name of block"
+                android:textColor="#859288"
+                android:textSize="11sp" />
+
+            <EditText
+                android:id="@+id/edit_block_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="Deep Focus"
+                android:imeOptions="actionDone"
+                android:inputType="textCapWords"
+                android:singleLine="true"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btn_save_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="8dp"
+            android:text="SAVE"
+            android:textColor="#A4E0B1"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_weight="1"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Active Status Banner (Screenshot 1 & 3) -->
+            <LinearLayout
+                android:id="@+id/card_active_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/bg_status_pill"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp">
+
+                <ImageView
+                    android:id="@+id/img_status_icon"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:contentDescription="Status"
+                    android:src="@drawable/ic_hourglass"
+                    android:tint="#C5DFC8" />
+
+                <TextView
+                    android:id="@+id/tv_active_status_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="30m 0s left today"
+                    android:textColor="#E1EDE3"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Blocked apps and websites Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Blocked apps and websites"
+                android:textColor="#CAD5CD"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_card_dark"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <HorizontalScrollView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:overScrollMode="never"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/container_selected_apps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" />
+                </HorizontalScrollView>
+
+                <ImageView
+                    android:id="@+id/btn_edit_apps"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Select Apps"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_more_vert" />
+            </LinearLayout>
+
+            <!-- Restrictions Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="Restrictions"
+                android:textColor="#CAD5CD"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Configure rules when apps should be blocked"
+                android:textColor="#7A877E"
+                android:textSize="12sp" />
+
+            <!-- Restriction 1: Daily Usage Limit (Screenshot 1) -->
+            <LinearLayout
+                android:id="@+id/card_daily_limit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_card_dark"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_hourglass"
+                        android:tint="#A4E0B1" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Daily usage limit"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <CheckBox
+                        android:id="@+id/chk_enable_daily_limit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="#A4E0B1" />
+                </LinearLayout>
+
+                <!-- Daily Times Row (30m M T W T F S S) -->
+                <LinearLayout
+                    android:id="@+id/row_daily_limit_indicators"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_limit_val_m"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="30m"
+                            android:textColor="#9EADA2"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="M"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_limit_val_t"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="30m"
+                            android:textColor="#9EADA2"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="T"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_limit_val_w"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="30m"
+                            android:textColor="#9EADA2"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="W"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_limit_val_th"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="30m"
+                            android:textColor="#9EADA2"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="T"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_limit_val_f"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="30m"
+                            android:textColor="#9EADA2"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="F"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_limit_val_s"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="30m"
+                            android:textColor="#9EADA2"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="S"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_limit_val_su"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="30m"
+                            android:textColor="#9EADA2"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="S"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Quick Daily Limit Selection -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btn_limit_15m"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="6dp"
+                        android:background="@drawable/bg_status_pill"
+                        android:paddingStart="12dp"
+                        android:paddingTop="6dp"
+                        android:paddingEnd="12dp"
+                        android:paddingBottom="6dp"
+                        android:text="15m"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/btn_limit_30m"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="6dp"
+                        android:background="@drawable/bg_status_pill"
+                        android:paddingStart="12dp"
+                        android:paddingTop="6dp"
+                        android:paddingEnd="12dp"
+                        android:paddingBottom="6dp"
+                        android:text="30m"
+                        android:textColor="#A4E0B1"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/btn_limit_1h"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="6dp"
+                        android:background="@drawable/bg_status_pill"
+                        android:paddingStart="12dp"
+                        android:paddingTop="6dp"
+                        android:paddingEnd="12dp"
+                        android:paddingBottom="6dp"
+                        android:text="1h"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/btn_limit_2h"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_status_pill"
+                        android:paddingStart="12dp"
+                        android:paddingTop="6dp"
+                        android:paddingEnd="12dp"
+                        android:paddingBottom="6dp"
+                        android:text="2h"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Restriction 2: Weekly Schedule Blocks (Screenshot 3) -->
+            <LinearLayout
+                android:id="@+id/card_weekly_schedule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_card_dark"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_clock"
+                        android:tint="#A4E0B1" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Block on a weekly schedule"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <CheckBox
+                        android:id="@+id/chk_enable_schedule"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="#A4E0B1" />
+                </LinearLayout>
+
+                <!-- Schedule Times (Start - End) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_schedule_start_time"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_status_pill"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="From: 09:00"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/tv_schedule_end_time"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_status_pill"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="Until: 17:00"
+                        android:textColor="#A4E0B1"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- 7 Day chips row -->
+                <LinearLayout
+                    android:id="@+id/row_schedule_day_chips"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/chip_day_mon"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginEnd="6dp"
+                        android:background="@drawable/bg_chip_selected"
+                        android:gravity="center"
+                        android:text="M"
+                        android:textColor="#101412"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/chip_day_tue"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginEnd="6dp"
+                        android:background="@drawable/bg_chip_selected"
+                        android:gravity="center"
+                        android:text="T"
+                        android:textColor="#101412"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/chip_day_wed"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginEnd="6dp"
+                        android:background="@drawable/bg_chip_selected"
+                        android:gravity="center"
+                        android:text="W"
+                        android:textColor="#101412"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/chip_day_thu"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginEnd="6dp"
+                        android:background="@drawable/bg_chip_selected"
+                        android:gravity="center"
+                        android:text="T"
+                        android:textColor="#101412"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/chip_day_fri"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginEnd="6dp"
+                        android:background="@drawable/bg_chip_selected"
+                        android:gravity="center"
+                        android:text="F"
+                        android:textColor="#101412"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/chip_day_sat"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginEnd="6dp"
+                        android:background="@drawable/bg_chip_unselected"
+                        android:gravity="center"
+                        android:text="S"
+                        android:textColor="#7A877E"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/chip_day_sun"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/bg_chip_unselected"
+                        android:gravity="center"
+                        android:text="S"
+                        android:textColor="#7A877E"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Restriction 3: Quick Period Block ("block app by certain period of time") -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_card_dark"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Quick Period Block"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Block selected apps immediately for a specific duration"
+                    android:textColor="#7A877E"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btn_quick_30m"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_status_pill"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="30 Min"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/btn_quick_1h"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_status_pill"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="1 Hour"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/btn_quick_2h"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_status_pill"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="2 Hours"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/btn_quick_clear"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_status_pill"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="Clear"
+                        android:textColor="#FF8A80"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Pause Options (Strict Mode) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="Pause options"
+                android:textColor="#CAD5CD"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_card_dark"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="14dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_lock"
+                    android:tint="#A4E0B1" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Strict: no pausing"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="You won't be able to stop the block while a restriction is active"
+                        android:textColor="#7A877E"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_strict_mode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <!-- What to block Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="What to block"
+                android:textColor="#CAD5CD"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_card_dark"
+                android:orientation="vertical"
+                android:paddingStart="14dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="14dp"
+                android:paddingBottom="8dp">
+
+                <!-- Block App Launch -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_touch"
+                        android:tint="#A4E0B1" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="App launch"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+
+                    <CheckBox
+                        android:id="@+id/chk_block_app_launch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="#A4E0B1"
+                        android:checked="true" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#222824" />
+
+                <!-- Block Notifications -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_notifications"
+                        android:tint="#A4E0B1" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Notifications"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+
+                    <CheckBox
+                        android:id="@+id/chk_block_notifications"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="#A4E0B1" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#222824" />
+
+                <!-- Adult & Misleading Site Blocker on Chrome -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_web"
+                        android:tint="#A4E0B1" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Adult &amp; misleading sites"
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Blocks porn, misleading ads, and adult dating on Chrome"
+                            android:textColor="#7A877E"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
+                    <CheckBox
+                        android:id="@+id/chk_block_adult_sites"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="#A4E0B1"
+                        android:checked="true" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

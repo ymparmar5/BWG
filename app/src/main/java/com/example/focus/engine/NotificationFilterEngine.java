@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.service.notification.StatusBarNotification;
 
 import com.example.focus.data.FocusPreferences;
+import com.example.focus.model.BlockProfile;
 import com.example.focus.model.NotificationDigestItem;
 
 import java.util.Set;
@@ -81,7 +82,22 @@ public class NotificationFilterEngine {
                 ownPackageName
         );
 
+        // Check if an active Block Profile restricts notifications for this package
+        if (!dismiss && pkg != null && !pkg.equals(ownPackageName)) {
+            boolean isExempt = Notification.CATEGORY_CALL.equals(cat)
+                    || Notification.CATEGORY_ALARM.equals(cat)
+                    || ((flags & Notification.FLAG_ONGOING_EVENT) != 0);
+
+            if (!isExempt) {
+                BlockProfile activeProfile = prefs.getActiveBlockProfileForPackage(null, pkg);
+                if (activeProfile != null && activeProfile.isBlockNotifications()) {
+                    dismiss = true;
+                }
+            }
+        }
+
         if (dismiss) {
+            prefs.incrementBlockedNotificationsCount();
             // Record in safety digest
             CharSequence titleSeq = n.extras != null ? n.extras.getCharSequence(Notification.EXTRA_TITLE) : null;
             CharSequence textSeq = n.extras != null ? n.extras.getCharSequence(Notification.EXTRA_TEXT) : null;

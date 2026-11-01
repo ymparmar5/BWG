@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#101412"
+    android:orientation="vertical"
+    android:paddingStart="16dp"
+    android:paddingTop="20dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="16dp">
+
+    <!-- Top Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/btn_tasks_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Back"
+            android:padding="8dp"
+            android:src="@drawable/ic_arrow_back" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="Focus Tasks"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btn_add_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_status_pill"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingStart="14dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="14dp"
+            android:paddingBottom="6dp"
+            android:text="+ Add Task"
+            android:textColor="#A4E0B1"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_weight="1"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- 1. Pomodoro Focus Timer Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_card_dark"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_pomodoro_mode"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="🍅 Work Sprint (25m)"
+                        android:textColor="#A4E0B1"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_pomodoro_cycles"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cycles: 0"
+                        android:textColor="#859288"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Big Countdown Display -->
+                <TextView
+                    android:id="@+id/tv_pomodoro_timer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="monospace"
+                    android:text="25:00"
+                    android:textColor="#FFFFFF"
+                    android:textSize="44sp"
+                    android:textStyle="bold" />
+
+                <!-- Active task label -->
+                <TextView
+                    android:id="@+id/tv_pomodoro_task"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Focusing on: Deep Focus Sprint"
+                    android:textColor="#CAD5CD"
+                    android:textSize="13sp" />
+
+                <!-- Timer Controls -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btn_pomodoro_toggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_status_pill"
+                        android:paddingStart="20dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="8dp"
+                        android:text="▶ Start"
+                        android:textColor="#A4E0B1"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/btn_pomodoro_break"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_status_pill"
+                        android:paddingStart="14dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="14dp"
+                        android:paddingBottom="8dp"
+                        android:text="☕ Break"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/btn_pomodoro_reset"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_status_pill"
+                        android:paddingStart="14dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="14dp"
+                        android:paddingBottom="8dp"
+                        android:text="↺ Reset"
+                        android:textColor="#FF8A80"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 2. Kaizen 1% Daily Wins Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_card_dark"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_flame"
+                        android:tint="#FFA726" />
+
+                    <TextView
+                        android:id="@+id/tv_kaizen_streak"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:text="🔥 1-Day Kaizen Streak"
+                        android:textColor="#FFA726"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/btn_add_kaizen_quick"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_status_pill"
+                        android:paddingStart="10dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="10dp"
+                        android:paddingBottom="4dp"
+                        android:text="+ 2m Habit"
+                        android:textColor="#FFA726"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Continuous 1% micro-steps. Completing any tiny habit today keeps your momentum fire alive."
+                    android:textColor="#7A877E"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- 3. Eisenhower Matrix Filter Tabs -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="Eisenhower Matrix &amp; Tasks"
+                android:textColor="#CAD5CD"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:overScrollMode="never"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tab_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="6dp"
+                        android:background="@drawable/bg_status_pill"
+                        android:paddingStart="14dp"
+                        android:paddingTop="6dp"
+                        android:paddingEnd="14dp"
+                        android:paddingBottom="6dp"
+                        android:text="All"
+                        android:textColor="#A4E0B1"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tab_q1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="6dp"
+                        android:background="@drawable/bg_status_pill"
+                        android:paddingStart="14dp"
+                        android:paddingTop="6dp"
+                        android:paddingEnd="14dp"
+                        android:paddingBottom="6dp"
+                        android:text="⚡ Q1 Do First"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tab_q2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="6dp"
+                        android:background="@drawable/bg_status_pill"
+                        android:paddingStart="14dp"
+                        android:paddingTop="6dp"
+                        android:paddingEnd="14dp"
+                        android:paddingBottom="6dp"
+                        android:text="💎 Q2 Deep Focus"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tab_q3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="6dp"
+                        android:background="@drawable/bg_status_pill"
+                        android:paddingStart="14dp"
+                        android:paddingTop="6dp"
+                        android:paddingEnd="14dp"
+                        android:paddingBottom="6dp"
+                        android:text="⏳ Q3 Quick"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tab_q4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="6dp"
+                        android:background="@drawable/bg_status_pill"
+                        android:paddingStart="14dp"
+                        android:paddingTop="6dp"
+                        android:paddingEnd="14dp"
+                        android:paddingBottom="6dp"
+                        android:text="🚫 Q4 Drop"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tab_kaizen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_status_pill"
+                        android:paddingStart="14dp"
+                        android:paddingTop="6dp"
+                        android:paddingEnd="14dp"
+                        android:paddingBottom="6dp"
+                        android:text="🌱 Kaizen"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- Tasks Container -->
+            <LinearLayout
+                android:id="@+id/container_task_items"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical" />
+
+            <TextView
+                android:id="@+id/tv_empty_tasks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:text="No tasks in this quadrant.\nTap '+ Add Task' above to capture ideas."
+                android:textColor="#6C7A70"
+                android:textSize="13sp"
+                android:visibility="gone" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

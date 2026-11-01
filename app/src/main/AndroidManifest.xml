@@ -64,6 +64,24 @@
             android:theme="@style/Theme.FocusLauncher"
             android:launchMode="singleTop" />
 
+        <activity
+            android:name=".ui.BlockProfileActivity"
+            android:exported="false"
+            android:label="Block Profiles"
+            android:theme="@style/Theme.FocusLauncher" />
+
+        <activity
+            android:name=".ui.WeeklyReportActivity"
+            android:exported="false"
+            android:label="Weekly Usage Report"
+            android:theme="@style/Theme.FocusLauncher" />
+
+        <activity
+            android:name=".ui.FocusTasksActivity"
+            android:exported="false"
+            android:label="Focus Tasks"
+            android:theme="@style/Theme.FocusLauncher" />
+
         <service
             android:name=".service.FocusAccessibilityService"
             android:exported="true"

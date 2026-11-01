@@ -48,6 +48,7 @@ import com.example.focus.engine.ScheduleBlock;
 import com.example.focus.engine.UsageTrackerEngine;
 import com.example.focus.model.AppItem;
 import com.example.focus.model.TodoItem;
+import com.example.focus.ui.FocusTasksActivity;
 import com.example.focus.service.FocusAccessibilityService;
 import com.example.focus.ui.AppDrawerAdapter;
 import com.example.focus.ui.BlockedInterceptActivity;
@@ -225,7 +226,8 @@ public class MainActivity extends AppCompatActivity {
         // Settings on left, Todo in center, Phone on right
         btnSettings.setOnClickListener(v ->
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class)));
-        btnTodo.setOnClickListener(v -> showTodoDialog());
+        btnTodo.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, FocusTasksActivity.class)));
         btnPhone.setOnClickListener(v -> AppHelper.openDialer(this));
 
         // Tapping search input explicitly opens keyboard

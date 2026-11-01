@@ -270,7 +270,7 @@
             android:id="@+id/btn_manage_todo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Focus Tasks &amp; To-Do List"
+            android:text="Focus Tasks (Pomodoro, Kaizen &amp; Eisenhower Matrix)"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             android:paddingTop="10dp"
@@ -281,7 +281,7 @@
             android:id="@+id/btn_view_screentime_report"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Screen Time &amp; Unlock Report"
+            android:text="Weekly Usage &amp; Screen Time Reports"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             android:paddingTop="10dp"
@@ -358,6 +358,18 @@
             android:background="?android:attr/selectableItemBackground" />
 
         <TextView
+            android:id="@+id/btn_open_block_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Block App &amp; Schedules (Visual Interface)"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="?android:attr/selectableItemBackground" />
+
+        <TextView
             android:id="@+id/btn_manage_blocked_apps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -367,6 +379,16 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:background="?android:attr/selectableItemBackground" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_block_adult_sites"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Block Adult &amp; Misleading Sites on Chrome"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch_blocker_debug"

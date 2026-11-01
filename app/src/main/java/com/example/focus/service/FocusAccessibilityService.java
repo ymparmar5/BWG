@@ -17,9 +17,12 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.Toast;
 
 import com.example.focus.data.FocusPreferences;
+import com.example.focus.engine.PomodoroEngine;
 import com.example.focus.engine.RuleMatcherEngine;
 import com.example.focus.engine.RuleModel;
 import com.example.focus.engine.UsageTrackerEngine;
+import com.example.focus.engine.WebBlockerEngine;
+import com.example.focus.model.BlockProfile;
 import com.example.focus.ui.BlockedInterceptActivity;
 
 import java.lang.ref.WeakReference;
@@ -140,9 +143,28 @@ public class FocusAccessibilityService extends AccessibilityService {
             }
         }
 
-        // 2. Strict App Blocklist Check
+        // 2. Named Block Profiles Check (Schedules, Daily Limits, Quick Blocks)
+        if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+            BlockProfile activeProfile = prefs.getActiveBlockProfileForPackage(this, packageName);
+            if (activeProfile != null && activeProfile.isBlockAppLaunch()) {
+                prefs.incrementBlockedAppLaunchesCount();
+                long appUsage = UsageTrackerEngine.getTodayAppUsageSeconds(this, packageName);
+                launchTakeoverScreen(
+                        getAppDisplayName(packageName),
+                        activeProfile.getName() + " Active",
+                        "App is blocked by your '" + activeProfile.getName() + "' block rule.",
+                        "Time spent today: " + UsageTrackerEngine.formatDuration(appUsage),
+                        activeProfile.getActiveStatusBanner(this, packageName),
+                        false
+                );
+                return;
+            }
+        }
+
+        // 3. Strict App Blocklist Check
         if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
             if (prefs.isAppBlocked(packageName)) {
+                prefs.incrementBlockedAppLaunchesCount();
                 long appUsage = UsageTrackerEngine.getTodayAppUsageSeconds(this, packageName);
                 launchTakeoverScreen(
                         getAppDisplayName(packageName),
@@ -156,10 +178,11 @@ public class FocusAccessibilityService extends AccessibilityService {
             }
         }
 
-        // 3. Bedtime ("Bad Time" Downtime Schedule) Check
+        // 4. Bedtime ("Bad Time" Downtime Schedule) Check
         if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
             if (prefs.isBedtimeModeEnabled() && prefs.isBedtimeActiveNow()) {
                 if (!isAllowedDuringBedtime(packageName)) {
+                    prefs.incrementBlockedAppLaunchesCount();
                     long appUsage = UsageTrackerEngine.getTodayAppUsageSeconds(this, packageName);
                     launchTakeoverScreen(
                             getAppDisplayName(packageName),
@@ -176,12 +199,13 @@ public class FocusAccessibilityService extends AccessibilityService {
             }
         }
 
-        // 3. Check App Usage Limits & Schedule Blocks on Window State Changes
+        // 5. Check App Usage Limits & Schedule Blocks on Window State Changes
         if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
             UsageTrackerEngine.ViolationResult violation =
                     UsageTrackerEngine.checkLimitOrScheduleViolation(this, prefs, packageName);
 
             if (violation != null) {
+                prefs.incrementBlockedAppLaunchesCount();
                 long appUsage = UsageTrackerEngine.getTodayAppUsageSeconds(this, packageName);
                 launchTakeoverScreen(
                         getAppDisplayName(packageName),
@@ -195,7 +219,32 @@ public class FocusAccessibilityService extends AccessibilityService {
             }
         }
 
-        // 4. Check Content Blocker (YouTube Shorts, Instagram Reels, WhatsApp Status)
+        // 6. Adult & Misleading Site Blocker for Browsers (Chrome, etc.)
+        if (prefs.isAdultBlockerEnabled() && WebBlockerEngine.isBrowserPackage(packageName)) {
+            AccessibilityNodeInfo root = getRootInActiveWindow();
+            if (root != null) {
+                try {
+                    String detectedUrl = WebBlockerEngine.extractBrowserUrl(root);
+                    if (detectedUrl != null && WebBlockerEngine.isBlockedUrl(detectedUrl)) {
+                        prefs.incrementBlockedAppLaunchesCount();
+                        performGlobalAction(GLOBAL_ACTION_BACK);
+                        launchTakeoverScreen(
+                                "Browser Protection",
+                                "Site Blocked: " + WebBlockerEngine.getMatchedCategory(detectedUrl),
+                                "Access to adult content, misleading ads, and adult dating sites is blocked.",
+                                "Stay Focused & Mindful",
+                                "Safe Browsing Active",
+                                false
+                        );
+                        return;
+                    }
+                } finally {
+                    root.recycle();
+                }
+            }
+        }
+
+        // 7. Check Content Blocker (YouTube Shorts, Instagram Reels, WhatsApp Status)
         if (!prefs.isBlockerEnabled()) {
             return;
         }
@@ -234,20 +283,34 @@ public class FocusAccessibilityService extends AccessibilityService {
             if (result.isBlocked) {
                 Log.w(TAG, "Content blocked in " + packageName + " by rule: " + result.matchedPattern);
 
-                String featureName = "Short-form video";
-                if ("com.google.android.youtube".equals(packageName)) featureName = "YouTube Shorts";
-                else if ("com.instagram.android".equals(packageName)) featureName = "Instagram Reels";
-                else if ("com.whatsapp".equals(packageName)) featureName = "WhatsApp Status";
+                boolean isAppInBlockPeriod = (prefs.getActiveBlockProfileForPackage(this, packageName) != null)
+                        || (prefs.isBedtimeModeEnabled() && prefs.isBedtimeActiveNow())
+                        || (UsageTrackerEngine.checkLimitOrScheduleViolation(this, prefs, packageName) != null)
+                        || prefs.isAppBlocked(packageName);
 
-                long appUsage = UsageTrackerEngine.getTodayAppUsageSeconds(this, packageName);
-                launchTakeoverScreen(
-                        featureName,
-                        "Distraction Blocked",
-                        "Short-form video feeds are blocked to keep you focused.",
-                        "Today's " + featureName + " app usage: " + UsageTrackerEngine.formatDuration(appUsage),
-                        "Stay Mindful",
-                        false
-                );
+                if (isAppInBlockPeriod) {
+                    String featureName = "Short-form video";
+                    if ("com.google.android.youtube".equals(packageName)) featureName = "YouTube Shorts";
+                    else if ("com.instagram.android".equals(packageName)) featureName = "Instagram Reels";
+                    else if ("com.whatsapp".equals(packageName)) featureName = "WhatsApp Status";
+
+                    long appUsage = UsageTrackerEngine.getTodayAppUsageSeconds(this, packageName);
+                    launchTakeoverScreen(
+                            featureName,
+                            "Distraction Blocked",
+                            "Short-form video feeds are blocked during this block period.",
+                            "Today's " + featureName + " app usage: " + UsageTrackerEngine.formatDuration(appUsage),
+                            "Stay Mindful",
+                            false
+                    );
+                } else {
+                    // USER REQUIREMENT: Automatically close the reel or shorts on click without closing the app,
+                    // allowing normal long-form video consumption!
+                    performGlobalAction(GLOBAL_ACTION_BACK);
+                    lastActionTime = now;
+                    mainHandler.post(() -> Toast.makeText(getApplicationContext(),
+                            "Shorts/Reel closed • Long videos allowed", Toast.LENGTH_SHORT).show());
+                }
             }
         } finally {
             root.recycle();

@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import com.example.focus.engine.RuleModel;
 import com.example.focus.engine.ScheduleBlock;
+import com.example.focus.model.BlockProfile;
 import com.example.focus.model.NotificationDigestItem;
 import com.example.focus.model.TodoItem;
 
@@ -77,6 +78,13 @@ public class FocusPreferences {
     private static final String KEY_BLOCKED_APPS = "blocked_apps_set";
     private static final String KEY_UNLOCK_COUNT_DATE = "unlock_count_date";
     private static final String KEY_UNLOCK_COUNT = "unlock_count_today";
+
+    private static final String KEY_BLOCK_PROFILES = "block_profiles_json_array";
+    private static final String KEY_KAIZEN_STREAK = "kaizen_streak_days";
+    private static final String KEY_KAIZEN_LAST_DATE = "kaizen_last_date";
+    private static final String KEY_BLOCKED_APP_LAUNCHES = "blocked_app_launches_count";
+    private static final String KEY_BLOCKED_NOTIFS = "blocked_notifs_count";
+    private static final String KEY_ADULT_BLOCKER_ENABLED = "adult_site_blocker_enabled";
 
     private final SharedPreferences prefs;
 
@@ -780,6 +788,147 @@ public class FocusPreferences {
             }
         }
         saveTodoList(list);
+    }
+
+    // --- ADULT & WEBSITE BLOCKER ---
+    public boolean isAdultSiteBlockerEnabled() {
+        return prefs.getBoolean(KEY_ADULT_BLOCKER_ENABLED, true);
+    }
+
+    public void setAdultSiteBlockerEnabled(boolean enabled) {
+        prefs.edit().putBoolean(KEY_ADULT_BLOCKER_ENABLED, enabled).apply();
+    }
+
+    // --- BLOCK PROFILES (NAMED BLOCKS, PERIODS & SCHEDULES) ---
+    public synchronized List<BlockProfile> getBlockProfiles() {
+        List<BlockProfile> list = new ArrayList<>();
+        String raw = prefs.getString(KEY_BLOCK_PROFILES, "[]");
+        try {
+            JSONArray arr = new JSONArray(raw);
+            for (int i = 0; i < arr.length(); i++) {
+                list.add(BlockProfile.fromJsonObject(arr.getJSONObject(i)));
+            }
+        } catch (JSONException ignored) {}
+        return list;
+    }
+
+    public synchronized void saveBlockProfiles(List<BlockProfile> list) {
+        JSONArray arr = new JSONArray();
+        if (list != null) {
+            for (BlockProfile p : list) {
+                try {
+                    arr.put(p.toJsonObject());
+                } catch (JSONException ignored) {}
+            }
+        }
+        prefs.edit().putString(KEY_BLOCK_PROFILES, arr.toString()).apply();
+    }
+
+    public synchronized void saveBlockProfile(BlockProfile profile) {
+        if (profile == null) return;
+        List<BlockProfile> list = getBlockProfiles();
+        boolean found = false;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getId().equals(profile.getId())) {
+                list.set(i, profile);
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            list.add(profile);
+        }
+        saveBlockProfiles(list);
+    }
+
+    public synchronized void deleteBlockProfile(String id) {
+        List<BlockProfile> list = getBlockProfiles();
+        Iterator<BlockProfile> it = list.iterator();
+        while (it.hasNext()) {
+            if (it.next().getId().equals(id)) {
+                it.remove();
+                break;
+            }
+        }
+        saveBlockProfiles(list);
+    }
+
+    public BlockProfile getActiveBlockProfileForPackage(Context context, String packageName) {
+        List<BlockProfile> profiles = getBlockProfiles();
+        for (BlockProfile profile : profiles) {
+            if (profile.isActiveNow(context, packageName)) {
+                return profile;
+            }
+        }
+        return null;
+    }
+
+    // --- KAIZEN 1% IMPROVEMENT STREAK ---
+    public int getKaizenStreak() {
+        return prefs.getInt(KEY_KAIZEN_STREAK, 0);
+    }
+
+    public boolean isKaizenRecordedToday() {
+        long now = System.currentTimeMillis();
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(now);
+        String todayKey = cal.get(Calendar.YEAR) + "-" + cal.get(Calendar.DAY_OF_YEAR);
+        String lastDate = prefs.getString(KEY_KAIZEN_LAST_DATE, "");
+        return todayKey.equals(lastDate);
+    }
+
+    public synchronized void recordKaizenWinToday() {
+        if (isKaizenRecordedToday()) return;
+
+        long now = System.currentTimeMillis();
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(now);
+        String todayKey = cal.get(Calendar.YEAR) + "-" + cal.get(Calendar.DAY_OF_YEAR);
+
+        cal.add(Calendar.DAY_OF_YEAR, -1);
+        String yesterdayKey = cal.get(Calendar.YEAR) + "-" + cal.get(Calendar.DAY_OF_YEAR);
+
+        String lastDate = prefs.getString(KEY_KAIZEN_LAST_DATE, "");
+        int streak = getKaizenStreak();
+
+        if (yesterdayKey.equals(lastDate)) {
+            streak++;
+        } else {
+            streak = 1;
+        }
+
+        prefs.edit()
+                .putString(KEY_KAIZEN_LAST_DATE, todayKey)
+                .putInt(KEY_KAIZEN_STREAK, streak)
+                .apply();
+    }
+
+    // --- BLOCKED METRICS (FOR WEEKLY REPORTS) ---
+    public int getBlockedAppLaunchesCount() {
+        return prefs.getInt(KEY_BLOCKED_APP_LAUNCHES, 0);
+    }
+
+    public synchronized void incrementBlockedAppLaunchesCount() {
+        int c = getBlockedAppLaunchesCount();
+        prefs.edit().putInt(KEY_BLOCKED_APP_LAUNCHES, c + 1).apply();
+    }
+
+    public int getBlockedNotificationsCount() {
+        return prefs.getInt(KEY_BLOCKED_NOTIFS, 0);
+    }
+
+    public synchronized void incrementBlockedNotificationsCount() {
+        int c = getBlockedNotificationsCount();
+        prefs.edit().putInt(KEY_BLOCKED_NOTIFS, c + 1).apply();
+    }
+
+    // --- ADULT & MISLEADING SITE BLOCKER ---
+    public boolean isAdultBlockerEnabled() {
+        return prefs.getBoolean(KEY_ADULT_BLOCKER_ENABLED, true);
+    }
+
+    public void setAdultBlockerEnabled(boolean enabled) {
+        prefs.edit().putBoolean(KEY_ADULT_BLOCKER_ENABLED, enabled).apply();
     }
 }
 

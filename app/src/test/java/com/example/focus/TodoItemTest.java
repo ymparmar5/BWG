@@ -24,5 +24,21 @@ public class TodoItemTest {
         Assert.assertEquals(item.getText(), deserialized.getText());
         Assert.assertEquals(item.isCompleted(), deserialized.isCompleted());
     }
-}
 
+    @Test
+    public void testEisenhowerAndKaizenProductivitySerialization() throws Exception {
+        TodoItem item = new TodoItem("Master Agentic Architecture");
+        item.setEisenhowerQuadrant(TodoItem.QUADRANT_Q2_SCHEDULE);
+        item.setKaizen(true);
+        item.setPomodorosEstimated(4);
+        item.incrementPomodoro();
+
+        JSONObject json = item.toJsonObject();
+        TodoItem deserialized = TodoItem.fromJsonObject(json);
+
+        Assert.assertEquals(TodoItem.QUADRANT_Q2_SCHEDULE, deserialized.getEisenhowerQuadrant());
+        Assert.assertTrue(deserialized.isKaizen());
+        Assert.assertEquals(4, deserialized.getPomodorosEstimated());
+        Assert.assertEquals(1, deserialized.getPomodorosCompleted());
+    }
+}
