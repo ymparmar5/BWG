@@ -44,34 +44,37 @@ public class WebBlockerEngine {
             "casino", "bet365", "1xbet", "gambling", "poker", "jackpot", "stake.com"
     };
 
+    // Fast memory cache for the most recently evaluated URL to avoid repeated string matching
+    private static String lastEvaluatedUrl = null;
+    private static boolean lastEvaluationResult = false;
+
     public static boolean isBrowserPackage(String packageName) {
         return packageName != null && BROWSER_PACKAGES.contains(packageName);
     }
 
     /**
-     * Inspects active window hierarchy in a browser to find the current URL or search query.
-     * Returns the detected URL or null if not found.
+     * Efficient, single-pass depth-limited search for URL bar in the active window hierarchy.
+     * Prevents deep DOM recursion into arbitrary web content, keeping battery & CPU usage near zero.
      */
     public static String extractBrowserUrl(AccessibilityNodeInfo root) {
         if (root == null) return null;
-
-        for (String idPart : URL_BAR_ID_SUBSTRINGS) {
-            String url = findTextByViewIdSubstring(root, idPart);
-            if (url != null && !url.trim().isEmpty()) {
-                return url.trim().toLowerCase(Locale.US);
-            }
-        }
-        return null;
+        return searchUrlInHierarchy(root, 0);
     }
 
-    private static String findTextByViewIdSubstring(AccessibilityNodeInfo node, String substring) {
-        if (node == null) return null;
+    private static String searchUrlInHierarchy(AccessibilityNodeInfo node, int depth) {
+        // Browser address bars are always in the top toolbars (depth <= 6). Skip deeper web content.
+        if (node == null || depth > 6) return null;
 
         CharSequence resIdSeq = node.getViewIdResourceName();
-        if (resIdSeq != null && resIdSeq.toString().toLowerCase(Locale.US).contains(substring)) {
-            CharSequence text = node.getText();
-            if (text != null && text.length() > 0) {
-                return text.toString();
+        if (resIdSeq != null) {
+            String resId = resIdSeq.toString().toLowerCase(Locale.US);
+            for (String sub : URL_BAR_ID_SUBSTRINGS) {
+                if (resId.contains(sub)) {
+                    CharSequence text = node.getText();
+                    if (text != null && text.length() > 0) {
+                        return text.toString().trim().toLowerCase(Locale.US);
+                    }
+                }
             }
         }
 
@@ -79,7 +82,7 @@ public class WebBlockerEngine {
         for (int i = 0; i < childCount; i++) {
             AccessibilityNodeInfo child = node.getChild(i);
             if (child != null) {
-                String found = findTextByViewIdSubstring(child, substring);
+                String found = searchUrlInHierarchy(child, depth + 1);
                 child.recycle();
                 if (found != null) {
                     return found;
@@ -91,17 +94,27 @@ public class WebBlockerEngine {
 
     /**
      * Checks if the extracted URL/query contains adult, misleading ads, or blocked keywords.
+     * Includes fast memoization for identical consecutive URLs.
      */
-    public static boolean isBlockedUrl(String url) {
+    public static synchronized boolean isBlockedUrl(String url) {
         if (url == null || url.isEmpty()) return false;
         String clean = url.toLowerCase(Locale.US);
 
+        if (clean.equals(lastEvaluatedUrl)) {
+            return lastEvaluationResult;
+        }
+
+        boolean blocked = false;
         for (String kw : BLOCKED_KEYWORDS) {
             if (clean.contains(kw)) {
-                return true;
+                blocked = true;
+                break;
             }
         }
-        return false;
+
+        lastEvaluatedUrl = clean;
+        lastEvaluationResult = blocked;
+        return blocked;
     }
 
     public static String getMatchedCategory(String url) {

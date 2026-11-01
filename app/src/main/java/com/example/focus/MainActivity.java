@@ -2,8 +2,10 @@ package com.example.focus;
 
 import android.app.AlertDialog;
 import android.app.role.RoleManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Color;
@@ -86,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
     private List<AppItem> allInstalledApps = new ArrayList<>();
     private final Map<String, AppItem> appMap = new HashMap<>();
     private boolean hasPromptedDefaultLauncher = false;
+    private boolean isAppsLoaded = false;
+    private BroadcastReceiver packageReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +103,30 @@ public class MainActivity extends AppCompatActivity {
         setupEdgeToEdgeInsets();
         setupGestures();
         setupBackPress();
+
+        packageReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                isAppsLoaded = false;
+                loadApps();
+            }
+        };
+        IntentFilter pFilter = new IntentFilter();
+        pFilter.addAction(Intent.ACTION_PACKAGE_ADDED);
+        pFilter.addAction(Intent.ACTION_PACKAGE_REMOVED);
+        pFilter.addAction(Intent.ACTION_PACKAGE_REPLACED);
+        pFilter.addDataScheme("package");
+        registerReceiver(packageReceiver, pFilter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (packageReceiver != null) {
+            try {
+                unregisterReceiver(packageReceiver);
+            } catch (Exception ignored) {}
+        }
     }
 
     @Override
@@ -549,13 +577,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadApps() {
-        allInstalledApps = AppHelper.getInstalledApps(this, prefs);
-        allInstalledApps.add(new AppItem("com.example.focus.settings", "SettingsActivity", "Focus Settings"));
-        Collections.sort(allInstalledApps);
+        if (!isAppsLoaded || allInstalledApps.isEmpty()) {
+            allInstalledApps = AppHelper.getInstalledApps(this, prefs);
+            allInstalledApps.add(new AppItem("com.example.focus.settings", "SettingsActivity", "Focus Settings"));
+            Collections.sort(allInstalledApps);
 
-        appMap.clear();
-        for (AppItem app : allInstalledApps) {
-            appMap.put(app.getPackageName(), app);
+            appMap.clear();
+            for (AppItem app : allInstalledApps) {
+                appMap.put(app.getPackageName(), app);
+            }
+            isAppsLoaded = true;
         }
 
         Set<String> hiddenPackages = prefs.getHiddenApps();
@@ -673,10 +704,12 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton("Save", (d, w) -> {
                     String newName = input.getText().toString().trim();
                     prefs.setAppAlias(app.getPackageName(), newName.isEmpty() ? null : newName);
+                    isAppsLoaded = false;
                     loadApps();
                 })
                 .setNeutralButton("Reset", (d, w) -> {
                     prefs.setAppAlias(app.getPackageName(), null);
+                    isAppsLoaded = false;
                     loadApps();
                 })
                 .setNegativeButton("Cancel", null)

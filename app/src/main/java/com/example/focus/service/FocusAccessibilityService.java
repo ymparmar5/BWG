@@ -33,12 +33,15 @@ public class FocusAccessibilityService extends AccessibilityService {
 
     public static final String TAG = "FOCUS_INSPECTOR";
     private static final long ACTION_DEBOUNCE_MS = 1200;
+    private static final long SCAN_THROTTLE_MS = 350; // Max ~3 scans/sec to preserve battery & CPU
 
     private static WeakReference<FocusAccessibilityService> instanceRef;
     private FocusPreferences prefs;
     private long lastActionTime = 0;
+    private long lastContentScanTime = 0;
     private long continuousSessionStartTime = 0;
     private long lastMindfulAlertTime = 0;
+    private volatile boolean isScreenOn = true;
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
     private ScreenStateReceiver screenReceiver;
 
@@ -48,8 +51,10 @@ public class FocusAccessibilityService extends AccessibilityService {
             if (intent == null || intent.getAction() == null) return;
             String action = intent.getAction();
             if (Intent.ACTION_SCREEN_OFF.equals(action)) {
+                isScreenOn = false;
                 continuousSessionStartTime = 0;
             } else if (Intent.ACTION_SCREEN_ON.equals(action) || Intent.ACTION_USER_PRESENT.equals(action)) {
+                isScreenOn = true;
                 continuousSessionStartTime = SystemClock.elapsedRealtime();
                 if (Intent.ACTION_USER_PRESENT.equals(action) && prefs != null) {
                     prefs.incrementTodayUnlockCount();
@@ -108,7 +113,7 @@ public class FocusAccessibilityService extends AccessibilityService {
 
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
-        if (event == null || prefs == null) return;
+        if (event == null || prefs == null || !isScreenOn) return;
 
         CharSequence pkgSeq = event.getPackageName();
         if (pkgSeq == null) return;
@@ -118,14 +123,26 @@ public class FocusAccessibilityService extends AccessibilityService {
             return;
         }
 
+        int eventType = event.getEventType();
         long now = SystemClock.elapsedRealtime();
+
+        // FAST PATH: For window content changes (scrolls, text typing, animations),
+        // completely bypass processing unless it is an active content-blocking target.
+        if (eventType == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED) {
+            if (!isContentInspectionTarget(packageName)) {
+                return; // Zero CPU/RAM overhead for 99% of apps on the phone
+            }
+            if (now - lastContentScanTime < SCAN_THROTTLE_MS) {
+                return; // Throttle scans to max 3/sec to eliminate frame drops & battery drain
+            }
+        }
 
         if (continuousSessionStartTime == 0) {
             continuousSessionStartTime = now;
         }
 
-        // 1. Continuous Screen Time Mindfulness Alert (e.g. 30 Minutes Continuous Usage)
-        if (prefs.isMindfulnessReminderEnabled()) {
+        // 1. Continuous Screen Time Mindfulness Alert (Evaluated on window changes)
+        if (prefs.isMindfulnessReminderEnabled() && eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
             long continuousMs = now - continuousSessionStartTime;
             long reminderThresholdMs = prefs.getMindfulnessReminderMinutes() * 60 * 1000L;
             if (continuousMs >= reminderThresholdMs && (now - lastMindfulAlertTime) >= reminderThresholdMs) {
@@ -143,8 +160,9 @@ public class FocusAccessibilityService extends AccessibilityService {
             }
         }
 
-        // 2. Named Block Profiles Check (Schedules, Daily Limits, Quick Blocks)
-        if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+        // 2-5. App Blocklist, Bedtime, Limits & Block Profiles (Only on window state changed)
+        if (eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+            // Named Block Profiles Check
             BlockProfile activeProfile = prefs.getActiveBlockProfileForPackage(this, packageName);
             if (activeProfile != null && activeProfile.isBlockAppLaunch()) {
                 prefs.incrementBlockedAppLaunchesCount();
@@ -159,10 +177,8 @@ public class FocusAccessibilityService extends AccessibilityService {
                 );
                 return;
             }
-        }
 
-        // 3. Strict App Blocklist Check
-        if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+            // Strict App Blocklist Check
             if (prefs.isAppBlocked(packageName)) {
                 prefs.incrementBlockedAppLaunchesCount();
                 long appUsage = UsageTrackerEngine.getTodayAppUsageSeconds(this, packageName);
@@ -176,10 +192,8 @@ public class FocusAccessibilityService extends AccessibilityService {
                 );
                 return;
             }
-        }
 
-        // 4. Bedtime ("Bad Time" Downtime Schedule) Check
-        if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+            // Bedtime ("Bad Time") Schedule Check
             if (prefs.isBedtimeModeEnabled() && prefs.isBedtimeActiveNow()) {
                 if (!isAllowedDuringBedtime(packageName)) {
                     prefs.incrementBlockedAppLaunchesCount();
@@ -197,13 +211,10 @@ public class FocusAccessibilityService extends AccessibilityService {
                     return;
                 }
             }
-        }
 
-        // 5. Check App Usage Limits & Schedule Blocks on Window State Changes
-        if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+            // Usage Limits & Focus Schedules
             UsageTrackerEngine.ViolationResult violation =
                     UsageTrackerEngine.checkLimitOrScheduleViolation(this, prefs, packageName);
-
             if (violation != null) {
                 prefs.incrementBlockedAppLaunchesCount();
                 long appUsage = UsageTrackerEngine.getTodayAppUsageSeconds(this, packageName);
@@ -219,7 +230,10 @@ public class FocusAccessibilityService extends AccessibilityService {
             }
         }
 
-        // 6. Adult & Misleading Site Blocker for Browsers (Chrome, etc.)
+        // Record content scan timestamp to enforce rate-limiting
+        lastContentScanTime = now;
+
+        // 6. Adult & Misleading Site Blocker for Browsers (Chrome, Firefox, etc.)
         if (prefs.isAdultBlockerEnabled() && WebBlockerEngine.isBrowserPackage(packageName)) {
             AccessibilityNodeInfo root = getRootInActiveWindow();
             if (root != null) {
@@ -244,7 +258,7 @@ public class FocusAccessibilityService extends AccessibilityService {
             }
         }
 
-        // 7. Check Content Blocker (YouTube Shorts, Instagram Reels, WhatsApp Status)
+        // 7. Content Blocker (YouTube Shorts, Instagram Reels, WhatsApp Status)
         if (!prefs.isBlockerEnabled()) {
             return;
         }
@@ -315,6 +329,14 @@ public class FocusAccessibilityService extends AccessibilityService {
         } finally {
             root.recycle();
         }
+    }
+
+    private boolean isContentInspectionTarget(String packageName) {
+        if ("com.google.android.youtube".equals(packageName) && prefs.isBlockYouTubeShortsEnabled()) return true;
+        if ("com.instagram.android".equals(packageName) && prefs.isBlockInstagramReelsEnabled()) return true;
+        if ("com.whatsapp".equals(packageName) && prefs.isBlockWhatsAppStatusEnabled()) return true;
+        if (prefs.isAdultBlockerEnabled() && WebBlockerEngine.isBrowserPackage(packageName)) return true;
+        return false;
     }
 
     private void launchTakeoverScreen(String appLabel, String title, String detail, String usageToday, String unlockTime, boolean isMindfulAlert) {

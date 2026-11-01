@@ -86,6 +86,13 @@ public class FocusPreferences {
     private static final String KEY_BLOCKED_NOTIFS = "blocked_notifs_count";
     private static final String KEY_ADULT_BLOCKER_ENABLED = "adult_site_blocker_enabled";
 
+    // In-memory performance caches to eliminate GC allocations & JSON parsing in hot paths
+    private Map<String, RuleModel> cachedRulesMap = null;
+    private List<BlockProfile> cachedProfiles = null;
+    private Set<String> cachedBlockedApps = null;
+    private Set<String> cachedNotifBlocked = null;
+    private Set<String> cachedNotifAllowed = null;
+
     private final SharedPreferences prefs;
 
     public FocusPreferences(Context context) {
@@ -330,31 +337,39 @@ public class FocusPreferences {
         prefs.edit().putInt(KEY_NOTIF_MODE, mode).apply();
     }
 
-    public Set<String> getBlockedNotificationPackages() {
-        return new HashSet<>(prefs.getStringSet(KEY_NOTIF_BLOCKED_PKGS, new HashSet<>()));
+    public synchronized Set<String> getBlockedNotificationPackages() {
+        if (cachedNotifBlocked == null) {
+            cachedNotifBlocked = new HashSet<>(prefs.getStringSet(KEY_NOTIF_BLOCKED_PKGS, new HashSet<>()));
+        }
+        return cachedNotifBlocked;
     }
 
-    public void setBlockedNotificationPackages(Set<String> pkgs) {
+    public synchronized void setBlockedNotificationPackages(Set<String> pkgs) {
+        cachedNotifBlocked = pkgs != null ? new HashSet<>(pkgs) : new HashSet<>();
         prefs.edit().putStringSet(KEY_NOTIF_BLOCKED_PKGS, pkgs).apply();
     }
 
-    public void blockNotification(String packageName) {
-        Set<String> set = getBlockedNotificationPackages();
+    public synchronized void blockNotification(String packageName) {
+        Set<String> set = new HashSet<>(getBlockedNotificationPackages());
         set.add(packageName);
         setBlockedNotificationPackages(set);
     }
 
-    public void unblockNotification(String packageName) {
-        Set<String> set = getBlockedNotificationPackages();
+    public synchronized void unblockNotification(String packageName) {
+        Set<String> set = new HashSet<>(getBlockedNotificationPackages());
         set.remove(packageName);
         setBlockedNotificationPackages(set);
     }
 
-    public Set<String> getAllowedNotificationPackages() {
-        return new HashSet<>(prefs.getStringSet(KEY_NOTIF_ALLOWED_PKGS, new HashSet<>()));
+    public synchronized Set<String> getAllowedNotificationPackages() {
+        if (cachedNotifAllowed == null) {
+            cachedNotifAllowed = new HashSet<>(prefs.getStringSet(KEY_NOTIF_ALLOWED_PKGS, new HashSet<>()));
+        }
+        return cachedNotifAllowed;
     }
 
-    public void setAllowedNotificationPackages(Set<String> pkgs) {
+    public synchronized void setAllowedNotificationPackages(Set<String> pkgs) {
+        cachedNotifAllowed = pkgs != null ? new HashSet<>(pkgs) : new HashSet<>();
         prefs.edit().putStringSet(KEY_NOTIF_ALLOWED_PKGS, pkgs).apply();
     }
 
@@ -435,11 +450,15 @@ public class FocusPreferences {
         return prefs.getString(KEY_RULES_JSON, "");
     }
 
-    public void setRulesJson(String json) {
+    public synchronized void setRulesJson(String json) {
+        cachedRulesMap = null;
         prefs.edit().putString(KEY_RULES_JSON, json).apply();
     }
 
-    public Map<String, RuleModel> getRulesMap() {
+    public synchronized Map<String, RuleModel> getRulesMap() {
+        if (cachedRulesMap != null) {
+            return cachedRulesMap;
+        }
         Map<String, RuleModel> map = new HashMap<>();
         try {
             JSONArray arr = new JSONArray(getRulesJson());
@@ -448,12 +467,15 @@ public class FocusPreferences {
                 map.put(model.getPackageName(), model);
             }
         } catch (JSONException e) {
-            return getDefaultRulesMap();
+            cachedRulesMap = getDefaultRulesMap();
+            return cachedRulesMap;
         }
+        cachedRulesMap = map;
         return map;
     }
 
-    public void resetRulesToDefault() {
+    public synchronized void resetRulesToDefault() {
+        cachedRulesMap = null;
         JSONArray arr = new JSONArray();
         for (RuleModel m : getDefaultRulesMap().values()) {
             try {
@@ -691,26 +713,31 @@ public class FocusPreferences {
     }
 
     // --- BLOCKED APPS (STRICT APP BLOCKER) ---
-    public Set<String> getBlockedApps() {
-        return new HashSet<>(prefs.getStringSet(KEY_BLOCKED_APPS, new HashSet<>()));
+    public synchronized Set<String> getBlockedApps() {
+        if (cachedBlockedApps == null) {
+            cachedBlockedApps = new HashSet<>(prefs.getStringSet(KEY_BLOCKED_APPS, new HashSet<>()));
+        }
+        return cachedBlockedApps;
     }
 
-    public void setBlockedApps(Set<String> set) {
+    public synchronized void setBlockedApps(Set<String> set) {
+        cachedBlockedApps = set != null ? new HashSet<>(set) : new HashSet<>();
         prefs.edit().putStringSet(KEY_BLOCKED_APPS, set).apply();
     }
 
     public boolean isAppBlocked(String packageName) {
+        if (packageName == null) return false;
         return getBlockedApps().contains(packageName);
     }
 
-    public void addBlockedApp(String packageName) {
-        Set<String> set = getBlockedApps();
+    public synchronized void addBlockedApp(String packageName) {
+        Set<String> set = new HashSet<>(getBlockedApps());
         set.add(packageName);
         setBlockedApps(set);
     }
 
-    public void removeBlockedApp(String packageName) {
-        Set<String> set = getBlockedApps();
+    public synchronized void removeBlockedApp(String packageName) {
+        Set<String> set = new HashSet<>(getBlockedApps());
         set.remove(packageName);
         setBlockedApps(set);
     }
@@ -801,6 +828,9 @@ public class FocusPreferences {
 
     // --- BLOCK PROFILES (NAMED BLOCKS, PERIODS & SCHEDULES) ---
     public synchronized List<BlockProfile> getBlockProfiles() {
+        if (cachedProfiles != null) {
+            return new ArrayList<>(cachedProfiles);
+        }
         List<BlockProfile> list = new ArrayList<>();
         String raw = prefs.getString(KEY_BLOCK_PROFILES, "[]");
         try {
@@ -809,10 +839,12 @@ public class FocusPreferences {
                 list.add(BlockProfile.fromJsonObject(arr.getJSONObject(i)));
             }
         } catch (JSONException ignored) {}
+        cachedProfiles = new ArrayList<>(list);
         return list;
     }
 
     public synchronized void saveBlockProfiles(List<BlockProfile> list) {
+        cachedProfiles = list != null ? new ArrayList<>(list) : new ArrayList<>();
         JSONArray arr = new JSONArray();
         if (list != null) {
             for (BlockProfile p : list) {

@@ -72,3 +72,4 @@ public class BlockProfileTest {
         assertTrue(deserialized.getTargetPackages().contains("com.pubg.imobile"));
     }
 }
+

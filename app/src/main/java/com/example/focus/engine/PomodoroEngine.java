@@ -2,6 +2,7 @@ package com.example.focus.engine;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.os.SystemClock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class PomodoroEngine {
     private boolean isRunning = false;
     private long remainingSeconds = 25 * 60;
     private long totalDurationSeconds = 25 * 60;
+    private long sessionEndTime = 0;
     private int completedCycles = 0;
 
     private String activeTaskId = null;
@@ -37,10 +39,23 @@ public class PomodoroEngine {
         public void run() {
             if (!isRunning) return;
 
+            syncRemainingSecondsFromTimestamp();
+
             if (remainingSeconds > 0) {
-                remainingSeconds--;
                 notifyTick();
-                handler.postDelayed(this, 1000);
+
+                // Battery optimization: Only poll every 1000ms if a UI listener is actively registered.
+                // If the user navigates away or turns off screen, avoid waking the CPU every second!
+                if (!listeners.isEmpty()) {
+                    handler.postDelayed(this, 1000);
+                } else {
+                    long msLeft = sessionEndTime - SystemClock.elapsedRealtime();
+                    if (msLeft > 0) {
+                        handler.postDelayed(this, msLeft);
+                    } else {
+                        onSessionFinished();
+                    }
+                }
             } else {
                 onSessionFinished();
             }
@@ -59,12 +74,26 @@ public class PomodoroEngine {
     public synchronized void registerListener(OnPomodoroTickListener listener) {
         if (listener != null && !listeners.contains(listener)) {
             listeners.add(listener);
+            syncRemainingSecondsFromTimestamp();
             listener.onTick(remainingSeconds, currentState, activeTaskLabel);
+
+            // If the timer is running and this is the first listener, resume 1s visual ticks
+            if (isRunning && listeners.size() == 1) {
+                handler.removeCallbacks(tickRunnable);
+                handler.post(tickRunnable);
+            }
         }
     }
 
     public synchronized void unregisterListener(OnPomodoroTickListener listener) {
         listeners.remove(listener);
+    }
+
+    private void syncRemainingSecondsFromTimestamp() {
+        if (isRunning && sessionEndTime > 0) {
+            long msLeft = sessionEndTime - SystemClock.elapsedRealtime();
+            this.remainingSeconds = Math.max(0, msLeft / 1000L);
+        }
     }
 
     public boolean isWorkSessionActive() {
@@ -80,6 +109,7 @@ public class PomodoroEngine {
     }
 
     public long getRemainingSeconds() {
+        syncRemainingSecondsFromTimestamp();
         return remainingSeconds;
     }
 
@@ -102,6 +132,7 @@ public class PomodoroEngine {
         this.currentState = STATE_WORK;
         this.totalDurationSeconds = minutes * 60L;
         this.remainingSeconds = totalDurationSeconds;
+        this.sessionEndTime = SystemClock.elapsedRealtime() + (totalDurationSeconds * 1000L);
         this.isRunning = true;
         notifyStateChanged();
         handler.post(tickRunnable);
@@ -112,6 +143,7 @@ public class PomodoroEngine {
         this.currentState = isLongBreak ? STATE_LONG_BREAK : STATE_SHORT_BREAK;
         this.totalDurationSeconds = minutes * 60L;
         this.remainingSeconds = totalDurationSeconds;
+        this.sessionEndTime = SystemClock.elapsedRealtime() + (totalDurationSeconds * 1000L);
         this.isRunning = true;
         notifyStateChanged();
         handler.post(tickRunnable);
@@ -119,6 +151,7 @@ public class PomodoroEngine {
 
     public void pause() {
         if (isRunning) {
+            syncRemainingSecondsFromTimestamp();
             isRunning = false;
             handler.removeCallbacks(tickRunnable);
             notifyStateChanged();
@@ -127,6 +160,7 @@ public class PomodoroEngine {
 
     public void resume() {
         if (!isRunning && currentState != STATE_IDLE) {
+            this.sessionEndTime = SystemClock.elapsedRealtime() + (remainingSeconds * 1000L);
             isRunning = true;
             handler.post(tickRunnable);
             notifyStateChanged();
@@ -135,6 +169,7 @@ public class PomodoroEngine {
 
     public void reset() {
         isRunning = false;
+        sessionEndTime = 0;
         handler.removeCallbacks(tickRunnable);
         currentState = STATE_IDLE;
         remainingSeconds = 25 * 60;
@@ -144,6 +179,7 @@ public class PomodoroEngine {
 
     private void onSessionFinished() {
         isRunning = false;
+        sessionEndTime = 0;
         if (currentState == STATE_WORK) {
             completedCycles++;
             // After 4 work sprints, take a long break (15 mins), otherwise short break (5 mins)
@@ -160,14 +196,18 @@ public class PomodoroEngine {
     }
 
     private void notifyTick() {
-        for (OnPomodoroTickListener l : new ArrayList<>(listeners)) {
-            l.onTick(remainingSeconds, currentState, activeTaskLabel);
+        for (OnPomodoroTickListener l : listeners) {
+            try {
+                l.onTick(remainingSeconds, currentState, activeTaskLabel);
+            } catch (Exception ignored) {}
         }
     }
 
     private void notifyStateChanged() {
-        for (OnPomodoroTickListener l : new ArrayList<>(listeners)) {
-            l.onStateChanged(currentState, completedCycles);
+        for (OnPomodoroTickListener l : listeners) {
+            try {
+                l.onStateChanged(currentState, completedCycles);
+            } catch (Exception ignored) {}
         }
     }
 }

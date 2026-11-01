@@ -39,6 +39,7 @@ public class WeeklyReportActivity extends AppCompatActivity {
     private TextView tvBarDetail;
 
     private List<AppUsageStat> fullUsageList = new ArrayList<>();
+    private final java.util.Map<String, Drawable> iconCache = new java.util.HashMap<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -132,7 +133,11 @@ public class WeeklyReportActivity extends AppCompatActivity {
         ivLp.setMargins(0, 0, 24, 0);
         iv.setLayoutParams(ivLp);
         try {
-            Drawable icon = pm.getApplicationIcon(stat.getPackageName());
+            Drawable icon = iconCache.get(stat.getPackageName());
+            if (icon == null) {
+                icon = pm.getApplicationIcon(stat.getPackageName());
+                iconCache.put(stat.getPackageName(), icon);
+            }
             iv.setImageDrawable(icon);
         } catch (Exception e) {
             iv.setImageResource(R.drawable.ic_launcher);

@@ -67,6 +67,9 @@ public class BlockProfileActivity extends AppCompatActivity {
     private CheckBox chkBlockNotifications;
     private CheckBox chkBlockAdultSites;
 
+    // Memory cache for app icons to prevent repeated binder IPC calls
+    private final java.util.Map<String, Drawable> iconCache = new java.util.HashMap<>();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -218,7 +221,11 @@ public class BlockProfileActivity extends AppCompatActivity {
 
         for (String pkg : pkgs) {
             try {
-                Drawable icon = pm.getApplicationIcon(pkg);
+                Drawable icon = iconCache.get(pkg);
+                if (icon == null) {
+                    icon = pm.getApplicationIcon(pkg);
+                    iconCache.put(pkg, icon);
+                }
                 ImageView iv = new ImageView(this);
                 int sizePx = (int) (36 * getResources().getDisplayMetrics().density);
                 int marginPx = (int) (4 * getResources().getDisplayMetrics().density);
@@ -426,3 +433,4 @@ public class BlockProfileActivity extends AppCompatActivity {
         }
     }
 }
+

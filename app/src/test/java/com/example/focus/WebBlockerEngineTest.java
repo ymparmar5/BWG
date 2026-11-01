@@ -54,3 +54,4 @@ public class WebBlockerEngineTest {
         assertEquals("Adult Content", WebBlockerEngine.getMatchedCategory("https://pornhub.com"));
     }
 }
+
